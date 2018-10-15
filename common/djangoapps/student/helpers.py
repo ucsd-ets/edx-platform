@@ -17,10 +17,6 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
 from django.utils import http
 from django.utils.translation import ugettext as _
-from oauth2_provider.models import AccessToken as dot_access_token
-from oauth2_provider.models import RefreshToken as dot_refresh_token
-from provider.oauth2.models import AccessToken as dop_access_token
-from provider.oauth2.models import RefreshToken as dop_refresh_token
 from pytz import UTC
 from six import iteritems, text_type
 import third_party_auth
@@ -48,7 +44,8 @@ from student.models import (
     UserAttribute,
     UserProfile,
     unique_id_for_user,
-    email_exists_or_retired
+    email_exists_or_retired,
+    username_exists_or_retired
 )
 
 
@@ -277,7 +274,7 @@ def get_next_url_for_login_page(request):
 
     If THIRD_PARTY_AUTH_HINT is set, then `tpa_hint=<hint>` is added as a query parameter.
     """
-    redirect_to = get_redirect_to(request)
+    redirect_to = _get_redirect_to(request)
     if not redirect_to:
         try:
             redirect_to = reverse('dashboard')
@@ -312,7 +309,7 @@ def get_next_url_for_login_page(request):
     return redirect_to
 
 
-def get_redirect_to(request):
+def _get_redirect_to(request):
     """
     Determine the redirect url and return if safe
     :argument
@@ -329,7 +326,7 @@ def get_redirect_to(request):
     # get information about a user on edx.org. In any such case drop the parameter.
     if redirect_to:
         mime_type, _ = mimetypes.guess_type(redirect_to, strict=False)
-        if not http.is_safe_url(redirect_to, allowed_hosts={request.get_host()}, require_https=True):
+        if not is_safe_redirect(request, redirect_to):
             log.warning(
                 u'Unsafe redirect parameter detected after login page: %(redirect_to)r',
                 {"redirect_to": redirect_to}
@@ -372,14 +369,17 @@ def get_redirect_to(request):
     return redirect_to
 
 
-def destroy_oauth_tokens(user):
+def is_safe_redirect(request, redirect_to):
     """
-    Destroys ALL OAuth access and refresh tokens for the given user.
+    Determine if the given redirect URL/path is safe for redirection.
     """
-    dop_access_token.objects.filter(user=user.id).delete()
-    dop_refresh_token.objects.filter(user=user.id).delete()
-    dot_access_token.objects.filter(user=user.id).delete()
-    dot_refresh_token.objects.filter(user=user.id).delete()
+    request_host = request.get_host()  # e.g. 'courses.edx.org'
+
+    login_redirect_whitelist = set(getattr(settings, 'LOGIN_REDIRECT_WHITELIST', []))
+    login_redirect_whitelist.add(request_host)
+
+    is_safe_url = http.is_safe_url(redirect_to, allowed_hosts=login_redirect_whitelist, require_https=True)
+    return is_safe_url
 
 
 def generate_activation_email_context(user, registration):
@@ -642,7 +642,7 @@ def do_create_account(form, custom_form=None):
         # AccountValidationError and a consistent user message returned (i.e. both should
         # return "It looks like {username} belongs to an existing account. Try again with a
         # different username.")
-        if User.objects.filter(username=user.username):
+        if username_exists_or_retired(user.username):
             raise AccountValidationError(
                 USERNAME_EXISTS_MSG_FMT.format(username=proposed_username),
                 field="username"

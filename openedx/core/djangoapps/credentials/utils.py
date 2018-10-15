@@ -13,12 +13,16 @@ def get_credentials_records_url(program_uuid=None):
     """
     Returns a URL for a given records page (or general records list if given no UUID).
     May return None if this feature is disabled.
+
+    Arguments:
+        program_uuid (str): Optional program uuid to link for a program records URL
     """
     base_url = CredentialsApiConfig.current().public_records_url
     if base_url is None:
         return None
     if program_uuid:
-        return base_url + 'programs/{}/'.format(program_uuid)
+        # Credentials expects the uuid without dashes so we are converting here
+        return base_url + 'programs/{}/'.format(program_uuid.replace('-', ''))
     return base_url
 
 
@@ -60,7 +64,7 @@ def get_credentials(user, program_uuid=None, credential_type=None):
     """
     credential_configuration = CredentialsApiConfig.current()
 
-    querystring = {'username': user.username, 'status': 'awarded'}
+    querystring = {'username': user.username, 'status': 'awarded', 'only_visible': 'True'}
 
     if program_uuid:
         querystring['program_uuid'] = program_uuid

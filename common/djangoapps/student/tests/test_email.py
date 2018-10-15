@@ -24,6 +24,7 @@ from student.models import (
     UserProfile,
     get_retired_email_by_email
 )
+from openedx.core.lib.request_utils import safe_get_host
 from student.tests.factories import PendingEmailChangeFactory, RegistrationFactory, UserFactory
 from student.views import (
     SETTING_CHANGE_INITIATED,
@@ -33,7 +34,6 @@ from student.views import (
 )
 from student.views import generate_activation_email_context, send_reactivation_email_for_user
 from third_party_auth.views import inactive_user_view
-from util.request import safe_get_host
 from util.testing import EventTestMixin
 
 
@@ -150,6 +150,32 @@ class ActivationEmailTests(CacheIsolationTestCase):
         for fragment in body_fragments:
             self.assertIn(fragment, msg.body)
 
+    def test_do_not_send_email_and_do_activate(self):
+        """
+        Tests that when an inactive user logs-in using the social auth,
+        an activation email is not sent.
+        """
+        pipeline_partial = {
+            'kwargs': {
+                'social': {
+                    'uid': 'fake uid'
+                }
+            }
+        }
+        user = UserFactory(is_active=False)
+        Registration().register(user)
+        request = RequestFactory().get(settings.SOCIAL_AUTH_INACTIVE_USER_URL)
+        request.user = user
+        with patch('student.views.management.compose_and_send_activation_email') as email:
+            with patch('third_party_auth.provider.Registry.get_from_pipeline') as reg:
+                with patch('third_party_auth.pipeline.get', return_value=pipeline_partial):
+                    with patch('third_party_auth.pipeline.running', return_value=True):
+                        with patch('third_party_auth.is_enabled', return_value=True):
+                            reg.skip_email_verification = True
+                            inactive_user_view(request)
+                            self.assertEquals(user.is_active, True)
+                            self.assertEquals(email.called, False, msg='method should not have been called')
+
     @patch('student.tasks.log')
     def test_send_email_to_inactive_user(self, mock_log):
         """
@@ -161,15 +187,16 @@ class ActivationEmailTests(CacheIsolationTestCase):
         request = RequestFactory().get(settings.SOCIAL_AUTH_INACTIVE_USER_URL)
         request.user = inactive_user
         with patch('edxmako.request_context.get_current_request', return_value=request):
-            inactive_user_view(request)
-            mock_log.info.assert_called_with(
-                "Activation Email has been sent to User {user_email}".format(
-                    user_email=inactive_user.email
+            with patch('third_party_auth.pipeline.running', return_value=False):
+                inactive_user_view(request)
+                mock_log.info.assert_called_with(
+                    "Activation Email has been sent to User {user_email}".format(
+                        user_email=inactive_user.email
+                    )
                 )
-            )
 
 
-@patch('student.views.login.render_to_string', Mock(side_effect=mock_render_to_string, autospec=True))
+@patch('student.views.management.render_to_string', Mock(side_effect=mock_render_to_string, autospec=True))
 @patch('django.contrib.auth.models.User.email_user')
 class ReactivationEmailTests(EmailTestMixin, CacheIsolationTestCase):
     """
@@ -321,24 +348,6 @@ class EmailChangeRequestTests(EventTestMixin, CacheIsolationTestCase):
         Test the error message if user attempts to change email to the existing value.
         """
         self.assertEqual(self.do_email_validation(self.user.email), 'Old email is the same as the new email.')
-
-    def test_duplicate_email(self):
-        """
-        Assert the expected error message from the email validation method for an email address
-        that is already in use by another account.
-        """
-        UserFactory.create(email=self.new_email)
-        self.assertEqual(self.do_email_validation(self.new_email), 'An account with this e-mail already exists.')
-
-    def test_retired_email(self):
-        """
-        Assert the expected error message from the email validation method for an email address
-        that corresponds with an already-retired account.
-        """
-        user = UserFactory.create(email=self.new_email)
-        user.email = get_retired_email_by_email(self.new_email)
-        user.save()
-        self.assertEqual(self.do_email_validation(self.new_email), 'An account with this e-mail already exists.')
 
     @patch('django.core.mail.send_mail')
     @patch('student.views.management.render_to_string', Mock(side_effect=mock_render_to_string, autospec=True))

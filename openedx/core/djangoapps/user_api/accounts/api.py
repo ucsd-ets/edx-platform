@@ -14,7 +14,7 @@ from django.http import HttpResponseForbidden
 from openedx.core.djangoapps.theming.helpers import get_current_request
 from six import text_type
 
-from student.models import User, UserProfile, Registration, email_exists_or_retired
+from student.models import User, UserProfile, Registration, email_exists_or_retired, username_exists_or_retired
 from student import forms as student_forms
 from student import views as student_views
 from util.model_utils import emit_setting_changed_event
@@ -178,6 +178,11 @@ def update_account_settings(requesting_user, update, username=None):
                 "developer_message": u"Error thrown from validate_new_email: '{}'".format(text_type(err)),
                 "user_message": text_type(err)
             }
+
+        # Don't process with sending email to given new email, if it is already associated with
+        # an account. User must see same success message with no error.
+        # This is so that this endpoint cannot be used to determine if an email is valid or not.
+        changing_email = new_email and not email_exists_or_retired(new_email)
 
     # If the user asked to change full name, validate it
     if changing_full_name:
@@ -683,7 +688,7 @@ def _validate_username_doesnt_exist(username):
     :return: None
     :raises: errors.AccountUsernameAlreadyExists
     """
-    if username is not None and User.objects.filter(username=username).exists():
+    if username is not None and username_exists_or_retired(username):
         raise errors.AccountUsernameAlreadyExists(_(accounts.USERNAME_CONFLICT_MSG).format(username=username))
 
 

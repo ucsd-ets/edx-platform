@@ -7,22 +7,22 @@ import json
 from datetime import datetime, timedelta
 from unittest import skip
 
-from nose.plugins.attrib import attr
 from pytz import UTC
 
 from base_studio_test import StudioCourseTest
 from common.test.acceptance.fixtures.config import ConfigModelFixture
 from common.test.acceptance.fixtures.course import XBlockFixtureDesc
-from common.test.acceptance.pages.common.utils import add_enrollment_course_modes
 from common.test.acceptance.pages.lms.course_home import CourseHomePage
 from common.test.acceptance.pages.lms.courseware import CoursewarePage
 from common.test.acceptance.pages.lms.progress import ProgressPage
-from common.test.acceptance.pages.lms.staff_view import StaffCoursewarePage
 from common.test.acceptance.pages.studio.overview import ContainerPage, CourseOutlinePage, ExpandCollapseLinkState
+from common.test.acceptance.pages.studio.settings import SettingsPage
+from common.test.acceptance.pages.studio.checklists import CourseChecklistsPage
 from common.test.acceptance.pages.studio.settings_advanced import AdvancedSettingsPage
 from common.test.acceptance.pages.studio.settings_group_configurations import GroupConfigurationsPage
 from common.test.acceptance.pages.studio.utils import add_discussion, drag, verify_ordering
 from common.test.acceptance.tests.helpers import disable_animations, load_data_str
+from openedx.core.lib.tests import attr
 
 SECTION_NAME = 'Test Section'
 SUBSECTION_NAME = 'Test Subsection'
@@ -549,30 +549,6 @@ class UnitAccessTest(CourseOutlineTest):
                 )
             )
         )
-
-    def _set_restriction_on_unrestricted_unit(self, unit):
-        """
-        Restrict unit access to a certain group and confirm that a
-        warning is displayed.  Then, remove the access restriction
-        and verify that the warning no longer appears.
-        """
-        self.assertFalse(unit.has_restricted_warning)
-        unit.toggle_unit_access('Content Groups', [self.content_group_a_id])
-        self.assertTrue(unit.has_restricted_warning)
-        unit.toggle_unit_access('Content Groups', [self.content_group_a_id])
-        self.assertFalse(unit.has_restricted_warning)
-
-    def test_units_can_be_restricted(self):
-        """
-        Visit the course outline page, restrict access to a unit.
-        Verify that there is a restricted group warning.
-        Remove the group access restriction and verify that there
-        is no longer a warning.
-        """
-        self.course_outline_page.visit()
-        self.course_outline_page.expand_all_subsections()
-        unit = self.course_outline_page.section_at(0).subsection_at(0).unit_at(0)
-        self._set_restriction_on_unrestricted_unit(unit)
 
 
 @attr(shard=14)
@@ -1889,3 +1865,49 @@ class SelfPacedOutlineTest(CourseOutlineTest):
         modal = subsection.edit()
         self.assertFalse(modal.has_release_date())
         self.assertFalse(modal.has_due_date())
+
+
+class CourseStatusOutlineTest(CourseOutlineTest):
+    """Test the course outline status section."""
+
+    def setUp(self):
+        super(CourseStatusOutlineTest, self).setUp()
+
+        self.schedule_and_details_settings = SettingsPage(
+            self.browser,
+            self.course_info['org'],
+            self.course_info['number'],
+            self.course_info['run']
+        )
+
+        self.checklists = CourseChecklistsPage(
+            self.browser,
+            self.course_info['org'],
+            self.course_info['number'],
+            self.course_info['run']
+        )
+
+    def test_course_status_section(self):
+        """
+        Ensure that the course status section appears in the course outline.
+        """
+        self.course_outline_page.visit()
+        self.assertTrue(self.course_outline_page.has_course_status_section)
+
+    def test_course_status_section_start_date_link(self):
+        """
+        Ensure that the course start date link in the course status section in
+        the course outline links to the "Schedule and Details" page.
+        """
+        self.course_outline_page.visit()
+        self.course_outline_page.click_course_status_section_start_date_link()
+        self.schedule_and_details_settings.wait_for_page()
+
+    def test_course_status_section_checklists_link(self):
+        """
+        Ensure that the course checklists link in the course status section in
+        the course outline links to the "Checklists" page.
+        """
+        self.course_outline_page.visit()
+        self.course_outline_page.click_course_status_section_checklists_link()
+        self.checklists.wait_for_page()

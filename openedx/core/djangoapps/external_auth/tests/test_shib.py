@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-#pylint: disable=no-member
 """
 Tests for Shibboleth Authentication
 @jbau
@@ -8,7 +7,6 @@ import unittest
 from importlib import import_module
 from urllib import urlencode
 
-import pytest
 from ddt import ddt, data
 from django.conf import settings
 from django.http import HttpResponseRedirect
@@ -23,7 +21,6 @@ from openedx.core.djangoapps.external_auth.views import (
 )
 from openedx.core.djangoapps.user_api import accounts as accounts_settings
 from mock import patch
-from nose.plugins.attrib import attr
 from six import text_type
 
 from openedx.core.djangolib.testing.utils import CacheIsolationTestCase
@@ -77,7 +74,6 @@ def gen_all_identities():
                     yield _build_identity_dict(mail, display_name, given_name, surname)
 
 
-@attr(shard=3)
 @ddt
 @override_settings(SESSION_ENGINE='django.contrib.sessions.backends.cache')
 class ShibSPTest(CacheIsolationTestCase):
@@ -85,6 +81,7 @@ class ShibSPTest(CacheIsolationTestCase):
     Tests for the Shibboleth SP, which communicates via request.META
     (Apache environment variables set by mod_shib)
     """
+    shard = 3
 
     ENABLED_CACHES = ['default']
 
@@ -319,7 +316,7 @@ class ShibSPTest(CacheIsolationTestCase):
                     'terms_of_service': u'true',
                     'honor_code': u'true'}
 
-        with patch('student.views.management.AUDIT_LOG') as mock_audit_log:
+        with patch('openedx.core.djangoapps.user_authn.views.register.AUDIT_LOG') as mock_audit_log:
             self.client.post('/create_account', data=postvars)
 
         mail = identity.get('mail')

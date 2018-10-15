@@ -146,7 +146,7 @@ class EnterpriseApiClient(object):
             'course_id': course_id,
             'consent_granted': consent_granted,
         }
-        endpoint = getattr(self.client, 'enterprise-course-enrollment')  # pylint: disable=literal-used-as-attribute
+        endpoint = getattr(self.client, 'enterprise-course-enrollment')
         try:
             endpoint.post(data=data)
         except (HttpClientError, HttpServerError):
@@ -546,9 +546,10 @@ def get_enterprise_learner_data(user):
     """
     Client API operation adapter/wrapper
     """
-    enterprise_learner_data = EnterpriseApiClient(user=user).fetch_enterprise_learner_data(user)
-    if enterprise_learner_data:
-        return enterprise_learner_data['results']
+    if user.is_authenticated:
+        enterprise_learner_data = EnterpriseApiClient(user=user).fetch_enterprise_learner_data(user)
+        if enterprise_learner_data:
+            return enterprise_learner_data['results']
 
 
 @enterprise_is_enabled(otherwise={})

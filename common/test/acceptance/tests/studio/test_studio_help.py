@@ -4,8 +4,6 @@ Test the Studio help links.
 
 from unittest import skip
 
-from nose.plugins.attrib import attr
-
 from common.test.acceptance.fixtures.course import XBlockFixtureDesc
 from common.test.acceptance.pages.common.auto_auth import AutoAuthPage
 from common.test.acceptance.pages.studio.asset_index import AssetIndexPageStudioFrontend
@@ -35,6 +33,7 @@ from common.test.acceptance.tests.helpers import (
     url_for_help
 )
 from common.test.acceptance.tests.studio.base_studio_test import ContainerBase, StudioCourseTest, StudioLibraryTest
+from openedx.core.lib.tests import attr
 
 
 def _get_expected_documentation_url(path):
@@ -343,47 +342,6 @@ class LibraryHelpTest(StudioLibraryTest):
         super(LibraryHelpTest, self).setUp()
         self.library_page = LibraryPage(self.browser, self.library_key)
         self.library_user_page = LibraryUsersPage(self.browser, self.library_key)
-
-    def test_library_content_nav_help(self):
-        """
-        Scenario: Help link in navigation bar is working on content
-        library page(click a library on the Library list page).
-        Given that I am on the content library page(click a library on the Library list page).
-        And I want help about the process
-        And I click the 'Help' in the navigation bar
-        Then Help link should open.
-        And help url should be correct
-        """
-        self.library_page.visit()
-        expected_url = _get_expected_documentation_url('/course_components/libraries.html')
-
-        # Assert that help link is correct.
-        assert_nav_help_link(
-            test=self,
-            page=self.library_page,
-            href=expected_url
-        )
-
-    def test_library_content_side_bar_help(self):
-        """
-        Scenario: Help link in sidebar links is working on
-        content library page(click a library on the Library list page).
-        Given that I am on the content library page(click a library on the Library list page).
-        And I want help about the process
-        And I click the 'Learn more about content libraries' in the sidebar links
-        Then Help link should open.
-        And help url should be correct
-        """
-        self.library_page.visit()
-        expected_url = _get_expected_documentation_url('/course_components/libraries.html')
-
-        # Assert that help link is correct.
-        assert_side_bar_help_link(
-            test=self,
-            page=self.library_page,
-            href=expected_url,
-            help_text='Learn more about content libraries'
-        )
 
     def test_library_user_access_setting_nav_help(self):
         """

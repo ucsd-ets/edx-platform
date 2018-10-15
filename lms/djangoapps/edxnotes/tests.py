@@ -6,7 +6,6 @@ import urlparse
 from contextlib import contextmanager
 from datetime import datetime
 from unittest import skipUnless
-import mock
 
 import ddt
 import jwt
@@ -18,7 +17,6 @@ from django.test.client import RequestFactory
 from django.test.utils import override_settings
 from edx_oauth2_provider.tests.factories import ClientFactory
 from mock import MagicMock, patch
-from nose.plugins.attrib import attr
 from provider.oauth2.models import Client
 
 from courseware.model_data import FieldDataCache
@@ -30,6 +28,7 @@ from edxnotes.decorators import edxnotes
 from edxnotes.exceptions import EdxNotesParseError, EdxNotesServiceUnavailable
 from edxnotes.plugins import EdxNotesTab
 from openedx.core.djangoapps.user_api.models import RetirementState, UserRetirementStatus
+from openedx.core.lib.tests import attr
 from openedx.core.lib.token_utils import JwtBuilder
 from student.tests.factories import CourseEnrollmentFactory, SuperuserFactory, UserFactory
 from xmodule.modulestore import ModuleStoreEnum
@@ -914,7 +913,6 @@ class EdxNotesHelpersTest(ModuleStoreTestCase):
         Verify that `construct_url` works correctly.
         """
         # make absolute url
-        # pylint: disable=no-member
         if self.request.is_secure():
             host = 'https://' + self.request.get_host()
         else:
@@ -1292,12 +1290,3 @@ class EdxNotesPluginTest(ModuleStoreTestCase):
         FEATURES['ENABLE_EDXNOTES'] = enabled
         with override_settings(FEATURES=FEATURES):
             assert EdxNotesTab.is_enabled(self.course, self.user) == enabled
-
-    @ddt.data(True, False)
-    def test_edxnotes_tab_with_harvard_notes(self, harvard_notes_enabled):
-        """
-        Verify EdxNotesTab visibility when harvard notes feature is enabled/disabled.
-        """
-        with patch("edxnotes.plugins.is_harvard_notes_enabled") as mock_harvard_notes_enabled:
-            mock_harvard_notes_enabled.return_value = harvard_notes_enabled
-            assert EdxNotesTab.is_enabled(self.course, self.user) == (not harvard_notes_enabled)

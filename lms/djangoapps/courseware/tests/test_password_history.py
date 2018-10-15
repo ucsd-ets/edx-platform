@@ -14,19 +14,18 @@ from django.utils import timezone
 from django.utils.http import int_to_base36
 from freezegun import freeze_time
 from mock import patch
-from nose.plugins.attrib import attr
 
 from courseware.tests.helpers import LoginEnrollmentTestCase
 from student.models import PasswordHistory
 
 
-@attr(shard=1)
 @patch.dict("django.conf.settings.FEATURES", {'ADVANCED_SECURITY': True})
 @ddt.ddt
 class TestPasswordHistory(LoginEnrollmentTestCase):
     """
     Go through some of the PasswordHistory use cases
     """
+    shard = 1
 
     def _login(self, email, password, should_succeed=True, err_msg_check=None):
         """
@@ -170,7 +169,7 @@ class TestPasswordHistory(LoginEnrollmentTestCase):
         student_email, _ = self._setup_user()
         user = User.objects.get(email=student_email)
 
-        err_msg = 'You are re-using a password that you have used recently. You must have 1 distinct password'
+        err_msg = 'You are re\\\\u002Dusing a password that you have used recently. You must have 1 distinct password'
         success_msg = 'Your Password Reset is Complete'
 
         token = default_token_generator.make_token(user)
@@ -200,7 +199,7 @@ class TestPasswordHistory(LoginEnrollmentTestCase):
         staff_email, _ = self._setup_user(is_staff=True)
         user = User.objects.get(email=staff_email)
 
-        err_msg = 'You are re-using a password that you have used recently. You must have 2 distinct passwords'
+        err_msg = 'You are re\\\\u002Dusing a password that you have used recently. You must have 2 distinct passwords'
         success_msg = 'Your Password Reset is Complete'
 
         token = default_token_generator.make_token(user)

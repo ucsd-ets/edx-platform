@@ -52,6 +52,7 @@ module.exports = Merge.smart({
         PasswordResetConfirmation: './lms/static/js/student_account/components/PasswordResetConfirmation.jsx',
         StudentAccountDeletion: './lms/static/js/student_account/components/StudentAccountDeletion.jsx',
         StudentAccountDeletionInitializer: './lms/static/js/student_account/StudentAccountDeletionInitializer.js',
+        ProblemBrowser: './lms/djangoapps/instructor/static/instructor/ProblemBrowser/index.jsx',
 
         // Learner Dashboard
         EntitlementFactory: './lms/static/js/learner_dashboard/course_entitlement_factory.js',
@@ -105,7 +106,10 @@ module.exports = Merge.smart({
             Popper: 'popper.js', // used by bootstrap
             CodeMirror: 'codemirror',
             'edx.HtmlUtils': 'edx-ui-toolkit/js/utils/html-utils',
-            AjaxPrefix: 'ajax_prefix'
+            AjaxPrefix: 'ajax_prefix',
+            // This is used by some XModules/XBlocks, which don't have
+            // any other way to declare that dependency.
+            $script: 'scriptjs'
         }),
 
         // Note: Until karma-webpack releases v3, it doesn't play well with
@@ -341,6 +345,7 @@ module.exports = Merge.smart({
             'common/static/coffee/src',
             'common/static/common/js',
             'common/static/common/js/vendor/',
+            'common/static/common/js/components',
             'common/static/js/src',
             'common/static/js/vendor/',
             'common/static/js/vendor/jQuery-File-Upload/js/',
