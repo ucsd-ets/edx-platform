@@ -1205,7 +1205,8 @@ EVENT_TRACKING_BACKENDS = {
             },
             'processors': [
                 {'ENGINE': 'track.shim.LegacyFieldMappingProcessor'},
-                {'ENGINE': 'track.shim.PrefixedEventProcessor'}
+                {'ENGINE': 'track.shim.PrefixedEventProcessor'},
+                {'ENGINE': 'track.shim.CaliperProcessor'}
             ]
         }
     },
