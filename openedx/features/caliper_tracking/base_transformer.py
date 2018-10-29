@@ -2,8 +2,8 @@
 Base module containing generic caliper transformer class
 """
 
-
 import uuid
+
 
 class CaliperBaseTransformer(object):
     """Base transformer class
@@ -19,7 +19,7 @@ class CaliperBaseTransformer(object):
         @param event: unprocessed event dict
         """
         self.event = event
-        self.caliper_event = event
+        self.caliper_event = dict()
         self.caliper_event['uuid'] = str(uuid.uuid4().urn)
 
     def transform_event(self):
