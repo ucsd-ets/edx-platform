@@ -33,6 +33,7 @@ class CaliperBaseTransformer(object):
         self.caliper_event.update({
             '@context': CALIPER_EVENT_CONTEXT,
             'id': str(uuid.uuid4().urn),
+            'agent': self.event.get('agent'),
             'edx_event_type': self.event.get('event_type'),
             'host': self.event.get('host'),
             'session': self.event.get('session'),
