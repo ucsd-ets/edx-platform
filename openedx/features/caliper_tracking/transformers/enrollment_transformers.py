@@ -26,7 +26,12 @@ def edx_course_enrollment_activated(current_event, caliper_event):
 
 def edx_course_enrollment_deactivated(current_event, caliper_event):
     """
-    Caliper specific log for edX course unenrollment
+    The server emits an enrollment.deactivated event when the student's
+    enrollment is cancelled.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
     """
     caliper_object = {
         'course_id': current_event['context']['course_id'],
@@ -38,5 +43,25 @@ def edx_course_enrollment_deactivated(current_event, caliper_event):
         'type': 'Enrollment',
         'action': 'Deactivated'
     })
+    caliper_event['actor']['type'] = 'Person'
+    return caliper_event
+
+
+def edx_course_enrollment_mode_changed(current_event, caliper_event):
+    """
+    The server emits an enrollment.mode_changed event when the student's
+    enrollment mode is changed.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    caliper_event.update({
+        'type': 'Enrollment',
+        'action': 'Mode_Changed',
+        'object': current_event['event'],
+        'course_id': current_event['context']['course_id']
+    })
+
     caliper_event['actor']['type'] = 'Person'
     return caliper_event
