@@ -3,7 +3,8 @@ from openedx.features.caliper_tracking.transformers.navigation_transformers impo
 from openedx.features.caliper_tracking.transformers.enrollment_transformers import (
     edx_course_enrollment_activated,
     edx_course_enrollment_mode_changed,
-    edx_course_enrollment_deactivated
+    edx_course_enrollment_deactivated,
+    edx_course_enrollment_upgrade_clicked
 )
 
 """
@@ -16,4 +17,5 @@ EVENT_MAPPING = {
     'edx.course.enrollment.activated': edx_course_enrollment_activated,
     'edx.course.enrollment.deactivated': edx_course_enrollment_deactivated,
     'edx.course.enrollment.mode_changed': edx_course_enrollment_mode_changed,
+    'edx.course.enrollment.upgrade.clicked': edx_course_enrollment_upgrade_clicked,
 }

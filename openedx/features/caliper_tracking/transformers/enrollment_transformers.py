@@ -65,3 +65,30 @@ def edx_course_enrollment_mode_changed(current_event, caliper_event):
 
     caliper_event['actor']['type'] = 'Person'
     return caliper_event
+
+
+def edx_course_enrollment_upgrade_clicked(current_event, caliper_event):
+    """
+    The server emits an enrollment.upgrade_clicked event when the student
+    clicks on Upgrade Enrollment Button.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+
+    caliper_object = {
+        'id': current_event['page'],
+        'name': 'Open edX Enrollment Upgrade',
+    }
+
+    caliper_event.update({
+        'type': 'NavigationEvent',
+        'action': 'NavigatedTo',
+        'course_id': current_event['context']['course_id'],
+        'object': caliper_object
+    })
+
+    caliper_event['actor']['type'] = 'Person'
+
+    return caliper_event
