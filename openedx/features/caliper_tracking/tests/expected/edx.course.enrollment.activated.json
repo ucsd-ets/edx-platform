@@ -1,0 +1,34 @@
+{
+  "@context": "http://purl.imsglobal.org/ctx/caliper/v1p1",
+  "id": "urn:uuid:2635b9dd-0061-4059-ac61-2718ab366f75",
+  "type": "Event",
+  "actor": {
+    "id": "edx.devstack.lms:18000/u/ali",
+    "name": "ali",
+    "type": "Person"
+  },
+  "action": "Activated",
+  "object": {
+    "id": "http://localhost:18000/courses/course-v1:edx+cs-101+2018/about",
+    "type": "Membership"
+  },
+  "eventTime": "2018-10-17T12:12:03.143Z",
+  "referrer": "http://localhost:18000/courses/course-v1:edx+cs-101+2018/about",
+  "extensions": {
+    "extra_fields": {
+      "session": "8205ce7ea40a0619955e15f072dc33e2",
+      "accept_language": "en-US,en;q=0.9,ur-PK;q=0.8,ur;q=0.7",
+      "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
+      "event_source": "server",
+      "event_type": "edx.course.enrollment.activated",
+      "host": "747befdb3d9d",
+      "ip": "172.18.0.1",
+      "page": null,
+      "mode": "audit",
+      "user_id": 6,
+      "org_id": "edx",
+      "course_id": "course-v1:edx+cs-101+2018",
+      "path": "/change_enrollment"
+    }
+  }
+}
