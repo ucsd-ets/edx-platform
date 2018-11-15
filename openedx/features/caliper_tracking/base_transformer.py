@@ -47,7 +47,7 @@ class CaliperBaseTransformer(object):
     def add_actor_info(self):
         self.caliper_event['actor'] = dict()
         user_profile_link = '{lms_url}{profile_link}'.format(
-            lms_url=settings.LMS_BASE,
+            lms_url=settings.LMS_ROOT_URL,
             profile_link=str(reverse('learner_profile', kwargs={'username': self.event.get('username')}))
         )
         self.caliper_event['actor'].update({
