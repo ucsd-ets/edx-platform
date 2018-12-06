@@ -21,8 +21,9 @@ def edx_course_enrollment_activated(current_event, caliper_event):
         'course_id': current_event['event']['course_id']
     })
     caliper_event['actor']['type'] = 'Person'
+
     return caliper_event
-    
+
 
 def edx_course_enrollment_deactivated(current_event, caliper_event):
     """

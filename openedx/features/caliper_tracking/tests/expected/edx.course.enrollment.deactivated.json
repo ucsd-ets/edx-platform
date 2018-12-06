@@ -1,18 +1,11 @@
 {
   "@context": "http://purl.imsglobal.org/ctx/caliper/v1p1",
-  "id": "urn:uuid:fa25a902-275e-4e5b-90b6-bd2779608dce",
-  "type": "Event",
+  "action": "Deactivated",
   "actor": {
     "id": "edx.devstack.lms:18000/u/honor",
-    "type": "Person",
-    "name": "honor"
+    "name": "honor",
+    "type": "Person"
   },
-  "action": "Deactivated",
-  "object": {
-    "id": "http://localhost:18000/courses/course-v1:edx+cs-101+2018/about",
-    "type": "Membership"
-  },
-  "referrer": "http://localhost:18000/dashboard",
   "eventTime": "2018-10-17T12:14:54.844Z",
   "extensions": {
     "extra_fields": {
@@ -23,12 +16,19 @@
       "event_type": "edx.course.enrollment.deactivated",
       "host": "747befdb3d9d",
       "ip": "172.18.0.1",
-      "org_id": "edx",
-      "path": "/change_enrollment",
-      "user_id": 6,
       "mode": "audit",
+      "org_id": "edx",
+      "page": null,
+      "path": "/change_enrollment",
       "session": "8205ce7ea40a0619955e15f072dc33e2",
-      "page":null
+      "user_id": 6
     }
-  }
+  },
+  "id": "urn:uuid:fa25a902-275e-4e5b-90b6-bd2779608dce",
+  "object": {
+    "id": "http://localhost:18000/courses/course-v1:edx+cs-101+2018/about",
+    "type": "Membership"
+  },
+  "referrer": "http://localhost:18000/dashboard",
+  "type": "Event"
 }
