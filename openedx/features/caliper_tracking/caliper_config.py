@@ -7,6 +7,7 @@ Mapping of events to their transformer functions
 EVENT_MAPPING = {
     'edx.bookmark.added': ctf.edx_bookmark_added,
     'edx.bookmark.listed': ctf.edx_bookmark_listed,
+    'edx.bookmark.accessed': ctf.edx_bookmark_accessed,
     'edx.bookmark.removed': ctf.edx_bookmark_removed,
     'edx.ui.lms.link_clicked': ctf.edx_ui_lms_link_clicked,
     'edx.course.enrollment.activated': ctf.edx_course_enrollment_activated,
