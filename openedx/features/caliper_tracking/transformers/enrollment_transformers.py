@@ -80,16 +80,29 @@ def edx_course_enrollment_upgrade_clicked(current_event, caliper_event):
 
     caliper_object = {
         'id': current_event['page'],
-        'name': 'Open edX Enrollment Upgrade',
+        'type': 'WebPage',
     }
 
     caliper_event.update({
         'type': 'NavigationEvent',
         'action': 'NavigatedTo',
-        'course_id': current_event['context']['course_id'],
-        'object': caliper_object
+        'object': caliper_object,
+
     })
 
-    caliper_event['actor']['type'] = 'Person'
+    caliper_event['extensions']['extra_fields'].update({
+        'event': current_event['event'],
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id']
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
 
     return caliper_event
