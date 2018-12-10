@@ -2,12 +2,13 @@
 Base module containing generic caliper transformer class
 """
 import uuid
-from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
 CALIPER_EVENT_CONTEXT = 'http://purl.imsglobal.org/ctx/caliper/v1p1'
+
+UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S:%f'
 
 
 class CaliperBaseTransformer(object):
@@ -29,6 +30,21 @@ class CaliperBaseTransformer(object):
         self._add_referrer()
         self._add_extensions()
 
+    def _convert_datetime(self, current_datetime):
+        """
+        Convert provided datetime into UTC format
+
+        @param datetime: datetime string.
+        :return: UTC formatted datetime string.
+        """
+        utc_offset = current_datetime.utcoffset()
+        utc_datetime = current_datetime - utc_offset
+
+        formatted_datetime = '{}{}'.format(
+            utc_datetime.strftime(UTC_DATETIME_FORMAT)[:-3], 'Z'
+        )
+        return formatted_datetime
+
     def _add_generic_fields(self):
         """
         Adds all of the generic fields to the event object
@@ -36,7 +52,15 @@ class CaliperBaseTransformer(object):
         self.caliper_event.update({
             '@context': CALIPER_EVENT_CONTEXT,
             'id': uuid.uuid4().urn,
-            'eventTime': datetime.now().isoformat('T')[:-3] + 'Z'
+            'agent': self.event.get('agent'),
+            'event_type': self.event.get('event_type'),
+            'host': self.event.get('host'),
+            'session': self.event.get('session'),
+            'referrer': self.event.get('referer'),
+            'user_id': self.event['context'].get('user_id'),
+            'org_id': self.event['context'].get('org_id'),
+            'path': self.event['context'].get('path'),
+            'eventTime': self._convert_datetime(self.event.get('time'))
         })
 
     def _add_actor_info(self):
@@ -46,7 +70,10 @@ class CaliperBaseTransformer(object):
         self.caliper_event['actor'] = {}
         user_profile_link = '{lms_url}{profile_link}'.format(
             lms_url=settings.LMS_ROOT_URL,
-            profile_link=str(reverse('learner_profile', kwargs={'username': self.event.get('username')}))
+            profile_link=str(reverse(
+                'learner_profile',
+                kwargs={'username': self.event.get('username')}
+            ))
         )
         self.caliper_event['actor'].update({
             'id': user_profile_link,
@@ -54,8 +81,8 @@ class CaliperBaseTransformer(object):
 
     def _add_extensions(self):
         """
-        A map of additional attributes not defined by the model MAY be specified for a more concise representation of
-        the Event.
+        A map of additional attributes not defined by the model MAY be
+        specified for a more concise representation of the Event.
         """
         self.caliper_event['extensions'] = {}
         self.caliper_event['extensions']['extra_fields'] = {
