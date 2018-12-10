@@ -86,4 +86,28 @@ def edx_bookmark_accessed(current_event, caliper_event):
 
 
 def edx_bookmark_removed(current_event, caliper_event):
-    print('edx_bookmark_removed')
+    """
+    When a bookmark is removed/deleted.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    caliper_event.update({
+        'action': 'Deleted',
+        'type': 'Event'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event.get('ip'),
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['actor'].update({
+        'name': current_event.get('username'),
+        'type': 'Person'
+    })
+    caliper_event['object'] = {
+        'id':  current_event.get('referer'),
+        'type': 'Bookmark',
+        'extensions': current_event['event']
+    }
+    return caliper_event
