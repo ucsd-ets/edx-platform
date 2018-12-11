@@ -24,7 +24,8 @@ def edx_course_enrollment_activated(current_event, caliper_event):
             'extensions': {
                 'mode': current_event['event']['mode'],
                 'course_id': current_event['context']['course_id'],
-                'user_id': caliper_event['extensions']['extra_fields'].pop('user_id')
+                'user_id': caliper_event['extensions']['extra_fields'].pop(
+                    'user_id')
             }
         },
     })
@@ -97,13 +98,30 @@ def edx_course_enrollment_mode_changed(current_event, caliper_event):
     :return: final created log
     """
     caliper_event.update({
-        'type': 'Enrollment',
-        'action': 'Mode_Changed',
-        'object': current_event['event'],
-        'course_id': current_event['context']['course_id']
+        'type': 'Event',
+        'action': 'Modified',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Membership',
+            'extensions': {
+                'course_id': current_event['context']['course_id'],
+                'org_id': current_event['context']['org_id'],
+                'mode': current_event['event']['mode'],
+            }
+        },
     })
 
-    caliper_event['actor']['type'] = 'Person'
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip']
+    })
+
     return caliper_event
 
 
