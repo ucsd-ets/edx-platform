@@ -11,5 +11,7 @@ from .enrollment_transformers import (
     edx_course_enrollment_activated, edx_course_enrollment_mode_changed, edx_course_enrollment_deactivated,
     edx_course_enrollment_upgrade_clicked
 )
-from .problem_transformers import problem_show
+from .problem_transformers import (
+    problem_show, problem_save,
+)
 from .video_transformers import pause_video
