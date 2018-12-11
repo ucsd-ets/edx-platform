@@ -25,6 +25,7 @@ EVENT_MAPPING = {
         ctf.edx_ui_lms_sequence_previous_selected,
     'seq_next': ctf.seq_next,
     'seq_prev': ctf.seq_prev,
+    'stop_video': ctf.stop_video,
     'problem_save': ctf.problem_save,
     'pause_video': ctf.pause_video,
     'problem_reset': ctf.problem_reset,
