@@ -3,12 +3,13 @@ Base module containing generic caliper transformer class
 """
 import uuid
 
+from dateutil.parser import parse
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
 CALIPER_EVENT_CONTEXT = 'http://purl.imsglobal.org/ctx/caliper/v1p1'
 
-UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S:%f'
+UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
 
 class CaliperBaseTransformer(object):
@@ -37,6 +38,11 @@ class CaliperBaseTransformer(object):
         @param datetime: datetime string.
         :return: UTC formatted datetime string.
         """
+
+        # convert current_datetime to a datetime object if it is string
+        if type(current_datetime) in (str, unicode):
+            current_datetime = parse(current_datetime)
+
         utc_offset = current_datetime.utcoffset()
         utc_datetime = current_datetime - utc_offset
 
@@ -52,14 +58,6 @@ class CaliperBaseTransformer(object):
         self.caliper_event.update({
             '@context': CALIPER_EVENT_CONTEXT,
             'id': uuid.uuid4().urn,
-            'agent': self.event.get('agent'),
-            'event_type': self.event.get('event_type'),
-            'host': self.event.get('host'),
-            'session': self.event.get('session'),
-            'referrer': self.event.get('referer'),
-            'user_id': self.event['context'].get('user_id'),
-            'org_id': self.event['context'].get('org_id'),
-            'path': self.event['context'].get('path'),
             'eventTime': self._convert_datetime(self.event.get('time'))
         })
 
@@ -88,6 +86,7 @@ class CaliperBaseTransformer(object):
         self.caliper_event['extensions']['extra_fields'] = {
             'agent': self.event.get('agent'),
             'event_type': self.event.get('event_type'),
+            'event_source': self.event.get('event_source'),
             'host': self.event.get('host'),
             'org_id': self.event['context'].get('org_id'),
             'path': self.event['context'].get('path'),
