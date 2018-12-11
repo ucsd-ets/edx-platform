@@ -17,4 +17,5 @@ EVENT_MAPPING = {
     'problem_show': ctf.problem_show,
     'problem_save': ctf.problem_save,
     'pause_video': ctf.pause_video,
+    'problem_reset': ctf.problem_reset,
 }
