@@ -13,3 +13,4 @@ from .enrollment_transformers import (
     edx_course_enrollment_upgrade_clicked
 )
 from .problem_transformers import problem_show
+from .video_transformers import pause_video
