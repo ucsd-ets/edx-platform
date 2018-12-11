@@ -2,6 +2,9 @@
 Transformers for all course related events.
 """
 
+from django.conf import settings
+from django.core.urlresolvers import reverse
+
 
 def edx_course_enrollment_activated(current_event, caliper_event):
     """
@@ -47,17 +50,40 @@ def edx_course_enrollment_deactivated(current_event, caliper_event):
     :param caliper_event: log containing both basic and default attribute
     :return: final created log
     """
+
+    course_id = current_event['context']['course_id']
+
+    course_link = '{lms_url}{profile_link}'.format(
+        lms_url=settings.LMS_ROOT_URL,
+        profile_link=str(reverse(
+            'about_course',
+            kwargs={'course_id': course_id}
+        ))
+    )
+
     caliper_object = {
-        'course_id': current_event['context']['course_id'],
-        'user_id': caliper_event['user_id'],
-        'mode': current_event['event']['mode']
+        'id': course_link,
+        'type': 'Membership',
+        'extensions': {
+            'course_id': course_id,
+            'mode': current_event['event']['mode']
+        }
     }
+
     caliper_event.update({
         'object': caliper_object,
-        'type': 'Enrollment',
-        'action': 'Deactivated'
+        'type': 'Event',
+        'action': 'Deactivated',
     })
-    caliper_event['actor']['type'] = 'Person'
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+    caliper_event['referrer']['type'] = 'WebPage'
+
     return caliper_event
 
 
