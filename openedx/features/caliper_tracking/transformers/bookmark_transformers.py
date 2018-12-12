@@ -55,7 +55,3 @@ def edx_bookmark_accessed(current_event, caliper_event):
 
 def edx_bookmark_removed(current_event, caliper_event):
     print('edx_bookmark_removed')
-
-
-def edx_course_tool_accessed(current_event, caliper_event):
-    print('edx_course_tool_accessed')
