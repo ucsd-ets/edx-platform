@@ -46,7 +46,39 @@ def edx_bookmark_listed(current_event, caliper_event):
 
 
 def edx_bookmark_added(current_event, caliper_event):
-    print('edx_bookmark_added')
+    """
+    The server emits this event when a user removes a bookmark from a page.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    caliper_event.update(
+        {
+            'type': 'AnnotationEvent',
+            'action': 'Bookmarked',
+            'object': {
+                'id': current_event['referer'],
+                'type': 'Page',
+                'extensions': {
+                    'course_id': current_event['event']['course_id'],
+                    'bookmark_id': current_event['event']['bookmark_id'],
+                    'component_usage_id': current_event['event']['component_usage_id'],
+                    'component_type': current_event['event']['component_type']
+                }
+            }
+        }
+    )
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'path': current_event['context']['path'],
+    })
+    return caliper_event
 
 
 def edx_bookmark_accessed(current_event, caliper_event):
