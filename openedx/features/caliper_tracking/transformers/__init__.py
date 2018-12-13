@@ -38,6 +38,7 @@ from .video_transformers import (
 from .forum_transformers import (
     edx_forum_response_created,
     edx_forum_thread_created,
+    edx_forum_thread_viewed,
     edx_forum_comment_created,
 )
 from .notes_transformers import (

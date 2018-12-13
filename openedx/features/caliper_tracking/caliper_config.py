@@ -31,6 +31,7 @@ EVENT_MAPPING = {
     'seek_video': ctf.seek_video,
     'load_video': ctf.load_video,
     'problem_reset': ctf.problem_reset,
+    'edx.forum.thread.viewed': ctf.edx_forum_thread_viewed,
     'save_problem_success': ctf.save_problem_success,
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
     'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
