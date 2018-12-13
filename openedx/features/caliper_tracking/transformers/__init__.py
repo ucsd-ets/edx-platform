@@ -6,7 +6,8 @@ from .bookmark_transformers import (
     edx_bookmark_accessed
 )
 from .navigation_transformers import (
-    edx_ui_lms_link_clicked, edx_course_tool_accessed
+    edx_ui_lms_link_clicked, edx_course_tool_accessed,
+    seq_prev
 )
 from .enrollment_transformers import (
     edx_course_enrollment_activated, edx_course_enrollment_mode_changed, edx_course_enrollment_deactivated,
