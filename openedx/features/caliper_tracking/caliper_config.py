@@ -14,6 +14,7 @@ EVENT_MAPPING = {
     'edx.course.enrollment.deactivated': ctf.edx_course_enrollment_deactivated,
     'edx.course.enrollment.mode_changed': ctf.edx_course_enrollment_mode_changed,
     'edx.course.enrollment.upgrade.clicked': ctf.edx_course_enrollment_upgrade_clicked,
+    'speed_change_video': ctf.edx_video_speed_changed,
     'edx.course.tool.accessed': ctf.edx_course_tool_accessed,
     'problem_show': ctf.problem_show,
     'problem_save': ctf.problem_save,
