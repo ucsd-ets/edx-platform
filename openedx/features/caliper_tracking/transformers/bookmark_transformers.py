@@ -1,6 +1,7 @@
 """
 Transformers for all the bookmark events
 """
+import json
 
 
 def edx_bookmark_listed(current_event, caliper_event):
@@ -82,7 +83,33 @@ def edx_bookmark_added(current_event, caliper_event):
 
 
 def edx_bookmark_accessed(current_event, caliper_event):
-    print('edx_bookmark_accessed')
+    """
+    When bookmarks are accessed.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    caliper_event.update({
+        'action': 'NavigatedTo',
+        'type': 'NavigationEvent'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context'].get('course_id'),
+        'ip': current_event.get('ip')
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['actor'].update({
+        'name': current_event.get('username'),
+        'type': 'Person'
+    })
+    event_info = json.loads(current_event['event'])
+    caliper_event['object'] = {
+        'id': current_event.get('referer'),
+        'type': 'WebPage',
+        'extensions': event_info
+    }
+    return caliper_event
 
 
 def edx_bookmark_removed(current_event, caliper_event):
