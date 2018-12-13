@@ -29,6 +29,7 @@ from .problem_transformers import (
     problem_check,
     edx_problem_hint_demandhint_displayed,
     problem_rescore,
+    problem_graded,
 )
 from .video_transformers import (
     pause_video,
