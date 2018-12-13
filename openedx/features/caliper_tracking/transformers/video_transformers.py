@@ -10,10 +10,10 @@ from isodate import duration_isoformat
 
 def pause_video(current_event, caliper_event):
     """
-    When a user selects the video player's pause control, the player emits a pause_video
-    event. Fot videos that are streamed in a browser, when the player reaches the end of the
-    video file and play automatically stops it emits both this event and a stop event
-    (as of June 2014).
+    When a user selects the video player's pause control, the player emits a
+    pause_video event. Fot videos that are streamed in a browser, when the
+    player reaches the end of the video file and play automatically stops it
+     emits both this event and a stop event (as of June 2014).
 
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
@@ -24,7 +24,8 @@ def pause_video(current_event, caliper_event):
         'action': 'Paused',
         'type': 'MediaEvent',
         'object': {
-            'duration': duration_isoformat(timedelta(seconds=current_event_details['duration'])),
+            'duration': duration_isoformat(
+                timedelta(seconds=current_event_details['duration'])),
             'extensions': {
                 'code': current_event_details['code'],
                 'id': current_event_details['id']
@@ -33,7 +34,8 @@ def pause_video(current_event, caliper_event):
             'type': 'VideoObject'
         },
         'target': {
-            'currentTime': duration_isoformat(timedelta(seconds=current_event_details['currentTime'])),
+            'currentTime': duration_isoformat(
+                timedelta(seconds=current_event_details['currentTime'])),
             'id': current_event['referer'],
             'type': 'MediaLocation'
         }
@@ -75,7 +77,8 @@ def edx_video_speed_changed(current_event, caliper_event):
     caliper_event['object'] = {
         'id': current_event.get('referer'),
         'type': 'VideoObject',
-        'duration': duration_isoformat(timedelta(seconds=event_info.pop('duration'))),
+        'duration': duration_isoformat(
+            timedelta(seconds=event_info.pop('duration'))),
         'extensions': event_info
     }
     return caliper_event

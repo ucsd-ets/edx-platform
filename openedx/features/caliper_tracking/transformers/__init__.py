@@ -27,5 +27,6 @@ from .problem_transformers import (
 from .video_transformers import pause_video, edx_video_speed_changed
 from .forum_transformers import (
     edx_forum_response_created,
-    edx_forum_thread_created
+    edx_forum_thread_created,
+    edx_forum_comment_created,
 )
