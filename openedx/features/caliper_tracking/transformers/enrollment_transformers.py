@@ -5,23 +5,36 @@ Transformers for all course related events.
 
 def edx_course_enrollment_activated(current_event, caliper_event):
     """
-    When a student enrolls in a course, the server emits an edx.course.enrollment.activated event.
+    When a student enrolls in a course, the server emits an
+    edx.course.enrollment.activated event.
 
     :param current_event: default log
     :param caliper_event: log containing both basic and default attribute
     :return: final created log
     """
     caliper_event.update({
-        'ip': current_event['ip'],
-        'object': current_event['event'],
-        'status': current_event['event']['mode'],
-        'page': current_event['page'],
-        'type': 'Membership',
+        'type': 'Event',
         'action': 'Activated',
-        'course_id': current_event['event']['course_id']
+        'object': {
+            'id': caliper_event['referrer']['id'],
+            'type': 'Membership',
+            'extensions': {
+                'mode': current_event['event']['mode'],
+                'course_id': current_event['context']['course_id'],
+                'user_id': caliper_event['extensions']['extra_fields'].pop('user_id')
+            }
+        },
     })
-    caliper_event['actor']['type'] = 'Person'
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].update({
+        'event_source': current_event['event_source'],
+        'ip': current_event['ip'],
 
+    })
     return caliper_event
 
 
