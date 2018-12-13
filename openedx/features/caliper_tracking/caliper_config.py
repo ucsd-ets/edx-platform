@@ -47,6 +47,7 @@ EVENT_MAPPING = {
         ctf.openassessmentblock_get_peer_submission,
     'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'edx.course.student_notes.viewed': ctf.edx_course_student_notes_viewed,
+    'textbook.pdf.page.navigated': ctf.textbook_pdf_page_navigated,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
     'xblock.poll.view_results': ctf.xblock_poll_view_results,
     'xblock.survey.view_results': ctf.xblock_survey_view_results,

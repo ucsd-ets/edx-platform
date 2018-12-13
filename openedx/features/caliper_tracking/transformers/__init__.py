@@ -23,6 +23,7 @@ from .enrollment_transformers import (
     edx_course_enrollment_upgrade_clicked,
     edx_course_enrollment_upgrade_succeeded,
 )
+from .textbook_transformers import textbook_pdf_page_navigated
 from .problem_transformers import (
     problem_show,
     problem_save,
