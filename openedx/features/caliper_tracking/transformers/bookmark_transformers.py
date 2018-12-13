@@ -20,7 +20,14 @@ def edx_bookmark_listed(current_event, caliper_event):
         'action': 'NavigatedTo',
         'object': {
             'id': current_event['referer'],
-            'type': 'WebPage'
+            'type': 'WebPage',
+            'extensions': {
+                'course_id': current_event['event'].get('course_id'),
+                'page_number': current_event['event'].get('page_number'),
+                'bookmarks_count': current_event['event'].get('bookmarks_count'),
+                'page_size': current_event['event'].get('page_size'),
+                'list_type': current_event['event'].get('list_type'),
+            }
         }
     })
 
@@ -34,12 +41,7 @@ def edx_bookmark_listed(current_event, caliper_event):
     })
 
     caliper_event['extensions']['extra_fields'].update({
-        'course_id': current_event['event'].get('course_id'),
         'ip': current_event.get('ip'),
-        'page_number': current_event['event'].get('page_number'),
-        'bookmarks_count': current_event['event'].get('bookmarks_count'),
-        'page_size': current_event['event'].get('page_size'),
-        'list_type': current_event['event'].get('list_type'),
     })
 
     return caliper_event
