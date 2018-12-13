@@ -31,5 +31,6 @@ EVENT_MAPPING = {
     'problem_reset': ctf.problem_reset,
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
+    'problem_check': ctf.problem_check,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
 }
