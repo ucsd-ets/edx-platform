@@ -17,6 +17,7 @@ EVENT_MAPPING = {
     'speed_change_video': ctf.edx_video_speed_changed,
     'edx.course.tool.accessed': ctf.edx_course_tool_accessed,
     'problem_show': ctf.problem_show,
+    'seq_next': ctf.seq_next,
     'seq_prev': ctf.seq_prev,
     'problem_save': ctf.problem_save,
     'pause_video': ctf.pause_video,
