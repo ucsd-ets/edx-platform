@@ -18,6 +18,7 @@ EVENT_MAPPING = {
     'edx.course.tool.accessed': ctf.edx_course_tool_accessed,
     'edx.forum.response.created': ctf.edx_forum_response_created,
     'problem_show': ctf.problem_show,
+    'edx.ui.lms.sequence.next_selected': ctf.edx_ui_lms_sequence_next_selected,
     'seq_next': ctf.seq_next,
     'seq_prev': ctf.seq_prev,
     'problem_save': ctf.problem_save,
