@@ -25,4 +25,5 @@ EVENT_MAPPING = {
     'problem_save': ctf.problem_save,
     'pause_video': ctf.pause_video,
     'problem_reset': ctf.problem_reset,
+    'edx.forum.thread.created': ctf.edx_forum_thread_created,
 }
