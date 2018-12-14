@@ -5,7 +5,7 @@ from .bookmark_transformers import (
     edx_bookmark_listed,
     edx_bookmark_added,
     edx_bookmark_removed,
-    edx_bookmark_accessed
+    edx_bookmark_accessed,
 )
 from .navigation_transformers import (
     edx_ui_lms_link_clicked,
@@ -32,6 +32,7 @@ from .video_transformers import (
     pause_video,
     stop_video,
     edx_video_speed_changed,
+    play_video,
     load_video,
 )
 from .forum_transformers import (
