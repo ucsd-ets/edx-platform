@@ -38,6 +38,7 @@ EVENT_MAPPING = {
     'edx.video.closed_captions.shown': ctf.edx_video_closed_caption_shown,
     'edx.video.closed_captions.hidden': ctf.edx_video_closed_caption_hidden,
     'problem_reset': ctf.problem_reset,
+    'seq_goto': ctf.seq_goto,
     'problem_rescore': ctf.problem_rescore,
     'edx.forum.thread.viewed': ctf.edx_forum_thread_viewed,
     'save_problem_success': ctf.save_problem_success,
