@@ -46,4 +46,5 @@ EVENT_MAPPING = {
     'xblock.poll.submitted': ctf.xblock_poll_submitted,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
     'openassessmentblock.get_submission_for_staff_grading': ctf.openassessmentblock_get_submission_for_staff_grading,
+    'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
 }
