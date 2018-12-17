@@ -25,6 +25,7 @@ from django.conf import settings
 from dogapi import dog_stats_api
 
 from track.backends import BaseBackend
+from openedx.features.caliper_tracking.decorators import transform_caliper
 
 __all__ = ['send']
 
@@ -81,6 +82,7 @@ def _instantiate_backend_from_name(name, options):
     return backend
 
 
+@transform_caliper
 @dog_stats_api.timed('track.send')
 def send(event):
     """
