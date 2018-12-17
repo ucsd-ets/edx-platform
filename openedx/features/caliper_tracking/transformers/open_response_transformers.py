@@ -1,7 +1,6 @@
 """
 Transformers for all openassessment events
 """
-
 import json
 
 from openedx.features.caliper_tracking.utils import convert_datetime
@@ -128,6 +127,92 @@ def openassessmentblock_peer_assess(current_event, caliper_event):
     return caliper_event
 
 
+def openassessment_student_training_assess_example(current_event, caliper_event):
+    """
+    The server emits this event when a learner submits a response.
+    The same event is emitted when a learner submits a
+    response for peer assessment or for self assessment.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_event.update({
+        'type': 'AssessmentEvent',
+        'action': 'Submitted',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Assessment',
+            'extensions': {
+                'corrections': current_event['event']['corrections'],
+                'options_selected': current_event['event']['options_selected'],
+                'submission_uuid': current_event['event']['submission_uuid']
+            }
+        }
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'asides': current_event['context']['asides'],
+        'course_id': current_event['context']['course_id'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'module': current_event['context']['module']
+    })
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+    caliper_event['extensions']['extra_fields'].pop('session')
+    return caliper_event
+
+
+def openassessmentblock_save_submission(current_event, caliper_event):
+    """
+    server emits openassessmentblock.save_submission event when user save
+    his response before submitting it.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+
+    """
+    saved_response = json.loads(current_event['event']['saved_response'])
+    module_details = current_event['context']['module']
+
+    caliper_object = {
+        'extensions': {
+            'saved_response': saved_response
+        },
+        'id': current_event['referer'],
+        'type': 'Assessment'
+    }
+
+    caliper_event.update({
+        'action': 'Paused',
+        'type': 'AssessmentEvent',
+        'object': caliper_object
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'asides': current_event['context']['asides'],
+        'course_id': current_event['context']['course_id'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'display_name': module_details['display_name'],
+        'usage_key': module_details['usage_key'],
+        'ip': current_event['ip']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].pop('session')
+
+    return caliper_event
+
+
 def openassessmentblock_get_peer_submission(current_event, caliper_event):
     """
     The server emits openassessmentblock.get_peer_submission event  when
@@ -170,44 +255,4 @@ def openassessmentblock_get_peer_submission(current_event, caliper_event):
     caliper_event['referrer']['type'] = 'WebPage'
     caliper_event['extensions']['extra_fields'].pop('session')
 
-    return caliper_event
-
-
-def openassessment_student_training_assess_example(
-        current_event, caliper_event):
-    """
-    The server emits this event when a learner submits a response.
-    The same event is emitted when a learner submits a
-    response for peer assessment or for self assessment.
-
-    :param current_event: default event log generated.
-    :param caliper_event: caliper_event log having some basic attributes.
-    :return: updated caliper_event.
-    """
-    caliper_event.update({
-        'type': 'AssessmentEvent',
-        'action': 'Submitted',
-        'object': {
-            'id': current_event['referer'],
-            'type': 'Assessment',
-            'extensions': {
-                'corrections': current_event['event']['corrections'],
-                'options_selected': current_event['event']['options_selected'],
-                'submission_uuid': current_event['event']['submission_uuid']
-            }
-        }
-    })
-    caliper_event['extensions']['extra_fields'].update({
-        'asides': current_event['context']['asides'],
-        'course_id': current_event['context']['course_id'],
-        'course_user_tags': current_event['context']['course_user_tags'],
-        'module': current_event['context']['module']
-    })
-    caliper_event['actor'].update({
-        'type': 'Person',
-        'name': current_event['username']
-    })
-    caliper_event['referrer']['type'] = 'WebPage'
-    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
-    caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event

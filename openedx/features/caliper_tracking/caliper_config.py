@@ -66,4 +66,6 @@ EVENT_MAPPING = {
         ctf.edx_course_enrollment_upgrade_succeeded,
     'edx.course.student_notes.notes_page_viewed':
         ctf.edx_course_student_notes_notes_page_viewed,
+    'openassessmentblock.save_submission':
+        ctf.openassessmentblock_save_submission,
 }
