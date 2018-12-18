@@ -251,3 +251,30 @@ def edx_problem_hint_demandhint_displayed(current_event, caliper_event):
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
 
     return caliper_event
+
+
+def problem_rescore(current_event, caliper_event):
+    caliper_object = {
+        'id': current_event['context'].get('referer'),
+        'extensions': current_event['event'],
+        'type': 'Attempt'
+    }
+
+    caliper_event.update({
+        'action': 'Graded',
+        'type': 'GradeEvent',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer'].update({
+        'id': current_event['context'].pop('referer'),
+        'type': 'WebPage'
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['context'].pop('username'),
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    return caliper_event
