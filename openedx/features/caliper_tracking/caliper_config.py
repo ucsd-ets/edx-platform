@@ -58,4 +58,6 @@ EVENT_MAPPING = {
     'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
     'edx.course.enrollment.upgrade.succeeded':
         ctf.edx_course_enrollment_upgrade_succeeded,
+    'edx.course.student_notes.notes_page_viewed':
+        ctf.edx_course_student_notes_notes_page_viewed,
 }

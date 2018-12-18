@@ -14,6 +14,7 @@ from .navigation_transformers import (
     edx_ui_lms_sequence_previous_selected,
     seq_prev,
     seq_next,
+    edx_course_student_notes_notes_page_viewed,
 )
 from .enrollment_transformers import (
     edx_course_enrollment_activated,
