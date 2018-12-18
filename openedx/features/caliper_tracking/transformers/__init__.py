@@ -56,4 +56,5 @@ from .open_response_transformers import (
     openassessmentblock_get_submission_for_staff_grading,
     openassessmentblock_peer_assess,
     openassessmentblock_create_submission,
+    openassessment_student_training_assess_example,
 )

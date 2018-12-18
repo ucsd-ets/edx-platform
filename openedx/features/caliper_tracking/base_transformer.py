@@ -32,7 +32,7 @@ class CaliperBaseTransformer(object):
 
     def _add_generic_fields(self):
         """
-        Adds all of the generic fields to the event object
+        Adds all of the generic fields to the event object.
         """
         self.caliper_event.update({
             '@context': CALIPER_EVENT_CONTEXT,
