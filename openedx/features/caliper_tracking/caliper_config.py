@@ -35,5 +35,6 @@ EVENT_MAPPING = {
     'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
     'problem_check': ctf.problem_check,
+    'openassessmentblock.create_submission': ctf.openassessmentblock_create_submission,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
 }
