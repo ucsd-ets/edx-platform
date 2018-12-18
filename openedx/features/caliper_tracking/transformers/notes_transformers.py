@@ -1,8 +1,50 @@
 """
 Transformers for all the navigation events
 """
-
 import json
+
+
+def edx_course_student_notes_edited(current_event, caliper_event):
+    """
+    The browser emits edx.course.student_notes.edited events when a
+    learner edits a note in course.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    object_extensions = json.loads(current_event['event'])
+
+    object_extensions.update({
+        'course_id': current_event['context']['course_id'],
+        'org_id': current_event['context']['org_id'],
+    })
+
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'Document',
+        'extensions': object_extensions
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Modified',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+    })
+
+    return caliper_event
 
 
 def edx_course_student_notes_added(current_event, caliper_event):
