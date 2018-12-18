@@ -56,7 +56,8 @@ from .textbook_transformers import (
     textbook_pdf_page_scrolled,
 )
 from .notes_transformers import (
-    edx_course_student_notes_added
+    edx_course_student_notes_added,
+    edx_course_student_notes_viewed,
 )
 from .open_response_transformers import (
     openassessmentblock_get_submission_for_staff_grading,
