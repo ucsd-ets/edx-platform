@@ -2,6 +2,7 @@
 Utils required in transformers
 """
 from dateutil.parser import parse
+from django.contrib.auth import get_user_model
 
 UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
@@ -25,3 +26,14 @@ def convert_datetime(current_datetime):
         utc_datetime.strftime(UTC_DATETIME_FORMAT)[:-3], 'Z'
     )
     return formatted_datetime
+
+
+def get_username_from_user_id(user_id):
+    """
+    @param : user_id
+    :return: username from the given user_id.
+    """
+
+    User = get_user_model()
+    user = User.objects.get(id=user_id)
+    return str(user.username)

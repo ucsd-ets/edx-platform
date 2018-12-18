@@ -100,3 +100,6 @@ from .peer_instruction_transformers import (
     ubc_peer_instruction_revised_submitted,
     ubc_peer_instruction_original_submitted,
 )
+from .cohort_transformers import (
+    edx_cohort_user_added,
+)
