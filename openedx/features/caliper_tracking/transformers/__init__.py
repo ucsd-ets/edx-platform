@@ -41,6 +41,9 @@ from .forum_transformers import (
     edx_forum_thread_viewed,
     edx_forum_comment_created,
 )
+from .xblock_transformers import (
+    xblock_poll_submitted,
+)
 from .notes_transformers import (
     edx_course_student_notes_added
 )
