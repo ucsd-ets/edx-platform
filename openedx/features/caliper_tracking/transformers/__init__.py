@@ -52,6 +52,7 @@ from .forum_transformers import (
 )
 from .xblock_transformers import (
     xblock_poll_submitted,
+    xblock_survey_submitted,
 )
 from .textbook_transformers import (
     textbook_pdf_page_scrolled,
