@@ -39,3 +39,6 @@ from .forum_transformers import (
 from .notes_transformers import (
     edx_course_student_notes_added
 )
+from .open_response_transformers import (
+    openassessmentblock_peer_assess,
+)

@@ -1,11 +1,27 @@
 """
 Utils required in transformers
 """
-from opaque_keys.edx.locator import CourseLocator
-from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
+from dateutil.parser import parse
+
+UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
 
-def get_course(course_key):
-    # TODO not finalized
-    course_id = CourseLocator.from_string(course_key)
-    return CourseOverview.objects.get(id=course_id)
+def convert_datetime(current_datetime):
+    """
+    Convert provided datetime into UTC format
+
+    @param datetime: datetime string.
+    :return: UTC formatted datetime string.
+    """
+
+    # convert current_datetime to a datetime object if it is string
+    if type(current_datetime) in (str, unicode):
+        current_datetime = parse(current_datetime)
+
+    utc_offset = current_datetime.utcoffset()
+    utc_datetime = current_datetime - utc_offset
+
+    formatted_datetime = '{}{}'.format(
+        utc_datetime.strftime(UTC_DATETIME_FORMAT)[:-3], 'Z'
+    )
+    return formatted_datetime
