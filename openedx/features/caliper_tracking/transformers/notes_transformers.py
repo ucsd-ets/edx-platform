@@ -49,8 +49,8 @@ def edx_course_student_notes_edited(current_event, caliper_event):
 
 def edx_course_student_notes_added(current_event, caliper_event):
     """
-    The server emits an edx.course.student_notes.added event when the student's
-
+    The server emits an edx.course.student_notes.added event when the student
+    add notes on a textual content present in course.
 
     :param current_event: default log
     :param caliper_event: log containing both basic and default attribute
@@ -118,5 +118,47 @@ def edx_course_student_notes_viewed(current_event, caliper_event):
     })
 
     caliper_event['referrer']['type'] = 'WebPage'
+
+    return caliper_event
+
+
+def edx_course_student_notes_deleted(current_event, caliper_event):
+    """
+    The browser emits edx.course.student_notes.deleted events when a
+    learner deletes a note in course.
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    object_extensions = json.loads(current_event['event'])
+
+    object_extensions.update({
+        'course_id': current_event['context']['course_id'],
+        'org_id': caliper_event['extensions']['extra_fields'].pop('org_id'),
+    })
+
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'Document',
+        'extensions': object_extensions
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Deleted',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+    })
 
     return caliper_event
