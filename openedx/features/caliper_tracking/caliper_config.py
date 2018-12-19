@@ -30,7 +30,8 @@ EVENT_MAPPING = {
     'problem_save': ctf.problem_save,
     'edx.problem.hint.demandhint_displayed':
         ctf.edx_problem_hint_demandhint_displayed,
-    'edx.problem.hint.feedback_displayed': ctf.edx_problem_hint_feedback_displayed,
+    'edx.problem.hint.feedback_displayed':
+        ctf.edx_problem_hint_feedback_displayed,
     'pause_video': ctf.pause_video,
     'seek_video': ctf.seek_video,
     'load_video': ctf.load_video,
@@ -44,11 +45,16 @@ EVENT_MAPPING = {
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
     'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
-    'openassessment.student_training_assess_example': ctf.openassessment_student_training_assess_example,
+    'openassessment.student_training_assess_example':
+        ctf.openassessment_student_training_assess_example,
     'problem_check': ctf.problem_check,
-    'openassessmentblock.create_submission': ctf.openassessmentblock_create_submission,
+    'openassessmentblock.create_submission':
+        ctf.openassessmentblock_create_submission,
     'xblock.poll.submitted': ctf.xblock_poll_submitted,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
-    'openassessmentblock.get_submission_for_staff_grading': ctf.openassessmentblock_get_submission_for_staff_grading,
+    'openassessmentblock.get_submission_for_staff_grading':
+        ctf.openassessmentblock_get_submission_for_staff_grading,
     'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
+    'edx.course.enrollment.upgrade.succeeded':
+        ctf.edx_course_enrollment_upgrade_succeeded,
 }
