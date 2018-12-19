@@ -4,16 +4,15 @@ Transformers for all the video events
 
 import json
 from datetime import timedelta
-
 from isodate import duration_isoformat
 
 
 def pause_video(current_event, caliper_event):
     """
-    When a user selects the video player's pause control, the player emits a
-    pause_video event. Fot videos that are streamed in a browser, when the
-    player reaches the end of the video file and play automatically stops it
-     emits both this event and a stop event (as of June 2014).
+    When a user selects the video player's pause control, the player emits
+    a pause_video event. Fot videos that are streamed in a browser, when
+    the player reaches the end of the video file and play automatically
+    stops it emits both this event and a stop event (as of June 2014).
 
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
@@ -49,6 +48,44 @@ def pause_video(current_event, caliper_event):
         'ip': current_event['ip']
     })
     caliper_event['referrer']['type'] = 'WebPage'
+    return caliper_event
+
+
+def stop_video(current_event, caliper_event):
+    """
+    When the video player reaches the end of the video file and play
+    automatically stops, the player emits a stop_video event.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    current_event_details = json.loads(current_event['event'])
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'VideoObject',
+        'duration': duration_isoformat(
+            timedelta(seconds=current_event_details['duration'])
+        ),
+        'extensions': {
+            "code": current_event_details['code'],
+            'id': current_event_details['id']
+        }
+    }
+    caliper_event.update({
+        'type': 'MediaEvent',
+        'action': 'Ended',
+        'object': caliper_object,
+    })
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id']
+    })
     return caliper_event
 
 
