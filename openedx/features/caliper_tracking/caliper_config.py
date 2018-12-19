@@ -28,6 +28,7 @@ EVENT_MAPPING = {
     'stop_video': ctf.stop_video,
     'problem_save': ctf.problem_save,
     'pause_video': ctf.pause_video,
+    'seek_video': ctf.seek_video,
     'load_video': ctf.load_video,
     'problem_reset': ctf.problem_reset,
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
