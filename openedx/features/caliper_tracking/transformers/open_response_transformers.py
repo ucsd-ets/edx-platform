@@ -4,6 +4,40 @@ Transformers for all openassessment events
 from openedx.features.caliper_tracking.utils import convert_datetime
 
 
+def openassessmentblock_get_submission_for_staff_grading(current_event, caliper_event):
+    """
+    When a course team member retrieves a learner's response for grading in the
+    staff assessment step the server emits this event.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_event.update({
+        'type': 'ViewEvent',
+        'action': 'Viewed',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Assessment',
+            'extensions': current_event['event']
+        }
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'asides': current_event['context']['asides'],
+        'course_id': current_event['context']['course_id'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'module': current_event['context']['module']
+    })
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+    caliper_event['extensions']['extra_fields'].pop('session')
+    return caliper_event
+
+
 def openassessmentblock_create_submission(current_event, caliper_event):
     """
     The server emits this event when a learner submits a response.
@@ -47,7 +81,8 @@ def openassessmentblock_create_submission(current_event, caliper_event):
 
 def openassessmentblock_peer_assess(current_event, caliper_event):
     """
-    The server emits this event when a learner submits an assessment of peer's response.
+    The server emits this event when a learner submits an
+    assessment of peer's response.
 
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.

@@ -44,6 +44,7 @@ from .notes_transformers import (
     edx_course_student_notes_added
 )
 from .open_response_transformers import (
+    openassessmentblock_get_submission_for_staff_grading,
     openassessmentblock_peer_assess,
     openassessmentblock_create_submission,
 )
