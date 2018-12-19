@@ -1,6 +1,7 @@
 """
 Transformers for all openassessment events
 """
+
 import json
 
 from openedx.features.caliper_tracking.utils import convert_datetime
@@ -127,7 +128,8 @@ def openassessmentblock_peer_assess(current_event, caliper_event):
     return caliper_event
 
 
-def openassessment_student_training_assess_example(current_event, caliper_event):
+def openassessment_student_training_assess_example(
+        current_event, caliper_event):
     """
     The server emits this event when a learner submits a response.
     The same event is emitted when a learner submits a
@@ -163,6 +165,52 @@ def openassessment_student_training_assess_example(current_event, caliper_event)
     caliper_event['referrer']['type'] = 'WebPage'
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
     caliper_event['extensions']['extra_fields'].pop('session')
+    return caliper_event
+
+
+def openassessmentblock_submit_feedback_on_assessments(
+        current_event, caliper_event):
+    """
+    The server emits openassessmentblock_submit_feedback_on_assessments event
+    when learner submit feedback.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+
+    """
+
+    module_details = current_event['context']['module']
+
+    caliper_object = {
+        'extensions': current_event['event'],
+        'id': current_event['referer'],
+        'type': 'Message'
+    }
+
+    caliper_event.update({
+        'action': 'Posted',
+        'type': 'MessageEvent',
+        'object': caliper_object
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'asides': current_event['context']['asides'],
+        'course_id': current_event['context']['course_id'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'display_name': module_details['display_name'],
+        'usage_key': module_details['usage_key'],
+        'ip': current_event['ip']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].pop('session')
+
     return caliper_event
 
 
