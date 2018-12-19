@@ -30,6 +30,7 @@ EVENT_MAPPING = {
     'problem_save': ctf.problem_save,
     'edx.problem.hint.demandhint_displayed':
         ctf.edx_problem_hint_demandhint_displayed,
+    'edx.problem.hint.feedback_displayed': ctf.edx_problem_hint_feedback_displayed,
     'pause_video': ctf.pause_video,
     'seek_video': ctf.seek_video,
     'load_video': ctf.load_video,
