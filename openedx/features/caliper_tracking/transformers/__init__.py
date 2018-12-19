@@ -22,11 +22,17 @@ from .enrollment_transformers import (
     edx_course_enrollment_upgrade_clicked
 )
 from .problem_transformers import (
-    problem_show, problem_save, problem_reset,
+    problem_show,
+    problem_save,
+    problem_reset,
 )
 from .video_transformers import pause_video, edx_video_speed_changed
 from .forum_transformers import (
     edx_forum_response_created,
     edx_forum_thread_created,
     edx_forum_comment_created,
+)
+from .forum_transformers import edx_forum_response_created
+from .notes_transformers import (
+    edx_course_student_notes_added
 )
