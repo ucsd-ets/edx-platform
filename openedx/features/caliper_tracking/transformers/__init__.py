@@ -32,6 +32,7 @@ from .video_transformers import (
     pause_video,
     stop_video,
     edx_video_speed_changed,
+    play_video,
     load_video,
     seek_video,
 )
