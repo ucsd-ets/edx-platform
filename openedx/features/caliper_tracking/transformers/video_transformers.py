@@ -4,6 +4,7 @@ Transformers for all the video events
 
 import json
 from datetime import timedelta
+
 from isodate import duration_isoformat
 
 
@@ -163,5 +164,53 @@ def load_video(current_event, caliper_event):
             'code': event_info.get('code'),
         }
     }
+
+    return caliper_event
+
+
+def seek_video(current_event, caliper_event):
+    """
+    A browser emits seek_video events when a user selects a user interface control to go to a different point in the
+    video file.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    current_event_details = json.loads(current_event['event'])
+    caliper_event.update({
+        'action': 'JumpedTo',
+        'type': 'MediaEvent',
+        'object': {
+            'duration': duration_isoformat(
+                timedelta(seconds=current_event_details['duration'])),
+            'extensions': {
+                'code': current_event_details['code'],
+                'id': current_event_details['id'],
+                'type': current_event_details['type'],
+            },
+            'id': current_event['referer'],
+            'type': 'VideoObject'
+        },
+        'target': {
+            'id': current_event['referer'],
+            'type': 'MediaLocation',
+            'currentTime': duration_isoformat(
+                timedelta(seconds=current_event_details['new_time'])),
+            'extensions': {
+                'old_time': duration_isoformat(
+                    timedelta(seconds=current_event_details['old_time'])),
+            }
+        }
+    })
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'ip': current_event['ip']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
 
     return caliper_event

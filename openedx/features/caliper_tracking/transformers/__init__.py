@@ -33,6 +33,7 @@ from .video_transformers import (
     stop_video,
     edx_video_speed_changed,
     load_video,
+    seek_video,
 )
 from .forum_transformers import (
     edx_forum_response_created,
