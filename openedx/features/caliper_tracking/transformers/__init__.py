@@ -49,6 +49,9 @@ from .forum_transformers import (
 from .xblock_transformers import (
     xblock_poll_submitted,
 )
+from .textbook_transformers import (
+    textbook_pdf_page_scrolled,
+)
 from .notes_transformers import (
     edx_course_student_notes_added
 )
