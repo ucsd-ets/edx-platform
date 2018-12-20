@@ -59,6 +59,7 @@ from .textbook_transformers import (
 from .notes_transformers import (
     edx_course_student_notes_added,
     edx_course_student_notes_viewed,
+    edx_course_student_notes_edited,
 )
 from .open_response_transformers import (
     openassessmentblock_get_submission_for_staff_grading,
