@@ -289,6 +289,17 @@ def edx_problem_hint_demandhint_displayed(current_event, caliper_event):
 
 
 def problem_rescore(current_event, caliper_event):
+    """
+    The server emits problem_rescore events when a problem is successfully
+    rescored.
+    In these events, the user who rescored the problem is identified in the
+    username and context.user_id fields, and the user who originally submitted
+    the response to the problem is identified in the student field.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
     caliper_object = {
         'id': current_event['context'].get('referer'),
         'extensions': current_event['event'],
