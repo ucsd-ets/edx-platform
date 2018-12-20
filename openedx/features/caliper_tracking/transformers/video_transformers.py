@@ -268,6 +268,48 @@ def seek_video(current_event, caliper_event):
     return caliper_event
 
 
+def edx_video_closed_caption_shown(current_event, caliper_event):
+    """
+    When a user toggles CC to display the closed captions, the browser or mobile app emits an
+    edx.video.closed_captions.shown event.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    current_event_details = json.loads(current_event['event'])
+    caliper_event.update({
+        'action': 'EnabledClosedCaptioning',
+        'type': 'MediaEvent',
+        'object': {
+            'duration': duration_isoformat(
+                timedelta(seconds=current_event_details['duration'])),
+            'extensions': {
+                'code': current_event_details['code'],
+                'id': current_event_details['id']
+            },
+            'id': current_event['referer'],
+            'type': 'VideoObject'
+        },
+        'target': {
+            'currentTime': duration_isoformat(
+                timedelta(seconds=current_event_details['current_time'])),
+            'id': current_event['referer'],
+            'type': 'MediaLocation'
+        }
+    })
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'ip': current_event['ip']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    return caliper_event
+
+
 def edx_video_closed_caption_hidden(current_event, caliper_event):
     """
     When a user toggles CC to display the closed captions, the browser or mobile app emits an
