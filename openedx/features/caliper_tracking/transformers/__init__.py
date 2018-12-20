@@ -27,7 +27,8 @@ from .problem_transformers import (
     problem_reset,
     save_problem_success,
     problem_check,
-    edx_problem_hint_demandhint_displayed
+    edx_problem_hint_demandhint_displayed,
+    problem_rescore,
 )
 from .video_transformers import (
     pause_video,
