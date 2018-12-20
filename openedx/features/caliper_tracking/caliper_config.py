@@ -48,6 +48,7 @@ EVENT_MAPPING = {
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
     'openassessment.student_training_assess_example':
         ctf.openassessment_student_training_assess_example,
+    'xblock.survey.submitted': ctf.xblock_survey_submitted,
     'problem_check': ctf.problem_check,
     'openassessmentblock.create_submission':
         ctf.openassessmentblock_create_submission,

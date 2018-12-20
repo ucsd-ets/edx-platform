@@ -3,23 +3,56 @@ Transformers for all the xblock events
 """
 
 
-def xblock_poll_submitted(current_event, caliper_event):
+def xblock_survey_submitted(current_event, caliper_event):
     """
-    The server emits an xblock.poll.submitted event each
-    time a user submits a response to a poll.
+    The server emits an xblock.survey.submitted event each
+    time a user submits responses to a survey.
 
 
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'Assessment',
+        'extensions': current_event['event']
+    }
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
+        'module': current_event['context']['module'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'asides': current_event['context']['asides']
+    })
+    caliper_event.update({
+        'type': 'AssessmentEvent',
+        'action': 'Submitted',
+        'object': caliper_object
+    })
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['extensions']['extra_fields'].pop('session')
+    caliper_event['referrer']['type'] = 'WebPage'
+    return caliper_event
 
+
+def xblock_poll_submitted(current_event, caliper_event):
+    """
+    The server emits an xblock.poll.submitted event each
+    time a user submits a response to a poll.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
     caliper_object = {
         "id": current_event['referer'],
         "type": 'Assessment',
         "extensions": current_event['event']
     }
-
     caliper_event['extensions']['extra_fields'].update({
         "ip": current_event['ip'],
         'course_id': current_event['context']['course_id'],
@@ -27,20 +60,15 @@ def xblock_poll_submitted(current_event, caliper_event):
         "course_user_tags": current_event['context']['course_user_tags'],
         "asides": current_event['context']['asides']
     })
-
     caliper_event.update({
         "type": 'AssessmentEvent',
         "action": 'Submitted',
         "object": caliper_object
     })
-
     caliper_event['actor'].update({
         "type": 'Person',
         "name": current_event['username']
     })
-
     caliper_event['extensions']['extra_fields'].pop('session')
-
     caliper_event['referrer']['type'] = "WebPage"
-
     return caliper_event
