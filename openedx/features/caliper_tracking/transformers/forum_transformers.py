@@ -6,8 +6,8 @@ Transformers for all the forums events
 def edx_forum_response_created(current_event, caliper_event):
     """
     Users create a reply to a post by clicking Add a Response and then
-    submitting their contributions. When these actions are complete, the
-     server emits an edx.forum.response.created event.
+    submitting their contributions. When these actions are complete,
+    the server emits an edx.forum.response.created event.
 
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
@@ -109,6 +109,48 @@ def edx_forum_comment_created(current_event, caliper_event):
     caliper_event.update({
         'type': 'MessageEvent',
         'action': 'Posted',
+        'object': caliper_object
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
+        'course_user_tags': current_event['context']['course_user_tags']
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    return caliper_event
+
+
+def edx_forum_thread_viewed(current_event, caliper_event):
+    """
+    A user views a thread in the course discussions on a desktop, laptop, or
+    tablet computer, or on the edX mobile apps.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    current_event_details = current_event['event']
+    current_event_details.pop('url', '')
+
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'Thread',
+        'name': current_event_details.pop('title', ''),
+        'extensions': current_event_details
+    }
+
+    caliper_event.update({
+        'type': 'ViewEvent',
+        'action': 'Viewed',
         'object': caliper_object
     })
 
