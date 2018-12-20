@@ -26,6 +26,7 @@ EVENT_MAPPING = {
     'seq_next': ctf.seq_next,
     'seq_prev': ctf.seq_prev,
     'stop_video': ctf.stop_video,
+    'problem_graded': ctf.problem_graded,
     'problem_save': ctf.problem_save,
     'edx.problem.hint.demandhint_displayed':
         ctf.edx_problem_hint_demandhint_displayed,

@@ -65,7 +65,6 @@ def edx_course_tool_accessed(current_event, caliper_event):
     caliper_event['extensions']['extra_fields'].update({
         'event': current_event['event'],
         'ip': current_event['ip'],
-        'event_source': current_event['event_source'],
         'course_id': current_event['context']['course_id']
     })
 
