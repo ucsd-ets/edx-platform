@@ -113,6 +113,39 @@ def problem_save(current_event, caliper_event):
     return caliper_event
 
 
+def save_problem_success(current_event, caliper_event):
+    """
+    The server emits save_problem_success events when a problem is saved successfully.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_event['extensions']['extra_fields'].pop('session')
+    caliper_event.update({
+        'action': 'Paused',
+        'type': 'AssessmentEvent',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Assessment',
+            'extensions': current_event['event']
+        }
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'asides': current_event['context']['asides'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'module': current_event['context']['module'],
+        'ip': current_event['ip']
+    })
+    return caliper_event
+
+
 def problem_check(current_event, caliper_event):
     """
     The server emits problem_check events when a problem is successfully checked.
