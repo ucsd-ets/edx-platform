@@ -213,3 +213,41 @@ def problem_check_server(current_event, caliper_event):
     })
     caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event
+
+
+def edx_problem_hint_demandhint_displayed(current_event, caliper_event):
+    """
+    Course teams can design problems to include one or more hints. For problems that include hints, 
+    the server emits an edx.problem.hint.demandhint_displayed event each time a user requests a 
+    hint.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_object = {
+        'id': current_event['referer'],
+        'extensions': current_event['event'],
+        'type': 'Frame'
+    }
+
+    caliper_event.update({
+        'action': 'Viewed',
+        'type': 'ViewEvent',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields'].pop('session')
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+
+    return caliper_event
