@@ -52,6 +52,7 @@ EVENT_MAPPING = {
     'openassessmentblock.create_submission':
         ctf.openassessmentblock_create_submission,
     'xblock.poll.submitted': ctf.xblock_poll_submitted,
+    'edx.course.student_notes.deleted': ctf.edx_course_student_notes_deleted,
     'edx.course.student_notes.edited': ctf.edx_course_student_notes_edited,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
     'openassessmentblock.get_submission_for_staff_grading':
