@@ -59,11 +59,13 @@ from .textbook_transformers import (
 )
 from .notes_transformers import (
     edx_course_student_notes_added,
+    edx_course_student_notes_added,
     edx_course_student_notes_viewed,
     edx_course_student_notes_edited,
     edx_course_student_notes_deleted,
 )
 from .open_response_transformers import (
+    openassessmentblock_submit_feedback_on_assessments,
     openassessmentblock_save_submission,
     openassessmentblock_get_peer_submission,
     openassessmentblock_get_submission_for_staff_grading,
