@@ -44,6 +44,7 @@ EVENT_MAPPING = {
     'play_video': ctf.play_video,
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
     'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
+    'edx.course.student_notes.viewed': ctf.edx_course_student_notes_viewed,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
     'openassessment.student_training_assess_example':
         ctf.openassessment_student_training_assess_example,
