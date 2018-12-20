@@ -111,3 +111,72 @@ def problem_save(current_event, caliper_event):
         'ip': current_event['ip']
     })
     return caliper_event
+
+
+def problem_check(current_event, caliper_event):
+    """
+    The server emits problem_check events when a problem is successfully checked.
+    Both browser interactions and server requests produce problem_check events, so your data package
+    can also contain events with an event source of browser.
+    Events emitted by the browser contain all of the GET parameters.
+    Only events emitted by the server are useful for most purposes.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    if current_event.get('event_source') == 'browser':
+        return problem_check_browser(current_event, caliper_event)
+    else:
+        return problem_check_server(current_event, caliper_event)
+
+
+def problem_check_browser(current_event, caliper_event):
+    caliper_event.update({
+        'action': 'Submitted',
+        'type': 'AssessmentEvent',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Assessment',
+            'extensions': {
+                'event': current_event['event']
+            }
+        }
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'ip': current_event['ip']
+    })
+    return caliper_event
+
+
+def problem_check_server(current_event, caliper_event):
+    caliper_event.update({
+        'action': 'Submitted',
+        'type': 'AssessmentEvent',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Assessment',
+            'extensions': current_event['event']
+        }
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'ip': current_event['ip'],
+        'asides': current_event['context']['asides'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'module': current_event['context']['module'],
+
+    })
+    caliper_event['extensions']['extra_fields'].pop('session')
+    return caliper_event

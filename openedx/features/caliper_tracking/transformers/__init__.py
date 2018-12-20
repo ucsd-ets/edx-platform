@@ -25,6 +25,7 @@ from .problem_transformers import (
     problem_show,
     problem_save,
     problem_reset,
+    problem_check,
 )
 from .video_transformers import (
     pause_video,
