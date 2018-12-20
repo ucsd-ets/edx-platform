@@ -3,13 +3,12 @@ Base module containing generic caliper transformer class
 """
 import uuid
 
-from dateutil.parser import parse
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-CALIPER_EVENT_CONTEXT = 'http://purl.imsglobal.org/ctx/caliper/v1p1'
+from openedx.features.caliper_tracking.utils import convert_datetime
 
-UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
+CALIPER_EVENT_CONTEXT = 'http://purl.imsglobal.org/ctx/caliper/v1p1'
 
 
 class CaliperBaseTransformer(object):
@@ -31,26 +30,6 @@ class CaliperBaseTransformer(object):
         self._add_referrer()
         self._add_extensions()
 
-    def _convert_datetime(self, current_datetime):
-        """
-        Convert provided datetime into UTC format
-
-        @param datetime: datetime string.
-        :return: UTC formatted datetime string.
-        """
-
-        # convert current_datetime to a datetime object if it is string
-        if type(current_datetime) in (str, unicode):
-            current_datetime = parse(current_datetime)
-
-        utc_offset = current_datetime.utcoffset()
-        utc_datetime = current_datetime - utc_offset
-
-        formatted_datetime = '{}{}'.format(
-            utc_datetime.strftime(UTC_DATETIME_FORMAT)[:-3], 'Z'
-        )
-        return formatted_datetime
-
     def _add_generic_fields(self):
         """
         Adds all of the generic fields to the event object
@@ -58,7 +37,7 @@ class CaliperBaseTransformer(object):
         self.caliper_event.update({
             '@context': CALIPER_EVENT_CONTEXT,
             'id': uuid.uuid4().urn,
-            'eventTime': self._convert_datetime(self.event.get('time'))
+            'eventTime': convert_datetime(self.event.get('time'))
         })
 
     def _add_actor_info(self):

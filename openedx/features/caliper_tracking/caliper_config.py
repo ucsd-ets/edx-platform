@@ -30,6 +30,7 @@ EVENT_MAPPING = {
     'pause_video': ctf.pause_video,
     'problem_reset': ctf.problem_reset,
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
+    'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
 }
