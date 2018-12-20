@@ -5,7 +5,7 @@ from .bookmark_transformers import (
     edx_bookmark_listed,
     edx_bookmark_added,
     edx_bookmark_removed,
-    edx_bookmark_accessed
+    edx_bookmark_accessed,
 )
 from .navigation_transformers import (
     edx_ui_lms_link_clicked,
@@ -45,4 +45,5 @@ from .notes_transformers import (
 )
 from .open_response_transformers import (
     openassessmentblock_peer_assess,
+    openassessmentblock_create_submission,
 )
