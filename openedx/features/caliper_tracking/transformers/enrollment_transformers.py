@@ -145,3 +145,41 @@ def edx_course_enrollment_upgrade_clicked(current_event, caliper_event):
     })
 
     return caliper_event
+
+
+def edx_course_enrollment_upgrade_succeeded(current_event, caliper_event):
+    """
+    This event is generated when the user is successfully upgraded, from honor
+    to verified or so, in a course.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Modified',
+        'object': {
+            'id': caliper_event['referrer']['id'],
+            'type': 'Membership',
+            'extensions': {
+                'mode': current_event['event']['mode'],
+                'course_id': current_event['context']['course_id'],
+                'user_id': caliper_event['extensions']['extra_fields']
+                    .pop('user_id'),
+                'org_id': caliper_event['extensions']['extra_fields']
+                    .pop('org_id')
+            }
+        },
+    })
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].update({
+        'event_source': current_event['event_source'],
+        'ip': current_event['ip'],
+
+    })
+    return caliper_event
