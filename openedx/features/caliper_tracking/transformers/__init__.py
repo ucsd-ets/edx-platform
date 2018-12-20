@@ -24,7 +24,6 @@ from .enrollment_transformers import (
     edx_course_enrollment_upgrade_clicked,
     edx_course_enrollment_upgrade_succeeded,
 )
-from .textbook_transformers import textbook_pdf_page_navigated
 from .problem_transformers import (
     problem_show,
     problem_save,
@@ -51,6 +50,7 @@ from .forum_transformers import (
     edx_forum_thread_created,
     edx_forum_thread_viewed,
     edx_forum_comment_created,
+    edx_forum_thread_voted,
     edx_forum_searched,
     edx_forum_response_voted,
 )
@@ -61,6 +61,7 @@ from .xblock_transformers import (
     xblock_survey_view_results,
 )
 from .textbook_transformers import (
+    textbook_pdf_page_navigated,
     textbook_pdf_page_scrolled,
     textbook_pdf_search_executed
 )
