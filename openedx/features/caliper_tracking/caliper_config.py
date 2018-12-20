@@ -34,6 +34,7 @@ EVENT_MAPPING = {
     'pause_video': ctf.pause_video,
     'seek_video': ctf.seek_video,
     'load_video': ctf.load_video,
+    'edx.video.closed_captions.shown': ctf.edx_video_closed_caption_shown,
     'edx.video.closed_captions.hidden': ctf.edx_video_closed_caption_hidden,
     'problem_reset': ctf.problem_reset,
     'problem_rescore': ctf.problem_rescore,
