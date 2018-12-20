@@ -39,4 +39,5 @@ EVENT_MAPPING = {
     'problem_check': ctf.problem_check,
     'openassessmentblock.create_submission': ctf.openassessmentblock_create_submission,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
+    'openassessmentblock.get_submission_for_staff_grading': ctf.openassessmentblock_get_submission_for_staff_grading,
 }
