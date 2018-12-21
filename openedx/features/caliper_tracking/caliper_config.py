@@ -51,6 +51,7 @@ EVENT_MAPPING = {
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
     'openassessmentblock.get_peer_submission':
         ctf.openassessmentblock_get_peer_submission,
+    'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'edx.course.student_notes.viewed': ctf.edx_course_student_notes_viewed,
     'textbook.pdf.page.navigated': ctf.textbook_pdf_page_navigated,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
@@ -66,7 +67,6 @@ EVENT_MAPPING = {
     'edx.course.student_notes.deleted': ctf.edx_course_student_notes_deleted,
     'edx.course.student_notes.edited': ctf.edx_course_student_notes_edited,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
-    'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'openassessmentblock.get_submission_for_staff_grading':
         ctf.openassessmentblock_get_submission_for_staff_grading,
     'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
@@ -109,6 +109,8 @@ EVENT_MAPPING = {
         ctf.edx_special_exam_timed_attempt_started,
     'edx.special_exam.timed.attempt.submitted':
     ctf.edx_special_exam_timed_attempt_submitted,
+    'edx.drag_and_drop_v2.feedback.opened':
+        ctf.edx_drag_and_drop_v2_feedback_opened,
     'edx.cohort.created': ctf.edx_cohort_created,
     'edx.special_exam.practice.attempt.created':
     ctf.edx_special_exam_practice_attempt_created,
@@ -122,5 +124,5 @@ EVENT_MAPPING = {
     'reset_problem': ctf.reset_problem,
     'showanswer': ctf.showanswer,
     'edx.special_exam.timed.attempt.deleted':
-    ctf.edx_special_exam_timed_attempt_deleted,
+        ctf.edx_special_exam_timed_attempt_deleted,
 }

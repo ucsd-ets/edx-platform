@@ -96,6 +96,10 @@ from .open_response_transformers import (
     openassessmentblock_staff_assess,
     openassessmentblock_self_assess,
 )
+from .drag_and_drop_transformers import (
+    edx_drag_and_drop_v2_item_dropped,
+    edx_drag_and_drop_v2_feedback_opened,
+)
 from .third_party_transformers import (
     edx_googlecomponent_calendar_displayed,
     edx_googlecomponent_document_displayed,
