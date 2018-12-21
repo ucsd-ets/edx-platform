@@ -49,6 +49,7 @@ from .forum_transformers import (
     edx_forum_thread_created,
     edx_forum_thread_viewed,
     edx_forum_comment_created,
+    edx_forum_searched,
     edx_forum_response_voted,
 )
 from .xblock_transformers import (
