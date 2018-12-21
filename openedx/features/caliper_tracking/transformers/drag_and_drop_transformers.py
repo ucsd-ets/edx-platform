@@ -158,3 +158,47 @@ def edx_drag_and_drop_v2_feedback_opened(current_event, caliper_event):
     caliper_event['object']['extensions'].pop('user_id')
 
     return caliper_event
+
+
+def edx_drag_and_drop_v2_feedback_closed(current_event, caliper_event):
+    """
+    The server emits this event when a pop up
+    feedback message closes in a drag and drop problem.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    object_extensions = current_event['context']
+
+    object_extensions.update(current_event['event'])
+
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'Frame',
+        'extensions': object_extensions
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Removed',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'path': caliper_event['object']['extensions'].pop('path')
+    })
+
+    caliper_event['extensions']['extra_fields'].pop('session')
+    caliper_event['object']['extensions'].pop('user_id')
+
+    return caliper_event
