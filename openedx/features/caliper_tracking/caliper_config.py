@@ -85,4 +85,6 @@ EVENT_MAPPING = {
     'edx.drag_and_drop_v2.item.dropped': ctf.edx_drag_and_drop_v2_item_dropped,
     'edx.drag_and_drop_v2.item.picked_up': ctf.edx_drag_and_drop_v2_item_picked_up,
     'oppia.exploration.loaded': ctf.oppia_exploration_loaded,
+    'ubc.peer_instruction.original_submitted':
+        ctf.ubc_peer_instruction_original_submitted,
 }
