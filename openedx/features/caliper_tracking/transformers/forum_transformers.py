@@ -170,6 +170,46 @@ def edx_forum_thread_viewed(current_event, caliper_event):
     return caliper_event
 
 
+
+
+def edx_forum_searched(current_event, caliper_event):
+    """
+    After a user executes a text search in the navigation sidebar of the
+    course Discussion page, the server emits an edx.forum.searched event.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'Forum',
+        'extensions': current_event['event']
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Searched',
+        'object': caliper_object
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
+        'course_user_tags': current_event['context']['course_user_tags']
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    return caliper_event
+
+
 def edx_forum_response_voted(current_event, caliper_event):
     """
     Users can indicate interest in a response by selecting a "Vote" icon.

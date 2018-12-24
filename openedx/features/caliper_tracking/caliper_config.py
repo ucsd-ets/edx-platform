@@ -75,4 +75,5 @@ EVENT_MAPPING = {
         ctf.openassessmentblock_submit_feedback_on_assessments,
     'openassessmentblock.save_submission':
         ctf.openassessmentblock_save_submission,
+    'edx.forum.searched': ctf.edx_forum_searched,
 }
