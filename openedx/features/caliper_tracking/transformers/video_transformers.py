@@ -268,7 +268,7 @@ def seek_video(current_event, caliper_event):
     return caliper_event
 
 
-def edx_video_closed_caption_shown(current_event, caliper_event):
+def edx_video_closed_captions_shown(current_event, caliper_event):
     """
     When a user toggles CC to display the closed captions, the browser or mobile app emits an
     edx.video.closed_captions.shown event.
@@ -310,7 +310,7 @@ def edx_video_closed_caption_shown(current_event, caliper_event):
     return caliper_event
 
 
-def edx_video_closed_caption_hidden(current_event, caliper_event):
+def edx_video_closed_captions_hidden(current_event, caliper_event):
     """
     When a user toggles CC to display the closed captions, the browser or mobile app emits an
     edx.video.closed_captions.shown event.
