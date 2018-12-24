@@ -65,6 +65,7 @@ from .textbook_transformers import (
     textbook_pdf_page_scrolled,
     textbook_pdf_search_executed,
     textbook_pdf_page_navigated,
+    textbook_pdf_zoom_menu_changed,
 )
 from .notes_transformers import (
     edx_course_student_notes_added,

@@ -65,6 +65,7 @@ EVENT_MAPPING = {
     'openassessmentblock.get_submission_for_staff_grading':
         ctf.openassessmentblock_get_submission_for_staff_grading,
     'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
+    'textbook.pdf.zoom.menu.changed': ctf.textbook_pdf_zoom_menu_changed,
     'edx.course.enrollment.upgrade.succeeded':
         ctf.edx_course_enrollment_upgrade_succeeded,
     'edx.course.student_notes.notes_page_viewed':
