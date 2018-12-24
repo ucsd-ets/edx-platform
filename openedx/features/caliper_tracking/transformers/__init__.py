@@ -64,7 +64,7 @@ from .textbook_transformers import (
     textbook_pdf_page_navigated,
     textbook_pdf_page_scrolled,
     textbook_pdf_search_executed,
-    textbook_pdf_page_navigated
+    textbook_pdf_page_navigated,
 )
 from .notes_transformers import (
     edx_course_student_notes_added,
@@ -94,5 +94,6 @@ from .drag_and_drop_transformers import (
     edx_drag_and_drop_v2_item_picked_up,
 )
 from .peer_instruction_transformers import (
+    ubc_peer_instruction_revised_submitted,
     ubc_peer_instruction_original_submitted,
 )
