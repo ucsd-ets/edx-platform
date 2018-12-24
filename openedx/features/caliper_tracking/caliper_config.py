@@ -100,4 +100,5 @@ EVENT_MAPPING = {
         ctf.edx_special_exam_timed_attempt_started,
     'edx.special_exam.timed.attempt.submitted':
     ctf.edx_special_exam_timed_attempt_submitted,
+    'edx.cohort.created': ctf.edx_cohort_created,
 }
