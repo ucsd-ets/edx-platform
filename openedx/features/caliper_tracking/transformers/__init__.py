@@ -52,6 +52,7 @@ from .forum_transformers import (
 )
 from .xblock_transformers import (
     xblock_poll_submitted,
+    xblock_poll_view_results,
     xblock_survey_submitted,
     xblock_survey_view_results,
 )
@@ -64,6 +65,7 @@ from .notes_transformers import (
     edx_course_student_notes_viewed,
     edx_course_student_notes_edited,
     edx_course_student_notes_deleted,
+    edx_course_student_notes_added,
 )
 from .open_response_transformers import (
     openassessmentblock_submit_feedback_on_assessments,
