@@ -141,4 +141,5 @@ EVENT_MAPPING = {
     'edx.user.settings.viewed': ctf.edx_user_settings_viewed,
     'edx.team.deleted': ctf.edx_team_deleted,
     'edx.team.created': ctf.edx_team_created,
+    'ubc.peer_instruction.accessed': ctf.ubc_peer_instruction_accessed,
 }

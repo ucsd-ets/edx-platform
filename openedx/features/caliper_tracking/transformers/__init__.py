@@ -120,6 +120,7 @@ from .drag_and_drop_transformers import (
 from .peer_instruction_transformers import (
     ubc_peer_instruction_revised_submitted,
     ubc_peer_instruction_original_submitted,
+    ubc_peer_instruction_accessed,
 )
 from .team_transformers import (
     edx_team_page_viewed,
