@@ -76,6 +76,8 @@ EVENT_MAPPING = {
         ctf.openassessmentblock_save_submission,
     'edx.googlecomponent.document.displayed':
         ctf.edx_googlecomponent_document_displayed,
+    'edx.googlecomponent.calendar.displayed':
+        ctf.edx_googlecomponent_calendar_displayed,
     'edx.forum.searched': ctf.edx_forum_searched,
     'textbook.pdf.search.executed': ctf.textbook_pdf_search_executed,
     'edx.drag_and_drop_v2.item.dropped': ctf.edx_drag_and_drop_v2_item_dropped,
