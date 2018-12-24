@@ -304,3 +304,49 @@ def openassessmentblock_get_peer_submission(current_event, caliper_event):
     caliper_event['extensions']['extra_fields'].pop('session')
 
     return caliper_event
+
+
+def openassessmentblock_staff_assess(current_event, caliper_event):
+    """
+    The server emits this event when a course team member submits an
+    assessment of a learner's response.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    current_event_details = current_event['event']
+    event_context_details = current_event['context']
+
+    caliper_object = {
+        'dateCreated': convert_datetime(current_event_details.pop('scored_at')),
+        'extensions': current_event_details,
+        'id': current_event['referer'],
+        'type': 'Attempt'
+    }
+
+    caliper_event.update({
+        'action': 'Graded',
+        'type': 'GradeEvent',
+        'object': caliper_object
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'asides': event_context_details['asides'],
+        'course_user_tags': event_context_details['course_user_tags'],
+        'course_id': event_context_details['course_id'],
+        'module': event_context_details['module'],
+        'ip': current_event['ip']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].pop('session')
+
+    return caliper_event
+

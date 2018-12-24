@@ -47,7 +47,6 @@ EVENT_MAPPING = {
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
     'openassessmentblock.get_peer_submission':
         ctf.openassessmentblock_get_peer_submission,
-    'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'edx.course.student_notes.viewed': ctf.edx_course_student_notes_viewed,
     'textbook.pdf.page.navigated': ctf.textbook_pdf_page_navigated,
     'edx.forum.comment.created': ctf.edx_forum_comment_created,
@@ -63,6 +62,7 @@ EVENT_MAPPING = {
     'edx.course.student_notes.deleted': ctf.edx_course_student_notes_deleted,
     'edx.course.student_notes.edited': ctf.edx_course_student_notes_edited,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
+    'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'openassessmentblock.get_submission_for_staff_grading':
         ctf.openassessmentblock_get_submission_for_staff_grading,
     'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
@@ -82,6 +82,7 @@ EVENT_MAPPING = {
         ctf.edx_googlecomponent_document_displayed,
     'edx.googlecomponent.calendar.displayed':
         ctf.edx_googlecomponent_calendar_displayed,
+    'openassessmentblock.staff_assess': ctf.openassessmentblock_staff_assess,
     'edx.forum.searched': ctf.edx_forum_searched,
     'oppia.exploration.state.changed': ctf.oppia_exploration_state_changed,
     'textbook.pdf.search.executed': ctf.textbook_pdf_search_executed,
