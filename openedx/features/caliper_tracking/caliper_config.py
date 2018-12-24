@@ -61,7 +61,6 @@ EVENT_MAPPING = {
     'xblock.poll.submitted': ctf.xblock_poll_submitted,
     'edx.course.student_notes.deleted': ctf.edx_course_student_notes_deleted,
     'edx.course.student_notes.edited': ctf.edx_course_student_notes_edited,
-
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
     'openassessmentblock.get_submission_for_staff_grading':
         ctf.openassessmentblock_get_submission_for_staff_grading,
@@ -85,4 +84,5 @@ EVENT_MAPPING = {
     'textbook.pdf.search.executed': ctf.textbook_pdf_search_executed,
     'edx.drag_and_drop_v2.item.dropped': ctf.edx_drag_and_drop_v2_item_dropped,
     'edx.drag_and_drop_v2.item.picked_up': ctf.edx_drag_and_drop_v2_item_picked_up,
+    'oppia.exploration.loaded': ctf.oppia_exploration_loaded,
 }
