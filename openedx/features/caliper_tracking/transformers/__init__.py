@@ -133,3 +133,6 @@ from .exam_transformers import (
     edx_special_exam_timed_attempt_created,
     edx_special_exam_timed_attempt_deleted,
 )
+from .third_party_transofrmers import (
+    oppia_exploration_completed,
+)
