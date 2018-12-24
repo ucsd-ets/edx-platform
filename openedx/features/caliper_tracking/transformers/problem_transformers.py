@@ -361,3 +361,38 @@ def edx_problem_hint_feedback_displayed(current_event, caliper_event):
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
 
     return caliper_event
+
+
+def edx_grades_problem_submitted(current_event, caliper_event):
+    """
+    Occurs when learner submitted submitted a question of peer assignment.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_object = {
+        'id': current_event['referer'],
+        'extensions': current_event['event'],
+        'type': 'Assessment'
+    }
+
+    caliper_event.update({
+        'action': 'Submitted',
+        'type': 'AssessmentEvent',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+
+    return caliper_event

@@ -33,6 +33,7 @@ from .problem_transformers import (
     problem_rescore,
     problem_graded,
     edx_problem_hint_feedback_displayed,
+    edx_grades_problem_submitted,
 )
 from .video_transformers import (
     pause_video,
