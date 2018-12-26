@@ -81,4 +81,5 @@ EVENT_MAPPING = {
     'edx.forum.searched': ctf.edx_forum_searched,
     'textbook.pdf.search.executed': ctf.textbook_pdf_search_executed,
     'edx.drag_and_drop_v2.item.dropped': ctf.edx_drag_and_drop_v2_item_dropped,
+    'edx.drag_and_drop_v2.item.picked_up': ctf.edx_drag_and_drop_v2_item_picked_up,
 }
