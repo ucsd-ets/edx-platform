@@ -135,4 +135,5 @@ EVENT_MAPPING = {
         ctf.textbook_pdf_search_highlight_toggled,
     'textbook.pdf.searchcasesensitivity.toggled':
         ctf.textbook_pdf_searchcasesensitivity_toggled,
+    'edx.course.student_notes.searched': ctf.edx_course_student_notes_searched
 }
