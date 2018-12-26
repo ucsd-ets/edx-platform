@@ -79,3 +79,6 @@ from .open_response_transformers import (
     openassessment_student_training_assess_example,
 )
 from .textbook_transformers import textbook_pdf_search_executed
+from .drag_and_drop_transformers import (
+    edx_drag_and_drop_v2_item_dropped,
+)
