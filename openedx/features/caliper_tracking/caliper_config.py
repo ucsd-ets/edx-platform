@@ -62,7 +62,6 @@ EVENT_MAPPING = {
     'edx.course.student_notes.deleted': ctf.edx_course_student_notes_deleted,
     'edx.course.student_notes.edited': ctf.edx_course_student_notes_edited,
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
-    'openassessmentblock.peer_assess': ctf.openassessmentblock_peer_assess,
     'openassessmentblock.get_submission_for_staff_grading':
         ctf.openassessmentblock_get_submission_for_staff_grading,
     'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
@@ -70,13 +69,13 @@ EVENT_MAPPING = {
         ctf.edx_course_enrollment_upgrade_succeeded,
     'edx.course.student_notes.notes_page_viewed':
         ctf.edx_course_student_notes_notes_page_viewed,
-    'openassessmentblock.get_submission_for_staff_grading':
-        ctf.openassessmentblock_get_submission_for_staff_grading,
     'edx.forum.response.voted': ctf.edx_forum_response_voted,
     'openassessmentblock.submit_feedback_on_assessments':
         ctf.openassessmentblock_submit_feedback_on_assessments,
     'openassessmentblock.save_submission':
         ctf.openassessmentblock_save_submission,
+    'edx.googlecomponent.document.displayed':
+        ctf.edx_googlecomponent_document_displayed,
     'edx.forum.searched': ctf.edx_forum_searched,
     'textbook.pdf.search.executed': ctf.textbook_pdf_search_executed,
     'edx.drag_and_drop_v2.item.dropped': ctf.edx_drag_and_drop_v2_item_dropped,
