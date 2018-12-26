@@ -109,3 +109,6 @@ from .exam_transformers import (
 from .exam_transformers import (
     edx_special_exam_timed_attempt_started,
 )
+from .exam_transformers import (
+    edx_special_exam_timed_attempt_submitted,
+)
