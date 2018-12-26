@@ -50,6 +50,7 @@ from .video_transformers import (
     edx_video_closed_captions_shown,
     edx_video_closed_captions_hidden,
     show_transcript,
+    hide_transcript,
 )
 from .forum_transformers import (
     edx_forum_response_created,
