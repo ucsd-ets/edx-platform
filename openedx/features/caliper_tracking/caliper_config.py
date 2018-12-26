@@ -86,6 +86,7 @@ EVENT_MAPPING = {
     'edx.forum.searched': ctf.edx_forum_searched,
     'oppia.exploration.state.changed': ctf.oppia_exploration_state_changed,
     'textbook.pdf.search.executed': ctf.textbook_pdf_search_executed,
+    'openassessmentblock.self_assess': ctf.openassessmentblock_self_assess,
     'edx.drag_and_drop_v2.item.dropped': ctf.edx_drag_and_drop_v2_item_dropped,
     'edx.drag_and_drop_v2.item.picked_up': ctf.edx_drag_and_drop_v2_item_picked_up,
     'oppia.exploration.loaded': ctf.oppia_exploration_loaded,

@@ -85,6 +85,7 @@ from .open_response_transformers import (
     openassessmentblock_create_submission,
     openassessment_student_training_assess_example,
     openassessmentblock_staff_assess,
+    openassessmentblock_self_assess,
 )
 from .third_party_transformers import (
     edx_googlecomponent_calendar_displayed,
