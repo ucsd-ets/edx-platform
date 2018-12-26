@@ -86,6 +86,7 @@ from .open_response_transformers import (
 from .third_party_transformers import (
     edx_googlecomponent_calendar_displayed,
     edx_googlecomponent_document_displayed,
+    oppia_exploration_state_changed,
 )
 from .drag_and_drop_transformers import (
     edx_drag_and_drop_v2_item_dropped,
