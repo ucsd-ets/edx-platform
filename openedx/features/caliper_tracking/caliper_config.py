@@ -89,4 +89,5 @@ EVENT_MAPPING = {
         ctf.ubc_peer_instruction_original_submitted,
     'ubc.peer_instruction.revised_submitted':
     ctf.ubc_peer_instruction_revised_submitted,
+    'edx.drag_and_drop_v2.loaded': ctf.edx_drag_and_drop_v2_loaded,
 }

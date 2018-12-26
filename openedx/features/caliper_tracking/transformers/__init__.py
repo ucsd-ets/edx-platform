@@ -92,6 +92,7 @@ from .third_party_transformers import (
 from .drag_and_drop_transformers import (
     edx_drag_and_drop_v2_item_dropped,
     edx_drag_and_drop_v2_item_picked_up,
+    edx_drag_and_drop_v2_loaded,
 )
 from .peer_instruction_transformers import (
     ubc_peer_instruction_revised_submitted,
