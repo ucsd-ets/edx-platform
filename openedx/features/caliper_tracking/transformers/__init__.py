@@ -24,7 +24,6 @@ from .enrollment_transformers import (
     edx_course_enrollment_upgrade_clicked,
     edx_course_enrollment_upgrade_succeeded,
 )
-from .textbook_transformers import textbook_pdf_page_navigated
 from .problem_transformers import (
     problem_show,
     problem_save,
@@ -62,7 +61,8 @@ from .xblock_transformers import (
 )
 from .textbook_transformers import (
     textbook_pdf_page_scrolled,
-    textbook_pdf_search_executed
+    textbook_pdf_search_executed,
+    textbook_pdf_page_navigated
 )
 from .notes_transformers import (
     edx_course_student_notes_added,
@@ -81,9 +81,10 @@ from .open_response_transformers import (
     openassessmentblock_create_submission,
     openassessment_student_training_assess_example,
 )
+from .third_party_transformers import (
+    edx_googlecomponent_calendar_displayed,
+    edx_googlecomponent_document_displayed,
+)
 from .drag_and_drop_transformers import (
     edx_drag_and_drop_v2_item_dropped,
-)
-from .third_party_transformers import (
-     edx_googlecomponent_document_displayed,
 )
