@@ -87,4 +87,6 @@ EVENT_MAPPING = {
     'oppia.exploration.loaded': ctf.oppia_exploration_loaded,
     'ubc.peer_instruction.original_submitted':
         ctf.ubc_peer_instruction_original_submitted,
+    'ubc.peer_instruction.revised_submitted':
+    ctf.ubc_peer_instruction_revised_submitted,
 }
