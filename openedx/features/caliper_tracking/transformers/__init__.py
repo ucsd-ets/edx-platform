@@ -38,6 +38,7 @@ from .problem_transformers import (
     edx_grades_problem_state_deleted,
     edx_grades_problem_rescored,
     reset_problem_fail,
+    edx_grades_problem_score_overridden
 )
 from .video_transformers import (
     pause_video,
