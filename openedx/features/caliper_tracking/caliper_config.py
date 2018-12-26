@@ -102,5 +102,6 @@ EVENT_MAPPING = {
     'edx.special_exam.timed.attempt.submitted':
     ctf.edx_special_exam_timed_attempt_submitted,
     'edx.cohort.created': ctf.edx_cohort_created,
-    'edx.cohort.user_removed': ctf.edx_cohort_user_removed
+    'edx.cohort.user_removed': ctf.edx_cohort_user_removed,
+    'edx.team.page_viewed': ctf.edx_team_page_viewed,
 }
