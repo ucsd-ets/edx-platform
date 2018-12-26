@@ -129,4 +129,5 @@ EVENT_MAPPING = {
     'edx.special_exam.timed.attempt.deleted':
         ctf.edx_special_exam_timed_attempt_deleted,
     'oppia.exploration.completed': ctf.oppia_exploration_completed,
+    'edx.team.searched': ctf.edx_team_searched,
 }
