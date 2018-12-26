@@ -106,3 +106,6 @@ from .cohort_transformers import (
 from .exam_transformers import (
     edx_special_exam_timed_attempt_created,
 )
+from .exam_transformers import (
+    edx_special_exam_timed_attempt_started,
+)

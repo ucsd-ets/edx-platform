@@ -95,4 +95,6 @@ EVENT_MAPPING = {
     'edx.drag_and_drop_v2.loaded': ctf.edx_drag_and_drop_v2_loaded,
     'edx.special_exam.timed.attempt.created':
         ctf.edx_special_exam_timed_attempt_created,
+    'edx.special_exam.timed.attempt.started':
+        ctf.edx_special_exam_timed_attempt_started,
 }
