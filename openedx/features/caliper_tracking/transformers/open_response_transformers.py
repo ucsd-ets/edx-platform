@@ -94,37 +94,40 @@ def openassessmentblock_peer_assess(current_event, caliper_event):
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
+
+    current_event_details = current_event['event']
+    event_context_details = current_event['context']
+
+    caliper_object = {
+        'dateCreated': convert_datetime(
+            current_event_details.pop('scored_at')),
+        'extensions': current_event_details,
+        'id': current_event['referer'],
+        'type': 'Attempt'
+    }
+
     caliper_event.update({
-        'type': 'AssessmentEvent',
-        'action': 'Submitted',
-        'object': {
-            'id': current_event['referer'],
-            'type': 'Assessment',
-            'extensions': {
-                'feedback': current_event['event']['feedback'],
-                'parts': current_event['event']['parts'],
-                'rubric': current_event['event']['rubric'],
-                'score_type': current_event['event']['score_type'],
-                'scored_at': convert_datetime(
-                    current_event['event']['scored_at']),
-                'scorer_id': current_event['event']['scorer_id'],
-                'submission_uuid': current_event['event']['submission_uuid']
-            }
-        }
+        'action': 'Graded',
+        'type': 'GradeEvent',
+        'object': caliper_object
     })
-    caliper_event['extensions']['extra_fields'].update({
-        'asides': current_event['context']['asides'],
-        'course_id': current_event['context']['course_id'],
-        'course_user_tags': current_event['context']['course_user_tags'],
-        'module': current_event['context']['module']
-    })
+
     caliper_event['actor'].update({
-        'type': 'Person',
-        'name': current_event['username']
+        'name': current_event['username'],
+        'type': 'Person'
     })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'asides': event_context_details['asides'],
+        'course_user_tags': event_context_details['course_user_tags'],
+        'course_id': event_context_details['course_id'],
+        'module': event_context_details['module'],
+        'ip': current_event['ip']
+    })
+
     caliper_event['referrer']['type'] = 'WebPage'
-    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
     caliper_event['extensions']['extra_fields'].pop('session')
+
     return caliper_event
 
 
