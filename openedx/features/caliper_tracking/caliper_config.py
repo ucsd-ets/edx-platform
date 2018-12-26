@@ -61,6 +61,7 @@ EVENT_MAPPING = {
     'xblock.poll.submitted': ctf.xblock_poll_submitted,
     'edx.course.student_notes.deleted': ctf.edx_course_student_notes_deleted,
     'edx.course.student_notes.edited': ctf.edx_course_student_notes_edited,
+
     'edx.course.student_notes.added': ctf.edx_course_student_notes_added,
     'openassessmentblock.get_submission_for_staff_grading':
         ctf.openassessmentblock_get_submission_for_staff_grading,
@@ -69,6 +70,7 @@ EVENT_MAPPING = {
         ctf.edx_course_enrollment_upgrade_succeeded,
     'edx.course.student_notes.notes_page_viewed':
         ctf.edx_course_student_notes_notes_page_viewed,
+    'edx.forum.thread.voted': ctf.edx_forum_thread_voted,
     'edx.forum.response.voted': ctf.edx_forum_response_voted,
     'openassessmentblock.submit_feedback_on_assessments':
         ctf.openassessmentblock_submit_feedback_on_assessments,
