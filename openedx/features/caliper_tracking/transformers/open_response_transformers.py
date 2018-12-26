@@ -30,14 +30,14 @@ def openassessmentblock_get_submission_for_staff_grading(
         'asides': current_event['context']['asides'],
         'course_id': current_event['context']['course_id'],
         'course_user_tags': current_event['context']['course_user_tags'],
-        'module': current_event['context']['module']
+        'module': current_event['context']['module'],
+        'ip': current_event['ip']
     })
     caliper_event['actor'].update({
         'type': 'Person',
         'name': current_event['username']
     })
     caliper_event['referrer']['type'] = 'WebPage'
-    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
     caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event
 
