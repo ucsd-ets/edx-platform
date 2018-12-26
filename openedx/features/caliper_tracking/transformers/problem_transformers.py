@@ -546,3 +546,42 @@ def edx_grades_problem_score_overridden(current_event, caliper_event):
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
 
     return caliper_event
+
+
+def reset_problem(current_event, caliper_event):
+    """
+    The server emits reset_problem events when a problem has been reset
+    successfully.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'Assessment',
+        'extensions': current_event['event']
+    }
+    caliper_event.update({
+        'action': 'Reset',
+        'type': 'AssessmentEvent',
+        'object': caliper_object
+    })
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields'].update({
+        'event_source': current_event['event_source'],
+        'event_type': current_event['event_type'],
+        'host': current_event['host'],
+        'ip': current_event['ip'],
+        'page': current_event['page'],
+    })
+    caliper_event['extensions']['extra_fields'].pop('session')
+    return caliper_event

@@ -110,4 +110,5 @@ EVENT_MAPPING = {
     'edx.grades.problem.rescored': ctf.edx_grades_problem_rescored,
     'reset_problem_fail': ctf.reset_problem_fail,
     'edx.grades.problem.score_overridden': ctf.edx_grades_problem_score_overridden,
+    'reset_problem': ctf.reset_problem,
 }
