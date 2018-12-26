@@ -35,6 +35,7 @@ from .problem_transformers import (
     problem_graded,
     edx_problem_hint_feedback_displayed,
     edx_grades_problem_submitted,
+    edx_grades_problem_state_deleted,
 )
 from .video_transformers import (
     pause_video,
