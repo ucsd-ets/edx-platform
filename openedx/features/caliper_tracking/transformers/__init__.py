@@ -103,3 +103,6 @@ from .peer_instruction_transformers import (
 from .cohort_transformers import (
     edx_cohort_user_added,
 )
+from .exam_transformers import (
+    edx_special_exam_timed_attempt_created,
+)

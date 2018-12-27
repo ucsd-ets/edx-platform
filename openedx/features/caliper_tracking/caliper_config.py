@@ -93,4 +93,6 @@ EVENT_MAPPING = {
     'ubc.peer_instruction.revised_submitted':
     ctf.ubc_peer_instruction_revised_submitted,
     'edx.drag_and_drop_v2.loaded': ctf.edx_drag_and_drop_v2_loaded,
+    'edx.special_exam.timed.attempt.created':
+        ctf.edx_special_exam_timed_attempt_created,
 }
