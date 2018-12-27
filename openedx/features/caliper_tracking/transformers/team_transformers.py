@@ -118,6 +118,49 @@ def edx_team_learner_added(current_event, caliper_event):
     return caliper_event
 
 
+def edx_team_deleted(current_event, caliper_event):
+    """
+    This event is generated when new team is deleted
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    team_link = utils.get_team_url_from_team_id(
+        current_event['referer'],
+        current_event['event']['team_id']
+    )
+
+    caliper_object = {
+        'extensions': current_event['event'],
+        'id': team_link,
+        'type': 'Group'
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Deleted',
+        'object': caliper_object,
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id']
+    })
+
+    return caliper_event
+
+
 def edx_team_changed(current_event, caliper_event):
     """
     This event is generated when user edits any field in a team.

@@ -77,8 +77,8 @@ from .textbook_transformers import (
     textbook_pdf_zoom_menu_changed,
     textbook_pdf_thumbnail_navigated,
     textbook_pdf_page_navigated,
-    textbook_pdf_zoom_buttons_changed,
     book,
+    textbook_pdf_zoom_buttons_changed,
     textbook_pdf_searchcasesensitivity_toggled,
     textbook_pdf_search_highlight_toggled,
 )
@@ -126,6 +126,7 @@ from .team_transformers import (
     edx_team_changed,
     edx_team_learner_added,
     edx_team_searched,
+    edx_team_deleted,
 )
 from .cohort_transformers import (
     edx_cohort_user_added,
