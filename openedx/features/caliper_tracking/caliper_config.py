@@ -71,6 +71,7 @@ EVENT_MAPPING = {
         ctf.edx_course_enrollment_upgrade_succeeded,
     'edx.course.student_notes.notes_page_viewed':
         ctf.edx_course_student_notes_notes_page_viewed,
+    'edx.cohort.user_added': ctf.edx_cohort_user_added,
     'edx.forum.thread.voted': ctf.edx_forum_thread_voted,
     'edx.forum.response.voted': ctf.edx_forum_response_voted,
     'openassessmentblock.submit_feedback_on_assessments':

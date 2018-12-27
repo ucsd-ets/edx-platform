@@ -1,7 +1,7 @@
 """
 This module contains the test cases for caliper_tracking application
 """
-
+import mock
 import json
 import os
 from datetime import datetime
@@ -25,7 +25,12 @@ class CaliperTransformationTestCase(TestCase):
 
     maxDiff = None
 
-    def test_caliper_transformers(self):
+    @mock.patch(
+        'openedx.features.caliper_tracking.utils.get_username_from_user_id',
+        return_value='honor',
+        autospec=True
+    )
+    def test_caliper_transformers(self, mock_function):
         test_files = [file for file in os.listdir(
             '{}current/'.format(TEST_DIR_PATH)) if file.endswith(".json")]
 

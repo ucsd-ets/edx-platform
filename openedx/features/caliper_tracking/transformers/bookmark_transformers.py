@@ -16,6 +16,7 @@ def edx_bookmark_listed(current_event, caliper_event):
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
+
     caliper_event.update({
         'type': 'NavigationEvent',
         'action': 'NavigatedTo',
