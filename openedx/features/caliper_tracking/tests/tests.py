@@ -11,7 +11,6 @@ from django.test import TestCase
 from openedx.features.caliper_tracking.base_transformer import CaliperBaseTransformer
 from openedx.features.caliper_tracking.caliper_config import EVENT_MAPPING
 
-
 TEST_DIR_PATH = 'openedx/features/caliper_tracking/tests/'
 
 
@@ -29,7 +28,15 @@ class CaliperTransformationTestCase(TestCase):
         return_value='honor',
         autospec=True
     )
-    def test_caliper_transformers(self, mock_function):
+    @mock.patch(
+        'openedx.features.caliper_tracking.utils.get_team_url_from_team_id',
+        return_value=(
+                "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/teams/"
+                "#teams/Topic1ID/check-3429fc5983a84c8c8366a4477b03d91c"
+        ),
+        autospec=True
+    )
+    def test_caliper_transformers(self, user_mock, team_mock):
         test_files = [file for file in os.listdir(
             '{}current/'.format(TEST_DIR_PATH)) if file.endswith(".json")]
 

@@ -37,3 +37,30 @@ def get_username_from_user_id(user_id):
     User = get_user_model()
     user = User.objects.get(id=user_id)
     return str(user.username)
+
+
+def get_topic_id_from_team_id(team_id):
+    """
+    :param team_id: extracting from event logs
+    :return: topic_id for making team url
+    """
+    from lms.djangoapps.teams.models import CourseTeam
+    user_team = CourseTeam.objects.get(team_id=team_id)
+
+    return user_team.topic_id
+
+
+def get_team_url_from_team_id(referer, team_id):
+    """
+
+    :param referer: extract from event logs
+    :param team_id: extract from event logs
+    :return: team url
+    """
+    topic_id = get_topic_id_from_team_id(team_id)
+    object_link = '{referrer}#teams/{topic_id}/{team_id}'.format(
+        referrer=referer,
+        topic_id=topic_id,
+        team_id=team_id
+    )
+    return object_link

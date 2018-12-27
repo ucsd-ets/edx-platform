@@ -122,3 +122,6 @@ from .exam_transformers import (
     edx_special_exam_timed_attempt_submitted,
     edx_special_exam_timed_attempt_created,
 )
+from .team_transformers import (
+    edx_team_learner_added,
+)
