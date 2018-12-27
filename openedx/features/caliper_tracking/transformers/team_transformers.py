@@ -1,3 +1,7 @@
+"""
+Transformers for all the teams related events
+"""
+
 import json
 from openedx.features.caliper_tracking import utils
 from django.conf import settings
@@ -52,7 +56,8 @@ def edx_team_learner_added(current_event, caliper_event):
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
-    username = utils.get_username_from_user_id(current_event['event']['user_id'])
+    username = utils.get_username_from_user_id(
+        current_event['event']['user_id'])
 
     user_link = '{lms_url}{profile_link}'.format(
         lms_url=settings.LMS_ROOT_URL,
@@ -62,7 +67,10 @@ def edx_team_learner_added(current_event, caliper_event):
         ))
     )
 
-    object_link = utils.get_team_url_from_team_id(current_event['referer'], current_event['event']['team_id'])
+    object_link = utils.get_team_url_from_team_id(
+        current_event['referer'],
+        current_event['event']['team_id']
+    )
 
     caliper_object = {
         'id': object_link,
@@ -193,6 +201,49 @@ def edx_team_searched(current_event, caliper_event):
 
     caliper_event['extensions']['extra_fields'].update({
         'ip': current_event['ip'],
+    })
+
+    return caliper_event
+
+
+def edx_team_created(current_event, caliper_event):
+    """
+    This event is generated when new team is created.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    team_link = utils.get_team_url_from_team_id(
+        current_event['referer'],
+        current_event['event']['team_id']
+    )
+
+    caliper_object = {
+        'extensions': current_event['event'],
+        'id': team_link,
+        'type': 'Group'
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Created',
+        'object': caliper_object,
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
     })
 
     return caliper_event
