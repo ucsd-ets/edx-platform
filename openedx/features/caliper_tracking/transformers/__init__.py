@@ -75,18 +75,15 @@ from .textbook_transformers import (
     textbook_pdf_page_navigated,
     textbook_pdf_page_scrolled,
     textbook_pdf_search_executed,
-    textbook_pdf_page_navigated,
     textbook_pdf_zoom_menu_changed,
     textbook_pdf_thumbnail_navigated,
     book,
 )
 from .notes_transformers import (
     edx_course_student_notes_added,
-    edx_course_student_notes_added,
     edx_course_student_notes_viewed,
     edx_course_student_notes_edited,
     edx_course_student_notes_deleted,
-    edx_course_student_notes_added,
 )
 from .open_response_transformers import (
     openassessmentblock_submit_feedback_on_assessments,
@@ -116,6 +113,8 @@ from .peer_instruction_transformers import (
 )
 from .team_transformers import (
     edx_team_page_viewed,
+    edx_team_changed,
+    edx_team_learner_added,
 )
 from .cohort_transformers import (
     edx_cohort_user_added,
@@ -129,7 +128,4 @@ from .exam_transformers import (
     edx_special_exam_practice_attempt_created,
     edx_special_exam_timed_attempt_created,
     edx_special_exam_timed_attempt_deleted,
-)
-from .team_transformers import (
-    edx_team_learner_added,
 )

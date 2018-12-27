@@ -94,13 +94,15 @@ EVENT_MAPPING = {
     'textbook.pdf.search.executed': ctf.textbook_pdf_search_executed,
     'openassessmentblock.self_assess': ctf.openassessmentblock_self_assess,
     'edx.drag_and_drop_v2.item.dropped': ctf.edx_drag_and_drop_v2_item_dropped,
-    'edx.drag_and_drop_v2.item.picked_up': ctf.edx_drag_and_drop_v2_item_picked_up,
+    'edx.drag_and_drop_v2.item.picked_up':
+        ctf.edx_drag_and_drop_v2_item_picked_up,
     'oppia.exploration.loaded': ctf.oppia_exploration_loaded,
     'ubc.peer_instruction.original_submitted':
         ctf.ubc_peer_instruction_original_submitted,
     'ubc.peer_instruction.revised_submitted':
         ctf.ubc_peer_instruction_revised_submitted,
     'edx.drag_and_drop_v2.loaded': ctf.edx_drag_and_drop_v2_loaded,
+    'edx.team.changed': ctf.edx_team_changed,
     'edx.special_exam.timed.attempt.created':
         ctf.edx_special_exam_timed_attempt_created,
     'edx.special_exam.timed.attempt.started':
