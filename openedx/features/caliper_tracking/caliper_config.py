@@ -104,6 +104,8 @@ EVENT_MAPPING = {
         ctf.ubc_peer_instruction_revised_submitted,
     'edx.drag_and_drop_v2.loaded': ctf.edx_drag_and_drop_v2_loaded,
     'edx.team.changed': ctf.edx_team_changed,
+    'edx.course.home.resume_course.clicked':
+        ctf.edx_course_home_resume_course_clicked,
     'edx.special_exam.timed.attempt.created':
         ctf.edx_special_exam_timed_attempt_created,
     'edx.special_exam.timed.attempt.started':
@@ -147,5 +149,6 @@ EVENT_MAPPING = {
     'problem_check_fail': ctf.problem_check_fail,
     'textbook.pdf.display.scaled': ctf.textbook_pdf_display_scaled,
     'textbook.pdf.chapter.navigated': ctf.textbook_pdf_chapter_navigated,
-    'edx.librarycontentblock.content.removed': ctf.edx_librarycontentblock_content_removed,
+    'edx.librarycontentblock.content.removed':
+        ctf.edx_librarycontentblock_content_removed,
 }
