@@ -28,6 +28,7 @@ EVENT_MAPPING = {
     'stop_video': ctf.stop_video,
     'problem_graded': ctf.problem_graded,
     'problem_save': ctf.problem_save,
+    'edx.grades.problem.submitted': ctf.edx_grades_problem_submitted,
     'edx.problem.hint.demandhint_displayed':
         ctf.edx_problem_hint_demandhint_displayed,
     'edx.problem.hint.feedback_displayed':
