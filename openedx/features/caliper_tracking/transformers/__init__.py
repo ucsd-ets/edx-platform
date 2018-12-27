@@ -54,6 +54,7 @@ from .video_transformers import (
     show_transcript,
     hide_transcript,
     video_hide_cc_menu,
+    video_show_cc_menu,
 )
 from .forum_transformers import (
     edx_forum_response_created,
