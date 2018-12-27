@@ -40,6 +40,7 @@ from .problem_transformers import (
     reset_problem_fail,
     edx_grades_problem_score_overridden,
     reset_problem,
+    showanswer,
 )
 from .video_transformers import (
     pause_video,
