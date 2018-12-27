@@ -106,4 +106,5 @@ EVENT_MAPPING = {
     'edx.team.page_viewed': ctf.edx_team_page_viewed,
     'edx.grades.problem.state_deleted': ctf.edx_grades_problem_state_deleted,
     'edx.grades.problem.rescored': ctf.edx_grades_problem_rescored,
+    'reset_problem_fail': ctf.reset_problem_fail,
 }
