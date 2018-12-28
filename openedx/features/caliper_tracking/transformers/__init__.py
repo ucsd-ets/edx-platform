@@ -123,6 +123,7 @@ from .exam_transformers import (
     edx_special_exam_timed_attempt_started,
     edx_special_exam_timed_attempt_submitted,
     edx_special_exam_timed_attempt_created,
+    edx_special_exam_timed_attempt_deleted,
 )
 from .team_transformers import (
     edx_team_learner_added,
