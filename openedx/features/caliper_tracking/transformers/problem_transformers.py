@@ -433,3 +433,39 @@ def edx_grades_problem_state_deleted(current_event, caliper_event):
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
 
     return caliper_event
+
+
+def edx_grades_problem_rescored(current_event, caliper_event):
+    """
+    Server emits this event when problem re-scoring task is accomplished.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_object = {
+        'id': current_event['referer'],
+        'extensions': current_event['event'],
+        'type': 'Attempt'
+    }
+
+    caliper_event.update({
+        'action': 'Graded',
+        'type': 'GradeEvent',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer'].update({
+        'id': current_event['referer'],
+        'type': 'WebPage'
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+
+    return caliper_event

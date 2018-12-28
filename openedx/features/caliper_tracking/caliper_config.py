@@ -93,7 +93,7 @@ EVENT_MAPPING = {
     'ubc.peer_instruction.original_submitted':
         ctf.ubc_peer_instruction_original_submitted,
     'ubc.peer_instruction.revised_submitted':
-    ctf.ubc_peer_instruction_revised_submitted,
+        ctf.ubc_peer_instruction_revised_submitted,
     'edx.drag_and_drop_v2.loaded': ctf.edx_drag_and_drop_v2_loaded,
     'edx.special_exam.timed.attempt.created':
         ctf.edx_special_exam_timed_attempt_created,
@@ -105,4 +105,5 @@ EVENT_MAPPING = {
     'edx.cohort.user_removed': ctf.edx_cohort_user_removed,
     'edx.team.page_viewed': ctf.edx_team_page_viewed,
     'edx.grades.problem.state_deleted': ctf.edx_grades_problem_state_deleted,
+    'edx.grades.problem.rescored': ctf.edx_grades_problem_rescored,
 }
