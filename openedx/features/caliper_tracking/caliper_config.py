@@ -114,4 +114,6 @@ EVENT_MAPPING = {
     'edx.team.learner_added': ctf.edx_team_learner_added,
     'reset_problem': ctf.reset_problem,
     'showanswer': ctf.showanswer,
+    'edx.special_exam.timed.attempt.deleted':
+    ctf.edx_special_exam_timed_attempt_deleted,
 }

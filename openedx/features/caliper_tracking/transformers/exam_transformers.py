@@ -1,6 +1,7 @@
 """
 Transformers for all exam related events.
 """
+from openedx.features.caliper_tracking.utils import convert_datetime
 
 
 def edx_special_exam_timed_attempt_created(current_event, caliper_event):
@@ -83,6 +84,39 @@ def edx_special_exam_timed_attempt_started(current_event, caliper_event):
             'id': current_event['referer'],
             'type': 'Assessment',
             'name': assessment_name,
+            'extensions': current_event['event']
+        }
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'ip': current_event['ip']
+    })
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    return caliper_event
+
+
+def edx_special_exam_timed_attempt_deleted(current_event, caliper_event):
+    """
+    The server emits this event when a course team or edX platform administrator
+    removes an exam attempt record for an individual learner.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Deleted',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Attempt',
+            'name': current_event['event'].pop('exam_name'),
+            'startedAtTime': convert_datetime(current_event['event'].pop('attempt_started_at')),
+            'endedAtTime': convert_datetime(current_event['event'].pop('attempt_completed_at')),
             'extensions': current_event['event']
         }
     })
