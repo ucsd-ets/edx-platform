@@ -102,15 +102,16 @@ from .peer_instruction_transformers import (
     ubc_peer_instruction_revised_submitted,
     ubc_peer_instruction_original_submitted,
 )
+from .team_transformers import (
+    edx_team_page_viewed,
+)
 from .cohort_transformers import (
     edx_cohort_user_added,
     edx_cohort_created,
+    edx_cohort_user_removed,
 )
 from .exam_transformers import (
     edx_special_exam_timed_attempt_started,
     edx_special_exam_timed_attempt_submitted,
     edx_special_exam_timed_attempt_created,
-)
-from .cohort_transformers import (
-    edx_cohort_user_removed,
 )
