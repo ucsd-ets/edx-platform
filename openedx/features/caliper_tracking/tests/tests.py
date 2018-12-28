@@ -5,9 +5,8 @@ This module contains the test cases for caliper_tracking application
 import mock
 import json
 import os
-from datetime import datetime
+
 from django.test import TestCase
-import logging
 
 from openedx.features.caliper_tracking.base_transformer import CaliperBaseTransformer
 from openedx.features.caliper_tracking.caliper_config import EVENT_MAPPING
@@ -17,8 +16,8 @@ TEST_DIR_PATH = 'openedx/features/caliper_tracking/tests/'
 
 
 class CaliperTransformationTestCase(TestCase):
-    """Data driven test case that tests all transformers for expected output
-
+    """
+    Data driven test case that tests all transformers for expected output
     The test case compares the files in the current/ directory
     and compares them with their corresponding files in the expected/ directory
     """

@@ -48,6 +48,7 @@ from .video_transformers import (
     seek_video,
     edx_video_closed_captions_shown,
     edx_video_closed_captions_hidden,
+    show_transcript,
 )
 from .forum_transformers import (
     edx_forum_response_created,
