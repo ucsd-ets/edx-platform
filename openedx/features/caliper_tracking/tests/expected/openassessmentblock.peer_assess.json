@@ -1,6 +1,6 @@
 {
   "@context": "http://purl.imsglobal.org/ctx/caliper/v1p1",
-  "action": "Submitted",
+  "action": "Graded",
   "actor": {
     "id": "http://localhost:18000/u/edx",
     "name": "edx",
@@ -28,37 +28,37 @@
       "user_id": 2
     }
   },
-  "id": "urn:uuid:8ca8127c-afed-4a75-b23b-6c92e432045d",
+  "id": "urn:uuid:a50ca17f-5971-47bb-8fca-4e6e6879001d",
   "object": {
+    "dateCreated": "2018-12-18T11:10:06.423Z",
     "extensions": {
       "feedback": "",
-      "parts": [
-        {
-          "criterion": {
-            "name": "Ideas",
-            "points_possible": 5
-          },
-          "feedback": "",
-          "option": {
-            "name": "Good",
-            "points": 5
+       "parts": [
+          {
+              "criterion": {
+                  "name": "Ideas",
+                  "points_possible": 5
+              },
+              "feedback": "",
+              "option": {
+                  "name": "Good",
+                  "points": 5
+              }
           }
-        }
       ],
       "rubric": {
-        "content_hash": "5314f2b6853bc1fa94d5a33e1c9cab4e2591b230"
+          "content_hash": "5314f2b6853bc1fa94d5a33e1c9cab4e2591b230"
       },
       "score_type": "PE",
-      "scored_at": "2018-12-18T11:10:06.423Z",
       "scorer_id": "0152b60e1449d7cec51d7389c9d5c285",
       "submission_uuid": "fc026da1-ee4b-4918-9d63-1d296fd9ce4a"
     },
     "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/2e563603fc064644838b249e1f7875fb/f28e0eda92bd46c7abcbd3a12bdba8ac/1?activate_block_id=block-v1%3AedX%2BDemoX%2BDemo_Course%2Btype%40vertical%2Bblock%4029665017b3f44a1bb695f9e4ec6c4230",
-    "type": "Assessment"
+    "type": "Attempt"
   },
   "referrer": {
     "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/2e563603fc064644838b249e1f7875fb/f28e0eda92bd46c7abcbd3a12bdba8ac/1?activate_block_id=block-v1%3AedX%2BDemoX%2BDemo_Course%2Btype%40vertical%2Bblock%4029665017b3f44a1bb695f9e4ec6c4230",
     "type": "WebPage"
   },
-  "type": "AssessmentEvent"
+  "type": "GradeEvent"
 }
