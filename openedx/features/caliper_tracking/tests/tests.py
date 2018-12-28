@@ -1,11 +1,11 @@
 """
 This module contains the test cases for caliper_tracking application
 """
+
 import mock
 import json
 import os
 from datetime import datetime
-
 from django.test import TestCase
 import logging
 
