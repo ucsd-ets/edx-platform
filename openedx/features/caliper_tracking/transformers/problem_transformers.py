@@ -585,3 +585,36 @@ def reset_problem(current_event, caliper_event):
     })
     caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event
+
+
+def showanswer(current_event, caliper_event):
+    """
+    The server emits showanswer events when the answer to a problem is shown.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    caliper_object = {
+        'id': current_event['referer'],
+        'extensions': current_event['event'],
+        'type': 'Frame'
+    }
+    caliper_event.update({
+        'action': 'Viewed',
+        'type': 'ViewEvent',
+        'object': caliper_object
+    })
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+    caliper_event['extensions']['extra_fields'].pop('session')
+
+    return caliper_event
