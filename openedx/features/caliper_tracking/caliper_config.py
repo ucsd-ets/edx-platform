@@ -46,6 +46,7 @@ EVENT_MAPPING = {
     'save_problem_success': ctf.save_problem_success,
     'play_video': ctf.play_video,
     'hide_transcript': ctf.hide_transcript,
+    'video_hide_cc_menu': ctf.video_hide_cc_menu,
     'edx.forum.thread.created': ctf.edx_forum_thread_created,
     'openassessmentblock.get_peer_submission':
         ctf.openassessmentblock_get_peer_submission,

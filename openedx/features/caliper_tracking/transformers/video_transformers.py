@@ -434,3 +434,40 @@ def show_transcript(current_event, caliper_event):
     })
     caliper_event['referrer']['type'] = 'WebPage'
     return caliper_event
+
+
+def video_hide_cc_menu(current_event, caliper_event):
+    """
+    When a user closes the Language Menu for a video that has transcripts in multiple languages, the browser emits a
+    video_hide_cc_menu event.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+    current_event_details = json.loads(current_event['event'])
+    caliper_event.update({
+        'action': 'Hid',
+        'type': 'Event',
+        'object': {
+            'duration': duration_isoformat(
+                timedelta(seconds=current_event_details['duration'])),
+            'extensions': {
+                'code': current_event_details['code'],
+                'id': current_event_details['id']
+            },
+            'id': current_event['referer'],
+            'type': 'Frame'
+        }
+    })
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'ip': current_event['ip'],
+        'name': current_event['name']
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    return caliper_event

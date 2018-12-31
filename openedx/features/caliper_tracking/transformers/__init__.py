@@ -53,6 +53,7 @@ from .video_transformers import (
     edx_video_closed_captions_hidden,
     show_transcript,
     hide_transcript,
+    video_hide_cc_menu,
 )
 from .forum_transformers import (
     edx_forum_response_created,
