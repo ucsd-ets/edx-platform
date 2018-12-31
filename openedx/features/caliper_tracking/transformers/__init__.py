@@ -122,8 +122,10 @@ from .cohort_transformers import (
     edx_cohort_user_removed,
 )
 from .exam_transformers import (
+    edx_special_exam_timed_attempt_created,
     edx_special_exam_timed_attempt_started,
     edx_special_exam_timed_attempt_submitted,
+    edx_special_exam_practice_attempt_created,
     edx_special_exam_timed_attempt_created,
     edx_special_exam_timed_attempt_deleted,
 )
