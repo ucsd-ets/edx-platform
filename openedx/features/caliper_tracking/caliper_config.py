@@ -149,6 +149,8 @@ EVENT_MAPPING = {
     'problem_check_fail': ctf.problem_check_fail,
     'textbook.pdf.display.scaled': ctf.textbook_pdf_display_scaled,
     'textbook.pdf.chapter.navigated': ctf.textbook_pdf_chapter_navigated,
+    'textbook.pdf.search.navigatednext':
+    ctf.textbook_pdf_search_navigatednext,
     'edx.librarycontentblock.content.removed':
         ctf.edx_librarycontentblock_content_removed,
     'edx.user.settings.changed': ctf.edx_user_settings_changed,
