@@ -80,6 +80,7 @@ from .textbook_transformers import (
     textbook_pdf_zoom_buttons_changed,
     book,
     textbook_pdf_searchcasesensitivity_toggled,
+    textbook_pdf_search_highlight_toggled,
 )
 from .notes_transformers import (
     edx_course_student_notes_added,
