@@ -39,6 +39,7 @@ EVENT_MAPPING = {
     'show_transcript': ctf.show_transcript,
     'edx.video.closed_captions.shown': ctf.edx_video_closed_captions_shown,
     'edx.video.closed_captions.hidden': ctf.edx_video_closed_captions_hidden,
+    'video_show_cc_menu': ctf.video_show_cc_menu,
     'problem_reset': ctf.problem_reset,
     'seq_goto': ctf.seq_goto,
     'problem_rescore': ctf.problem_rescore,
