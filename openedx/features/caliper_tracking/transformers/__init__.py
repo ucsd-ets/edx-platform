@@ -143,3 +143,6 @@ from .exam_transformers import (
 from .third_party_transofrmers import (
     oppia_exploration_completed,
 )
+from .user_settings_transformers import (
+    edx_user_settings_viewed,
+)
