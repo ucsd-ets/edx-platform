@@ -83,11 +83,12 @@ from .textbook_transformers import (
     textbook_pdf_search_highlight_toggled,
 )
 from .notes_transformers import (
-    edx_course_student_notes_added,
     edx_course_student_notes_viewed,
     edx_course_student_notes_edited,
     edx_course_student_notes_deleted,
     edx_course_student_notes_searched,
+    edx_course_student_notes_added,
+    edx_course_student_notes_used_unit_link,
 )
 from .open_response_transformers import (
     openassessmentblock_submit_feedback_on_assessments,

@@ -108,6 +108,8 @@ EVENT_MAPPING = {
         ctf.edx_special_exam_timed_attempt_created,
     'edx.special_exam.timed.attempt.started':
         ctf.edx_special_exam_timed_attempt_started,
+    'edx.course.student_notes.used_unit_link':
+        ctf.edx_course_student_notes_used_unit_link,
     'edx.special_exam.timed.attempt.submitted':
         ctf.edx_special_exam_timed_attempt_submitted,
     'edx.drag_and_drop_v2.feedback.opened':
