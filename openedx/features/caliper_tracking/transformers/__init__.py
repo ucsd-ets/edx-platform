@@ -87,6 +87,7 @@ from .notes_transformers import (
     edx_course_student_notes_viewed,
     edx_course_student_notes_edited,
     edx_course_student_notes_deleted,
+    edx_course_student_notes_searched,
 )
 from .open_response_transformers import (
     openassessmentblock_submit_feedback_on_assessments,
