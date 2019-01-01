@@ -131,6 +131,8 @@ EVENT_MAPPING = {
         ctf.edx_special_exam_timed_attempt_deleted,
     'oppia.exploration.completed': ctf.oppia_exploration_completed,
     'edx.team.searched': ctf.edx_team_searched,
+    'textbook.pdf.search.highlight.toggled':
+        ctf.textbook_pdf_search_highlight_toggled,
     'textbook.pdf.searchcasesensitivity.toggled':
         ctf.textbook_pdf_searchcasesensitivity_toggled,
 }
