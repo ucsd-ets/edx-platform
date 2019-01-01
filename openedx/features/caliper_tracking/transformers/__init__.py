@@ -138,6 +138,7 @@ from .team_transformers import (
     edx_team_changed,
     edx_team_learner_added,
     edx_team_searched,
+    edx_team_learner_removed,
     edx_team_deleted,
     edx_team_created,
 )

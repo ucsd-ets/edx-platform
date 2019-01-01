@@ -4,8 +4,6 @@ Transformers for all the teams related events
 
 import json
 from openedx.features.caliper_tracking import utils
-from django.conf import settings
-from django.core.urlresolvers import reverse
 
 
 def edx_team_page_viewed(current_event, caliper_event):
@@ -59,13 +57,7 @@ def edx_team_learner_added(current_event, caliper_event):
     username = utils.get_username_from_user_id(
         current_event['event']['user_id'])
 
-    user_link = '{lms_url}{profile_link}'.format(
-        lms_url=settings.LMS_ROOT_URL,
-        profile_link=str(reverse(
-            'learner_profile',
-            kwargs={'username': username}
-        ))
-    )
+    user_link = utils.get_user_link_from_username(username)
 
     object_link = utils.get_team_url_from_team_id(
         current_event['referer'],
@@ -244,6 +236,79 @@ def edx_team_searched(current_event, caliper_event):
 
     caliper_event['extensions']['extra_fields'].update({
         'ip': current_event['ip'],
+    })
+
+    return caliper_event
+
+
+def edx_team_learner_removed(current_event, caliper_event):
+    """
+    When a user leaves a team or is removed by someone else,
+    the server emits an edx.team.learner_deleted event.
+
+    This event is also triggered when a team is deleted,
+    because all members are removed when a team is deleted.
+
+    Course team members who have any of the Staff, Admin, Discussion Admin,
+    Discussion Moderator, or Community TA roles can remove learners from teams.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    username = utils.get_username_from_user_id(current_event['event']['user_id'])
+
+    user_link = utils.get_user_link_from_username(username)
+
+    if current_event['event']['remove_method'] == 'team_deleted':
+        object_link = current_event['referer']
+    else:
+        object_link = utils.get_team_url_from_team_id(
+            current_event['referer'],
+            current_event['event']['team_id']
+        )
+
+    caliper_object = {
+        'id': object_link,
+        'member': {
+            'extensions': {
+                'user_id': current_event['event']['user_id']
+            },
+            'id': user_link,
+            'name': username,
+            'type': 'Person'
+        },
+        'organization': {
+            'extensions': {
+                'team_id': current_event['event']['team_id']
+            },
+            'id': object_link,
+            'type': 'Group'
+        },
+        'type': 'Membership',
+        'extensions': {
+            'remove_method': current_event['event']['remove_method']
+        }
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Removed',
+        'object': caliper_object,
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
     })
 
     return caliper_event
