@@ -72,6 +72,7 @@ EVENT_MAPPING = {
     'textbook.pdf.page.scrolled': ctf.textbook_pdf_page_scrolled,
     'textbook.pdf.zoom.menu.changed': ctf.textbook_pdf_zoom_menu_changed,
     'textbook.pdf.thumbnail.navigated': ctf.textbook_pdf_thumbnail_navigated,
+    'textbook.pdf.zoom.buttons.changed': ctf.textbook_pdf_zoom_buttons_changed,
     'book': ctf.book,
     'edx.course.enrollment.upgrade.succeeded':
         ctf.edx_course_enrollment_upgrade_succeeded,
