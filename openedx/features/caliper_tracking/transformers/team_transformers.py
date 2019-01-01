@@ -1,7 +1,3 @@
-"""
-Transformers for all the teams related events
-"""
-
 import json
 from openedx.features.caliper_tracking import utils
 from django.conf import settings
@@ -109,6 +105,51 @@ def edx_team_learner_added(current_event, caliper_event):
     caliper_event['extensions']['extra_fields'].update({
         'ip': current_event['ip'],
         'course_id': current_event['context']['course_id'],
+    })
+
+    return caliper_event
+
+
+def edx_team_changed(current_event, caliper_event):
+    """
+    This event is generated when user edits any field in a team.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    object_extensions = current_event['event']
+
+    object_link = utils.get_team_url_from_team_id(current_event['referer'],
+                                                  current_event['event'][
+                                                      'team_id'])
+    object_extensions.update({
+        'course_id': current_event['context']['course_id'],
+        'org_id': caliper_event['extensions']['extra_fields'].pop('org_id'),
+    })
+
+    caliper_object = {
+        'id': object_link,
+        'type': 'Group',
+        'extensions': object_extensions
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Modified',
+        'object': caliper_object
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
     })
 
     return caliper_event
