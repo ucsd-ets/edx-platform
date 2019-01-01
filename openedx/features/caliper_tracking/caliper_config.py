@@ -108,18 +108,21 @@ EVENT_MAPPING = {
     'edx.special_exam.timed.attempt.started':
         ctf.edx_special_exam_timed_attempt_started,
     'edx.special_exam.timed.attempt.submitted':
-    ctf.edx_special_exam_timed_attempt_submitted,
+        ctf.edx_special_exam_timed_attempt_submitted,
     'edx.drag_and_drop_v2.feedback.opened':
         ctf.edx_drag_and_drop_v2_feedback_opened,
+    'edx.drag_and_drop_v2.feedback.closed':
+        ctf.edx_drag_and_drop_v2_feedback_closed,
     'edx.cohort.created': ctf.edx_cohort_created,
     'edx.special_exam.practice.attempt.created':
-    ctf.edx_special_exam_practice_attempt_created,
+        ctf.edx_special_exam_practice_attempt_created,
     'edx.cohort.user_removed': ctf.edx_cohort_user_removed,
     'edx.team.page_viewed': ctf.edx_team_page_viewed,
     'edx.grades.problem.state_deleted': ctf.edx_grades_problem_state_deleted,
     'edx.grades.problem.rescored': ctf.edx_grades_problem_rescored,
     'reset_problem_fail': ctf.reset_problem_fail,
-    'edx.grades.problem.score_overridden': ctf.edx_grades_problem_score_overridden,
+    'edx.grades.problem.score_overridden':
+        ctf.edx_grades_problem_score_overridden,
     'edx.team.learner_added': ctf.edx_team_learner_added,
     'reset_problem': ctf.reset_problem,
     'showanswer': ctf.showanswer,

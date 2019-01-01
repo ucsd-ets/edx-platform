@@ -72,11 +72,11 @@ from .xblock_transformers import (
     xblock_survey_view_results,
 )
 from .textbook_transformers import (
-    textbook_pdf_page_navigated,
     textbook_pdf_page_scrolled,
     textbook_pdf_search_executed,
     textbook_pdf_zoom_menu_changed,
     textbook_pdf_thumbnail_navigated,
+    textbook_pdf_page_navigated,
     book,
 )
 from .notes_transformers import (
@@ -98,6 +98,7 @@ from .open_response_transformers import (
 )
 from .drag_and_drop_transformers import (
     edx_drag_and_drop_v2_item_dropped,
+    edx_drag_and_drop_v2_feedback_closed,
     edx_drag_and_drop_v2_feedback_opened,
 )
 from .third_party_transformers import (
