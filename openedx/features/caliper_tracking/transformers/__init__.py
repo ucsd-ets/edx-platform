@@ -120,6 +120,7 @@ from .team_transformers import (
     edx_team_page_viewed,
     edx_team_changed,
     edx_team_learner_added,
+    edx_team_searched,
 )
 from .cohort_transformers import (
     edx_cohort_user_added,
