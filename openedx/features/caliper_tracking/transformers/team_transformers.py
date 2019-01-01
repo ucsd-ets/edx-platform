@@ -1,5 +1,5 @@
 """
-Transformers for all the teams related events
+Transformers for all the team events
 """
 
 import json
@@ -10,7 +10,6 @@ def edx_team_page_viewed(current_event, caliper_event):
     """
     When a user views any page with a unique URL under the Teams page in the
     courseware, the browser emits an edx.team.page_viewed event.
-
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
@@ -49,7 +48,6 @@ def edx_team_learner_added(current_event, caliper_event):
     """
     When a user joins a team or is added by someone else,
     the server emits an edx.team.learner_added event.
-
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
@@ -156,7 +154,6 @@ def edx_team_deleted(current_event, caliper_event):
 def edx_team_changed(current_event, caliper_event):
     """
     This event is generated when user edits any field in a team.
-
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
@@ -164,9 +161,11 @@ def edx_team_changed(current_event, caliper_event):
 
     object_extensions = current_event['event']
 
-    object_link = utils.get_team_url_from_team_id(current_event['referer'],
-                                                  current_event['event'][
-                                                      'team_id'])
+    object_link = utils.get_team_url_from_team_id(
+        current_event['referer'],
+        current_event['event']['team_id']
+    )
+
     object_extensions.update({
         'course_id': current_event['context']['course_id'],
         'org_id': caliper_event['extensions']['extra_fields'].pop('org_id'),
@@ -202,7 +201,6 @@ def edx_team_searched(current_event, caliper_event):
     """
     When a user performs a search for teams from the topic view under the
     Teams page of the courseware, the server emits an edx.team.searched event.
-
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
@@ -350,6 +348,58 @@ def edx_team_created(current_event, caliper_event):
     })
 
     caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
+    })
+
+    return caliper_event
+
+
+def edx_team_activity_updated(current_event, caliper_event):
+    """
+    When team discussion activity has occurred on a team,
+    including a team member posting, editing posts, commenting,
+    responding, endorsing, and so on), the server emits
+    an edx.team.activity_updated event.
+
+    The definition of activity that would trigger
+    this event does not include changes in team membership.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    object_link = utils.get_team_url_from_team_id(
+        current_event['referer'],
+        current_event['event']['team_id']
+    )
+
+    caliper_object = {
+        'id': object_link,
+        'type': 'Forum',
+        'extensions': {
+            'team_id': current_event['event']['team_id']
+        }
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Modified',
+        'object': caliper_object,
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'course_user_tags': current_event['context']['course_user_tags'],
         'ip': current_event['ip'],
         'course_id': current_event['context']['course_id'],
     })

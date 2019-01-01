@@ -141,6 +141,8 @@ from .team_transformers import (
     edx_team_learner_removed,
     edx_team_deleted,
     edx_team_created,
+    edx_team_learner_added,
+    edx_team_activity_updated,
 )
 from .cohort_transformers import (
     edx_cohort_user_added,
