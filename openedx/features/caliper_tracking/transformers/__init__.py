@@ -156,3 +156,6 @@ from .third_party_transofrmers import (
 from .user_settings_transformers import (
     edx_user_settings_viewed,
 )
+from .content_library_transformers import (
+    edx_librarycontentblock_content_removed,
+)
