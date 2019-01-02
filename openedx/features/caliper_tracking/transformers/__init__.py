@@ -146,3 +146,6 @@ from .third_party_transofrmers import (
 from .user_settings_transformers import (
     edx_user_settings_viewed,
 )
+from .team_transformers import (
+    edx_team_created,
+)
