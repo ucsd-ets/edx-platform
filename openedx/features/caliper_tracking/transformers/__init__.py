@@ -107,6 +107,7 @@ from .open_response_transformers import (
     openassessment_student_training_assess_example,
     openassessmentblock_staff_assess,
     openassessmentblock_self_assess,
+    openassessmentblock_save_files_descriptions,
 )
 from .drag_and_drop_transformers import (
     edx_drag_and_drop_v2_item_dropped,

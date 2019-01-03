@@ -397,3 +397,52 @@ def openassessmentblock_self_assess(current_event, caliper_event):
     caliper_event['extensions']['extra_fields'].pop('session')
 
     return caliper_event
+
+
+def openassessmentblock_save_files_descriptions(current_event, caliper_event):
+    """
+    The server emits this event when a description of a learner's response
+    file is saved on submission.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    caliper_object = {
+        'extensions': {
+            'saved_response': json.loads(
+                current_event['event']['saved_response']
+            )
+        },
+        'id': current_event['referer'],
+        'type': 'Document',
+        'isPartOf': {
+            'id': current_event['referer'],
+            'type': 'Assessment'
+        }
+    }
+
+    caliper_event.update({
+        'action': 'Described',
+        'type': 'Event',
+        'object': caliper_object
+    })
+
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'asides': current_event['context']['asides'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'ip': current_event['ip'],
+        'module': current_event['context']['module'],
+        'course_id': current_event['context']['course_id']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['extensions']['extra_fields'].pop('session')
+    
+    return caliper_event
