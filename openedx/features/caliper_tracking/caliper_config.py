@@ -144,4 +144,5 @@ EVENT_MAPPING = {
     'ubc.peer_instruction.accessed': ctf.ubc_peer_instruction_accessed,
     'problem_check_fail': ctf.problem_check_fail,
     'textbook.pdf.display.scaled': ctf.textbook_pdf_display_scaled,
+    'textbook.pdf.chapter.navigated': ctf.textbook_pdf_chapter_navigated,
 }

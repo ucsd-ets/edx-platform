@@ -83,6 +83,7 @@ from .textbook_transformers import (
     textbook_pdf_searchcasesensitivity_toggled,
     textbook_pdf_search_highlight_toggled,
     textbook_pdf_display_scaled,
+    textbook_pdf_chapter_navigated,
 )
 from .notes_transformers import (
     edx_course_student_notes_viewed,
