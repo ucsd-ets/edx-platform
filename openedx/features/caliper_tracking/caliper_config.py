@@ -143,4 +143,5 @@ EVENT_MAPPING = {
     'edx.team.created': ctf.edx_team_created,
     'ubc.peer_instruction.accessed': ctf.ubc_peer_instruction_accessed,
     'problem_check_fail': ctf.problem_check_fail,
+    'textbook.pdf.display.scaled': ctf.textbook_pdf_display_scaled,
 }
