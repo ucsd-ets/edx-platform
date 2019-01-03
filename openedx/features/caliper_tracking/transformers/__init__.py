@@ -80,6 +80,7 @@ from .textbook_transformers import (
     textbook_pdf_page_navigated,
     book,
     textbook_pdf_zoom_buttons_changed,
+    textbook_pdf_thumbnails_toggled,
     textbook_pdf_searchcasesensitivity_toggled,
     textbook_pdf_search_highlight_toggled,
     textbook_pdf_display_scaled,
@@ -131,6 +132,7 @@ from .team_transformers import (
     edx_team_learner_added,
     edx_team_searched,
     edx_team_deleted,
+    edx_team_created,
 )
 from .cohort_transformers import (
     edx_cohort_user_added,
@@ -150,7 +152,4 @@ from .third_party_transofrmers import (
 )
 from .user_settings_transformers import (
     edx_user_settings_viewed,
-)
-from .team_transformers import (
-    edx_team_created,
 )
