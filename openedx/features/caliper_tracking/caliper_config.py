@@ -152,4 +152,6 @@ EVENT_MAPPING = {
     'edx.librarycontentblock.content.removed':
         ctf.edx_librarycontentblock_content_removed,
     'edx.user.settings.changed': ctf.edx_user_settings_changed,
+    'xmodule.partitions.assigned_user_to_partition':
+        ctf.xmodule_partitions_assigned_user_to_partition,
 }
