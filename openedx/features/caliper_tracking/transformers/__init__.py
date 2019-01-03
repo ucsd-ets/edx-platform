@@ -71,6 +71,7 @@ from .xblock_transformers import (
     xblock_poll_view_results,
     xblock_survey_submitted,
     xblock_survey_view_results,
+    xblock_split_test_child_render,
 )
 from .textbook_transformers import (
     textbook_pdf_page_scrolled,

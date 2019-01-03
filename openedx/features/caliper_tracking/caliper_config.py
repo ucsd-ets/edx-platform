@@ -156,6 +156,7 @@ EVENT_MAPPING = {
         ctf.xmodule_partitions_assigned_user_to_partition,
     'openassessmentblock.save_files_descriptions':
         ctf.openassessmentblock_save_files_descriptions,
+    'xblock.split_test.child_render': ctf.xblock_split_test_child_render,
     'edx.librarycontentblock.content.assigned':
         ctf.edx_librarycontentblock_content_assigned,
 }

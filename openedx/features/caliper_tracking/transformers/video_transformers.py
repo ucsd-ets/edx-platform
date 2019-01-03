@@ -72,7 +72,7 @@ def stop_video(current_event, caliper_event):
             timedelta(seconds=current_event_details['duration'])
         ),
         'extensions': {
-            "code": current_event_details['code'],
+            'code': current_event_details['code'],
             'id': current_event_details['id']
         }
     }
@@ -508,4 +508,3 @@ def video_show_cc_menu(current_event, caliper_event):
     })
     caliper_event['referrer']['type'] = 'WebPage'
     return caliper_event
-

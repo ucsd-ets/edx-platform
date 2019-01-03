@@ -364,7 +364,7 @@ def textbook_pdf_thumbnails_toggled(current_event, caliper_event):
     """
 
     current_event_details = json.loads(current_event['event'])
-    current_event_details.pop("name")
+    current_event_details.pop('name')
 
     caliper_event['actor'].update({
         'type': 'Person',
@@ -442,7 +442,7 @@ def textbook_pdf_outline_toggled(current_event, caliper_event):
 
     current_event_details = json.loads(current_event['event'])
 
-    current_event_details.pop("name")
+    current_event_details.pop('name')
 
     caliper_event['actor'].update({
         'type': 'Person',
