@@ -142,4 +142,5 @@ EVENT_MAPPING = {
     'edx.team.deleted': ctf.edx_team_deleted,
     'edx.team.created': ctf.edx_team_created,
     'ubc.peer_instruction.accessed': ctf.ubc_peer_instruction_accessed,
+    'problem_check_fail': ctf.problem_check_fail,
 }

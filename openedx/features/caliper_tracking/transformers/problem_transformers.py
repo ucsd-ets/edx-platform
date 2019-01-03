@@ -1,4 +1,3 @@
-
 """
 Transformers for all the problems events
 """
@@ -194,60 +193,33 @@ def problem_check(current_event, caliper_event):
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
-    if current_event.get('event_source') == 'browser':
-        return problem_check_browser(current_event, caliper_event)
-    else:
-        return problem_check_server(current_event, caliper_event)
 
-
-def problem_check_browser(current_event, caliper_event):
     caliper_event.update({
         'action': 'Submitted',
         'type': 'AssessmentEvent',
         'object': {
             'id': current_event['referer'],
             'type': 'Assessment',
+        }
+    })
+    caliper_event['referrer']['type'] = 'WebPage'
+    caliper_event['actor'].update({
+        'name': current_event['username'],
+        'type': 'Person'
+    })
+    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
+
+    if current_event.get('event_source') == 'server':
+        caliper_event['extensions']['extra_fields'].pop('session')
+        caliper_event['object']['extensions'] = current_event['event']
+    else:
+        caliper_event['object'].update({
             'extensions': {
                 'event': current_event['event']
             }
-        }
-    })
-    caliper_event['referrer']['type'] = 'WebPage'
-    caliper_event['actor'].update({
-        'name': current_event['username'],
-        'type': 'Person'
-    })
-    caliper_event['extensions']['extra_fields'].update({
-        'course_id': current_event['context']['course_id'],
-        'ip': current_event['ip']
-    })
-    return caliper_event
+        })
 
-
-def problem_check_server(current_event, caliper_event):
-    caliper_event.update({
-        'action': 'Submitted',
-        'type': 'AssessmentEvent',
-        'object': {
-            'id': current_event['referer'],
-            'type': 'Assessment',
-            'extensions': current_event['event']
-        }
-    })
-    caliper_event['referrer']['type'] = 'WebPage'
-    caliper_event['actor'].update({
-        'name': current_event['username'],
-        'type': 'Person'
-    })
-    caliper_event['extensions']['extra_fields'].update({
-        'course_id': current_event['context']['course_id'],
-        'ip': current_event['ip'],
-        'asides': current_event['context']['asides'],
-        'course_user_tags': current_event['context']['course_user_tags'],
-        'module': current_event['context']['module'],
-
-    })
-    caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event
 
 
@@ -618,3 +590,17 @@ def showanswer(current_event, caliper_event):
     caliper_event['extensions']['extra_fields'].pop('session')
 
     return caliper_event
+
+
+def problem_check_fail(current_event, caliper_event):
+    """
+    The server emits problem_check_fail events when a problem cannot be
+    checked successfully.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    # transformer code for this event is same as that of problem_check
+    return problem_check(current_event, caliper_event)
