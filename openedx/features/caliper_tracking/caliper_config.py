@@ -158,4 +158,6 @@ EVENT_MAPPING = {
         ctf.openassessmentblock_save_files_descriptions,
     'edx.librarycontentblock.content.assigned':
         ctf.edx_librarycontentblock_content_assigned,
+    'edx.bi.course.upgrade.sidebarupsell.displayed':
+        ctf.edx_bi_course_upgrade_sidebarupsell_displayed,
 }
