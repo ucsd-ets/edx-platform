@@ -80,6 +80,7 @@ from .textbook_transformers import (
     textbook_pdf_page_navigated,
     book,
     textbook_pdf_zoom_buttons_changed,
+    textbook_pdf_outline_toggled,
     textbook_pdf_thumbnails_toggled,
     textbook_pdf_searchcasesensitivity_toggled,
     textbook_pdf_search_highlight_toggled,
@@ -87,6 +88,8 @@ from .textbook_transformers import (
     textbook_pdf_chapter_navigated,
 )
 from .notes_transformers import (
+    edx_course_student_notes_added,
+    edx_course_student_notes_added,
     edx_course_student_notes_viewed,
     edx_course_student_notes_edited,
     edx_course_student_notes_deleted,

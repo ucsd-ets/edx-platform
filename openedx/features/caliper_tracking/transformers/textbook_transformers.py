@@ -202,8 +202,8 @@ def book(current_event, caliper_event):
 
 def textbook_pdf_thumbnail_navigated(current_event, caliper_event):
     """
-    The browser emits textbook.pdf.thumbnail.navigated events when a user clicks on a thumbnail image to
-    navigate to a page.
+    The browser emits textbook.pdf.thumbnail.navigated events when a user
+    clicks on a thumbnail image to navigate to a page.
 
     :param current_event: default event log generated.
     :param caliper_event: caliper_event log having some basic attributes.
@@ -427,6 +427,47 @@ def textbook_pdf_display_scaled(current_event, caliper_event):
         'type': 'Event',
         'object': caliper_event_object
     })
+    return caliper_event
+
+
+def textbook_pdf_outline_toggled(current_event, caliper_event):
+    """
+    The browser emits textbook.pdf.outline.toggled events when a user clicks
+    the outline icon to show or hide a list of the book's chapters.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    current_event_details = json.loads(current_event['event'])
+
+    current_event_details.pop("name")
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'course_id': current_event['context']['course_id'],
+        'ip': current_event['ip'],
+    })
+
+    caliper_event_object = {
+        'id': current_event['referer'],
+        'type': 'SoftwareApplication',
+        'extensions': current_event_details
+    }
+
+    caliper_event.update({
+        'action': 'Used',
+        'type': 'ToolUseEvent',
+        'object': caliper_event_object
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
     return caliper_event
 
 
