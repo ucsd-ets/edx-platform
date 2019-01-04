@@ -154,4 +154,6 @@ EVENT_MAPPING = {
     'edx.user.settings.changed': ctf.edx_user_settings_changed,
     'xmodule.partitions.assigned_user_to_partition':
         ctf.xmodule_partitions_assigned_user_to_partition,
+    'openassessmentblock.save_files_descriptions':
+        ctf.openassessmentblock_save_files_descriptions,
 }
