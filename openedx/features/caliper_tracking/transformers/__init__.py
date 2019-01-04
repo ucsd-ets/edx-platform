@@ -159,3 +159,6 @@ from .user_settings_transformers import (
 from .content_library_transformers import (
     edx_librarycontentblock_content_removed,
 )
+from .course_transfomers import (
+    edx_course_home_resume_course_clicked,
+)
