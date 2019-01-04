@@ -118,6 +118,7 @@ from .third_party_transformers import (
     edx_googlecomponent_document_displayed,
     oppia_exploration_state_changed,
     oppia_exploration_loaded,
+    oppia_exploration_completed,
 )
 from .drag_and_drop_transformers import (
     edx_drag_and_drop_v2_item_dropped,
@@ -150,12 +151,13 @@ from .exam_transformers import (
     edx_special_exam_timed_attempt_created,
     edx_special_exam_timed_attempt_deleted,
 )
-from .third_party_transofrmers import (
-    oppia_exploration_completed,
-)
 from .user_settings_transformers import (
     edx_user_settings_viewed,
 )
+from .xmodule_transformers import (
+    xmodule_partitions_assigned_user_to_partition,
+)
+
 from .content_library_transformers import (
     edx_librarycontentblock_content_removed,
 )
