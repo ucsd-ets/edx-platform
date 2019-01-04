@@ -162,3 +162,6 @@ from .content_library_transformers import (
 from .course_transfomers import (
     edx_course_home_resume_course_clicked,
 )
+from .user_settings_transformers import (
+    edx_user_settings_changed,
+)
