@@ -168,3 +168,6 @@ from .course_transfomers import (
 from .user_settings_transformers import (
     edx_user_settings_changed,
 )
+from .content_library_transformers import (
+    edx_librarycontentblock_content_assigned,
+)
