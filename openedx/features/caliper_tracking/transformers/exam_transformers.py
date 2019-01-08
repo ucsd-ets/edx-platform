@@ -111,11 +111,25 @@ def edx_special_exam_timed_attempt_deleted(current_event, caliper_event):
         'object': {
             'id': current_event['referer'],
             'type': 'Attempt',
-            'name': current_event['event'].pop('exam_name'),
-            'startedAtTime': convert_datetime(current_event['event'].pop('attempt_started_at')),
-            'endedAtTime': convert_datetime(current_event['event'].pop('attempt_completed_at')),
-            'extensions': current_event['event']
         }
+    })
+    if current_event['event'].get('exam_name'):
+        caliper_event['object']['name'] = current_event['event'].pop('exam_name')
+
+    if current_event['event'].get('attempt_started_at'):
+        caliper_event['object']['startedAtTime'] = convert_datetime(
+            current_event['event'].pop(
+                'attempt_started_at'
+            ))
+
+    if current_event['event'].get('attempt_completed_at'):
+        caliper_event['object']['endedAtTime'] = convert_datetime(
+            current_event['event'].pop(
+                'attempt_completed_at'
+            ))
+
+    caliper_event['object'].update({
+        'extensions': current_event['event']
     })
     caliper_event['extensions']['extra_fields'].update({
         'course_id': current_event['context']['course_id'],
