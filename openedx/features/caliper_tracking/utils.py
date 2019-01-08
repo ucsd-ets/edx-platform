@@ -12,7 +12,6 @@ UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 def convert_datetime(current_datetime):
     """
     Convert provided datetime into UTC format
-
     @param datetime: datetime string.
     :return: UTC formatted datetime string.
     """
@@ -64,7 +63,6 @@ def get_topic_id_from_team_id(team_id):
 
 def get_team_url_from_team_id(referer, team_id):
     """
-
     :param referer: extract from event logs
     :param team_id: extract from event logs
     :return: team url
@@ -76,4 +74,3 @@ def get_team_url_from_team_id(referer, team_id):
         team_id=team_id
     )
     return object_link
-

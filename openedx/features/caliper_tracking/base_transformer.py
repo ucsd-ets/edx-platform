@@ -10,14 +10,12 @@ CALIPER_EVENT_CONTEXT = 'http://purl.imsglobal.org/ctx/caliper/v1p1'
 
 class CaliperBaseTransformer(object):
     """Base transformer class
-
     This class is responsible for adding all the caliper compliant
     fields which are common to all events
     """
 
     def __init__(self, event):
         """Constructor
-
         @param event: unprocessed event dict
         """
         self.event = event
