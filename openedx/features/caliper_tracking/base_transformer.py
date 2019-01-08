@@ -3,10 +3,7 @@ Base module containing generic caliper transformer class
 """
 import uuid
 
-from django.conf import settings
-from django.core.urlresolvers import reverse
-
-from openedx.features.caliper_tracking.utils import convert_datetime
+from openedx.features.caliper_tracking import utils
 
 CALIPER_EVENT_CONTEXT = 'http://purl.imsglobal.org/ctx/caliper/v1p1'
 
@@ -37,7 +34,7 @@ class CaliperBaseTransformer(object):
         self.caliper_event.update({
             '@context': CALIPER_EVENT_CONTEXT,
             'id': uuid.uuid4().urn,
-            'eventTime': convert_datetime(self.event.get('time'))
+            'eventTime': utils.convert_datetime(self.event.get('time'))
         })
 
     def _add_actor_info(self):
@@ -45,13 +42,7 @@ class CaliperBaseTransformer(object):
         Adds all generic information related to `actor`
         """
         self.caliper_event['actor'] = {}
-        user_profile_link = '{lms_url}{profile_link}'.format(
-            lms_url=settings.LMS_ROOT_URL,
-            profile_link=str(reverse(
-                'learner_profile',
-                kwargs={'username': self.event.get('username')}
-            ))
-        )
+        user_profile_link = utils.get_user_link_from_username(self.event.get('username'))
         self.caliper_event['actor'].update({
             'id': user_profile_link,
         })
