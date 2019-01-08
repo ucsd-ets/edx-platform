@@ -1,6 +1,6 @@
 """
-  Transformers for all the Third-Party events
-  """
+Transformers for all the Third-Party events
+"""
 
 
 def edx_googlecomponent_calendar_displayed(current_event, caliper_event):

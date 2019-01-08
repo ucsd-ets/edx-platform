@@ -120,26 +120,61 @@ def xblock_poll_submitted(current_event, caliper_event):
     :return: updated caliper_event.
     """
     caliper_object = {
-        "id": current_event['referer'],
-        "type": 'Assessment',
-        "extensions": current_event['event']
+        'id': current_event['referer'],
+        'type': 'Assessment',
+        'extensions': current_event['event']
     }
     caliper_event['extensions']['extra_fields'].update({
-        "ip": current_event['ip'],
+        'ip': current_event['ip'],
         'course_id': current_event['context']['course_id'],
-        "module": current_event['context']['module'],
-        "course_user_tags": current_event['context']['course_user_tags'],
-        "asides": current_event['context']['asides']
+        'module': current_event['context']['module'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+        'asides': current_event['context']['asides']
     })
     caliper_event.update({
-        "type": 'AssessmentEvent',
-        "action": 'Submitted',
-        "object": caliper_object
+        'type': 'AssessmentEvent',
+        'action': 'Submitted',
+        'object': caliper_object
     })
     caliper_event['actor'].update({
-        "type": 'Person',
-        "name": current_event['username']
+        'type': 'Person',
+        'name': current_event['username']
     })
     caliper_event['extensions']['extra_fields'].pop('session')
-    caliper_event['referrer']['type'] = "WebPage"
+    caliper_event['referrer']['type'] = 'WebPage'
+    return caliper_event
+
+
+def xblock_split_test_child_render(current_event, caliper_event):
+    """
+    When a student views a module that is set up to test different
+    content using child modules, the server emits a xblock.split_test.child_render
+    event to identify the child module that was shown to the student.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_object = {
+        'id': current_event['referer'],
+        'type': 'DigitalResource',
+        'extensions': current_event['event']
+    }
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
+        'module': current_event['context']['module'],
+        'course_user_tags': current_event['context']['course_user_tags'],
+    })
+    caliper_event.update({
+        'type': 'ViewEvent',
+        'action': 'Viewed',
+        'object': caliper_object
+    })
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+    caliper_event['extensions']['extra_fields'].pop('session')
+    caliper_event['referrer']['type'] = 'WebPage'
     return caliper_event
