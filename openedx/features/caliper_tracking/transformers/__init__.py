@@ -42,6 +42,7 @@ from .problem_transformers import (
     reset_problem,
     showanswer,
     problem_check_fail,
+    save_problem_fail,
 )
 from .video_transformers import (
     pause_video,
