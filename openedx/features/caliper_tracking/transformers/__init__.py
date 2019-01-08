@@ -154,6 +154,7 @@ from .exam_transformers import (
 )
 from .user_settings_transformers import (
     edx_user_settings_viewed,
+    edx_bi_course_upgrade_sidebarupsell_displayed,
 )
 from .xmodule_transformers import (
     xmodule_partitions_assigned_user_to_partition,
