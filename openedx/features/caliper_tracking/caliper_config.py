@@ -169,4 +169,5 @@ EVENT_MAPPING = {
     'edx.done.toggled': ctf.edx_done_toggled,
     'edx.special_exam.practice.updated': ctf.edx_special_exam_practice_updated,
     'edx.special_exam.timed.updated': ctf.edx_special_exam_timed_updated,
+    'edx.special_exam.proctored.updated': ctf.edx_special_exam_proctored_updated,
 }
