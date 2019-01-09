@@ -164,6 +164,7 @@ EVENT_MAPPING = {
     'save_problem_fail': ctf.save_problem_fail,
     'edx.team.learner_removed': ctf.edx_team_learner_removed,
     'edx.team.activity_updated': ctf.edx_team_activity_updated,
+    'edx.special_exam.proctored.created': ctf.edx_special_exam_proctored_created,
     'edx.special_exam.practice.created': ctf.edx_special_exam_practice_created,
     'edx.done.toggled': ctf.edx_done_toggled,
 }
