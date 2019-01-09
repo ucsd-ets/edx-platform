@@ -158,6 +158,7 @@ from .exam_transformers import (
     edx_special_exam_timed_attempt_deleted,
     edx_special_exam_proctored_created,
     edx_special_exam_practice_created,
+    edx_special_exam_practice_updated
 )
 from .user_settings_transformers import (
     edx_user_settings_viewed,
