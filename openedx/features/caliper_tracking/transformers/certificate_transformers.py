@@ -1,9 +1,7 @@
-"""
-Transformers for all the certificate events
-"""
-
 from openedx.features.caliper_tracking.utils import get_certificate_url
 from django.conf import settings
+
+import json
 
 
 def edx_certificate_evidence_visited(current_event, caliper_event):
@@ -51,5 +49,43 @@ def edx_certificate_evidence_visited(current_event, caliper_event):
     )
 
     caliper_event.pop('referrer')
+
+    return caliper_event
+
+
+def edx_certificate_shared(current_event, caliper_event):
+    """
+    When a learner shares the URL for her certificate on a social media
+    web site, the server emits an edx.certificate.shared event.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+
+    object_extensions = json.loads(current_event['event'])
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Shared',
+        'object': {
+            'id': object_extensions['certificate_url'],
+            'type': 'Document',
+            'extensions': object_extensions
+        }
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person'
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event.get('ip'),
+        'course_id': current_event['context'].get('course_id'),
+    })
 
     return caliper_event
