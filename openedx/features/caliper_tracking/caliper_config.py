@@ -119,7 +119,7 @@ EVENT_MAPPING = {
     'edx.drag_and_drop_v2.feedback.closed':
         ctf.edx_drag_and_drop_v2_feedback_closed,
     'edx.special_exam.timed.attempt.ready_to_submit':
-    ctf.edx_special_exam_time_attempt_ready_to_submit,
+        ctf.edx_special_exam_time_attempt_ready_to_submit,
     'edx.cohort.created': ctf.edx_cohort_created,
     'edx.special_exam.practice.attempt.created':
         ctf.edx_special_exam_practice_attempt_created,
@@ -152,7 +152,7 @@ EVENT_MAPPING = {
     'textbook.pdf.display.scaled': ctf.textbook_pdf_display_scaled,
     'textbook.pdf.chapter.navigated': ctf.textbook_pdf_chapter_navigated,
     'textbook.pdf.search.navigatednext':
-    ctf.textbook_pdf_search_navigatednext,
+        ctf.textbook_pdf_search_navigatednext,
     'edx.librarycontentblock.content.removed':
         ctf.edx_librarycontentblock_content_removed,
     'edx.user.settings.changed': ctf.edx_user_settings_changed,
@@ -177,4 +177,5 @@ EVENT_MAPPING = {
     'edx.special_exam.timed.created': ctf.edx_special_exam_timed_created,
     'edx.grades.grading_policy_changed': ctf.edx_grades_grading_policy_changed,
     'page_close': ctf.page_close,
+    'edx.certificate.evidence_visited': ctf.edx_certificate_evidence_visited
 }

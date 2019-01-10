@@ -188,3 +188,6 @@ from .content_library_transformers import (
     edx_librarycontentblock_content_assigned,
 )
 from .course_content_completion_transformers import edx_done_toggled
+from .certificate_transformers import (
+    edx_certificate_evidence_visited,
+)
