@@ -274,3 +274,42 @@ def edx_special_exam_practice_updated(current_event, caliper_event):
     caliper_event['referrer']['type'] = 'WebPage'
 
     return caliper_event
+
+
+def edx_special_exam_timed_updated(current_event, caliper_event):
+    """
+    The server emits this event when a instructor changes the time limit for timed exams.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Modified',
+        'object': {
+            'id': current_event['referer'],
+            'type': 'Assessment',
+        }
+    })
+
+    if current_event['event'].get('exam_name'):
+        caliper_event['object']['name'] = current_event['event'].pop('exam_name')
+
+    caliper_event['object'].update({
+        'extensions': current_event['event']
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id']
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer']['type'] = 'WebPage'
+
+    return caliper_event
