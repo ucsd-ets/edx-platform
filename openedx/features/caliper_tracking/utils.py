@@ -5,6 +5,7 @@ from dateutil.parser import parse
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.urls.exceptions import NoReverseMatch
 
 UTC_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
@@ -41,13 +42,20 @@ def get_username_from_user_id(user_id):
 
 
 def get_user_link_from_username(username):
-    return '{lms_url}{profile_link}'.format(
-        lms_url=settings.LMS_ROOT_URL,
-        profile_link=str(reverse(
-            'learner_profile',
-            kwargs={'username': username}
-        ))
-    )
+    try:
+        link = '{lms_url}{profile_link}'.format(
+            lms_url=settings.LMS_ROOT_URL,
+            profile_link=str(reverse(
+                'learner_profile',
+                kwargs={'username': username}
+            ))
+        )
+    except NoReverseMatch:
+        link = '{lms_url}/u/{username}'.format(
+            lms_url=settings.LMS_ROOT_URL,
+            username=username
+        )
+    return link
 
 
 def get_topic_id_from_team_id(team_id):
