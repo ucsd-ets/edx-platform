@@ -27,7 +27,6 @@
     "object": {
         "duration": "PT3M15S",
         "extensions": {
-            "currentTime": "PT0.026738S",
             "id": "0b9e39477cf34507a7a48f74be381fdd",
             "code": "b7xgknqkQk8"
         },
@@ -37,6 +36,11 @@
     "referrer": {
         "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/d8a6192ade314473a78242dfeedfbf5b/edx_introduction/1?activate_block_id=block-v1%3AedX%2BDemoX%2BDemo_Course%2Btype%40vertical%2Bblock%40vertical_0270f6de40fc",
         "type": "WebPage"
+    },
+    "target": {
+        "currentTime": "PT0.026738S",
+        "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/d8a6192ade314473a78242dfeedfbf5b/edx_introduction/1?activate_block_id=block-v1%3AedX%2BDemoX%2BDemo_Course%2Btype%40vertical%2Bblock%40vertical_0270f6de40fc",
+        "type": "MediaLocation"
     },
     "type": "MediaEvent"
 }

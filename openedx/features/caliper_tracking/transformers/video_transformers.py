@@ -141,9 +141,19 @@ def play_video(current_event, caliper_event):
     :param caliper_event: log containing both basic and default attribute
     :return: final created log
     """
+
+    event_info = json.loads(current_event['event'])
+
     caliper_event.update({
         'action': 'Started',
-        'type': 'MediaEvent'
+        'type': 'MediaEvent',
+        'target': {
+            'currentTime': duration_isoformat(timedelta(
+                seconds=event_info['currentTime']
+            )),
+            'id': current_event['referer'],
+            'type': 'MediaLocation'
+        }
     })
 
     caliper_event['extensions']['extra_fields'].update({
@@ -158,8 +168,6 @@ def play_video(current_event, caliper_event):
         'type': 'Person'
     })
 
-    event_info = json.loads(current_event['event'])
-
     caliper_event['object'] = {
         'id': current_event.get('referer'),
         'type': 'VideoObject',
@@ -169,9 +177,6 @@ def play_video(current_event, caliper_event):
         'extensions': {
             'id': event_info.get('id'),
             'code': event_info.get('code'),
-            'currentTime': duration_isoformat(timedelta(
-                seconds=event_info.get('currentTime')
-            ))
         }
     }
     return caliper_event
