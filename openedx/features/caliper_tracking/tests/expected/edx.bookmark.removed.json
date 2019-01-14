@@ -31,7 +31,7 @@
             "course_id": "course-v1:ar+CS113x+2018_T3"
         },
         "id": "http://localhost:18000/courses/course-v1:ar+CS113x+2018_T3/courseware/61c5a01d2255496f88a367be5ad525db/766d16ae8c734d6a8304f1fad5d1d088/1?activate_block_id=block-v1%3Aar%2BCS113x%2B2018_T3%2Btype%40vertical%2Bblock%40ba4ee5b3905747208702f465275733b6",
-        "type": "Bookmark"
+        "type": "BookmarkAnnotation"
     },
     "referrer": {
         "id": "http://localhost:18000/courses/course-v1:ar+CS113x+2018_T3/courseware/61c5a01d2255496f88a367be5ad525db/766d16ae8c734d6a8304f1fad5d1d088/1?activate_block_id=block-v1%3Aar%2BCS113x%2B2018_T3%2Btype%40vertical%2Bblock%40ba4ee5b3905747208702f465275733b6",

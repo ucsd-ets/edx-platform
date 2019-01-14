@@ -137,7 +137,7 @@ def edx_bookmark_removed(current_event, caliper_event):
     })
     caliper_event['object'] = {
         'id':  current_event.get('referer'),
-        'type': 'Bookmark',
+        'type': 'BookmarkAnnotation',
         'extensions': current_event['event']
     }
     return caliper_event
