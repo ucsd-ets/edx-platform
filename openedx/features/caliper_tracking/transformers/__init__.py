@@ -157,6 +157,7 @@ from .exam_transformers import (
     edx_special_exam_practice_attempt_created,
     edx_special_exam_timed_attempt_created,
     edx_special_exam_timed_attempt_deleted,
+    edx_special_exam_time_attempt_ready_to_submit,
     edx_special_exam_timed_created,
     edx_special_exam_proctored_updated,
     edx_special_exam_timed_updated,

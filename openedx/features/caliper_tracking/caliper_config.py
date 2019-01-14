@@ -118,6 +118,8 @@ EVENT_MAPPING = {
         ctf.edx_drag_and_drop_v2_feedback_opened,
     'edx.drag_and_drop_v2.feedback.closed':
         ctf.edx_drag_and_drop_v2_feedback_closed,
+    'edx.special_exam.timed.attempt.ready_to_submit':
+    ctf.edx_special_exam_time_attempt_ready_to_submit,
     'edx.cohort.created': ctf.edx_cohort_created,
     'edx.special_exam.practice.attempt.created':
         ctf.edx_special_exam_practice_attempt_created,
