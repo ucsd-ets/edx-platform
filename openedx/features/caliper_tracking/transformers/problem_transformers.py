@@ -93,7 +93,7 @@ def problem_graded(current_event, caliper_event):
         'extensions': {
             'event': current_event['event']
         },
-        'type': 'Assessment'
+        'type': 'Attempt'
     }
     caliper_event.update({
         'action': 'Graded',

@@ -32,7 +32,7 @@
       ]
     },
     "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/1414ffd5143b4b508f739b563ab468b7/workflow/",
-    "type": "Assessment"
+    "type": "Attempt"
   },
   "referrer": {
     "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/1414ffd5143b4b508f739b563ab468b7/workflow/",
