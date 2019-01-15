@@ -1,7 +1,7 @@
 {
     "eventTime":"2018-12-10T06:37:32.332Z",
-    "action": "Used",
-    "type": "ToolUseEvent",
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
     "referrer":{
         "id":"http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/course/",
         "type": "WebPage"

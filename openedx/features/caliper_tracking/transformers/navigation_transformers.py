@@ -57,8 +57,8 @@ def edx_course_tool_accessed(current_event, caliper_event):
     }
 
     caliper_event.update({
-        'type': 'ToolUseEvent',
-        'action': 'Used',
+        'type': 'NavigationEvent',
+        'action': 'NavigatedTo',
         'object': caliper_object,
     })
 
