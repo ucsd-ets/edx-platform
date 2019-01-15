@@ -169,20 +169,20 @@ from .exam_transformers import (
 from .user_settings_transformers import (
     edx_user_settings_viewed,
     edx_bi_course_upgrade_sidebarupsell_displayed,
+    edx_user_settings_changed,
 )
 from .xmodule_transformers import (
     xmodule_partitions_assigned_user_to_partition,
 )
-
+from .certificate_transformers import (
+    edx_certificate_created
+)
 from .content_library_transformers import (
     edx_librarycontentblock_content_removed,
 )
 from .course_transfomers import (
     edx_course_home_resume_course_clicked,
     edx_grades_grading_policy_changed
-)
-from .user_settings_transformers import (
-    edx_user_settings_changed,
 )
 from .content_library_transformers import (
     edx_librarycontentblock_content_assigned,

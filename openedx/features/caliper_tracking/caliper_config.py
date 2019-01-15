@@ -153,6 +153,7 @@ EVENT_MAPPING = {
     'textbook.pdf.chapter.navigated': ctf.textbook_pdf_chapter_navigated,
     'textbook.pdf.search.navigatednext':
         ctf.textbook_pdf_search_navigatednext,
+    'edx.certificate.created': ctf.edx_certificate_created,
     'edx.librarycontentblock.content.removed':
         ctf.edx_librarycontentblock_content_removed,
     'edx.user.settings.changed': ctf.edx_user_settings_changed,
