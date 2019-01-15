@@ -151,6 +151,7 @@ from .cohort_transformers import (
     edx_cohort_created,
     edx_cohort_user_removed,
     edx_cohort_creation_requested,
+    edx_cohort_user_add_requested,
 )
 from .exam_transformers import (
     edx_special_exam_timed_attempt_created,
