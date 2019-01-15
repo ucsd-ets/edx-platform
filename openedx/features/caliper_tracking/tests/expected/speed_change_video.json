@@ -28,13 +28,17 @@
         "duration": "PT2M21S",
         "extensions": {
             "code": "3_yD_cEKoCk",
-            "current_time": "PT5.171946S",
             "id": "5e9b65b2ce6b4b6eb0a1bd894e06b810",
             "new_speed": "0.75",
             "old_speed": "1.50"
         },
         "id": "http://localhost:18000/courses/course-v1:ar+CS113x+2018_T3/courseware/61c5a01d2255496f88a367be5ad525db/766d16ae8c734d6a8304f1fad5d1d088/1",
         "type": "VideoObject"
+    },
+    "target": {
+        "id": "http://localhost:18000/courses/course-v1:ar+CS113x+2018_T3/courseware/61c5a01d2255496f88a367be5ad525db/766d16ae8c734d6a8304f1fad5d1d088/1",
+        "type": "MediaLocation",
+        "currentTime": "PT5.171946S"
     },
     "referrer": {
         "id": "http://localhost:18000/courses/course-v1:ar+CS113x+2018_T3/courseware/61c5a01d2255496f88a367be5ad525db/766d16ae8c734d6a8304f1fad5d1d088/1",

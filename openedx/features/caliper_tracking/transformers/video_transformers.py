@@ -122,13 +122,14 @@ def edx_video_speed_changed(current_event, caliper_event):
             seconds=event_info.pop('duration')
         )),
     }
-    object_extensions = {
-        'current_time': duration_isoformat(timedelta(
+    caliper_event['target'] = {
+        'id': current_event['referer'],
+        'type': 'MediaLocation',
+        'currentTime': duration_isoformat(timedelta(
             seconds=event_info.pop('current_time')
         ))
     }
-    object_extensions.update(event_info)
-    caliper_event['object']['extensions'] = object_extensions
+    caliper_event['object']['extensions'] = event_info
     return caliper_event
 
 
