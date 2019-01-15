@@ -177,5 +177,6 @@ EVENT_MAPPING = {
     'edx.special_exam.timed.created': ctf.edx_special_exam_timed_created,
     'edx.grades.grading_policy_changed': ctf.edx_grades_grading_policy_changed,
     'page_close': ctf.page_close,
-    'edx.certificate.evidence_visited': ctf.edx_certificate_evidence_visited
+    'edx.certificate.evidence_visited': ctf.edx_certificate_evidence_visited,
+    'edx.certificate.shared': ctf.edx_certificate_shared,
 }
