@@ -16,6 +16,7 @@ from .navigation_transformers import (
     seq_next,
     edx_course_student_notes_notes_page_viewed,
     seq_goto,
+    page_close,
 )
 from .enrollment_transformers import (
     edx_course_enrollment_activated,
