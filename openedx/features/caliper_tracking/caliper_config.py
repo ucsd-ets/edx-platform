@@ -181,4 +181,5 @@ EVENT_MAPPING = {
     'edx.certificate.evidence_visited': ctf.edx_certificate_evidence_visited,
     'edx.certificate.shared': ctf.edx_certificate_shared,
     'edx.cohort.creation_requested': ctf.edx_cohort_creation_requested,
+    'edx.cohort.user_add_requested': ctf.edx_cohort_user_add_requested,
 }
