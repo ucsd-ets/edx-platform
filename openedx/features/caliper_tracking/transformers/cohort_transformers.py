@@ -187,3 +187,48 @@ def edx_cohort_user_removed(current_event, caliper_event):
     })
 
     return caliper_event
+
+
+def edx_cohort_creation_requested(current_event, caliper_event):
+    """
+    When a course team member manually creates a cohort on the Cohorts page of the instructor
+    dashboard, the server emits an edx.cohort.creation_requested event.
+
+    :param current_event: default log
+    :param caliper_event: log containing both basic and default attribute
+    :return: final created log
+    """
+
+    cohort_page_link = '{instructor_page}#view-cohort_management'.format(
+        instructor_page=current_event['referer'])
+
+    caliper_object = {
+        'extensions': {
+            'cohort_id': current_event['event']['cohort_id']
+        },
+        'id': cohort_page_link,
+        'name': current_event['event']['cohort_name'],
+        'type': 'Group'
+    }
+
+    caliper_event.update({
+        'type': 'Event',
+        'action': 'Created',
+        'object': caliper_object,
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event['ip'],
+        'course_id': current_event['context']['course_id'],
+    })
+
+    return caliper_event
