@@ -35,7 +35,8 @@ def edx_drag_and_drop_v2_item_dropped(current_event, caliper_event):
         'type': 'Person'
     })
 
-    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields'].update(
+        current_event['context'])
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
     caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event
@@ -73,7 +74,8 @@ def edx_drag_and_drop_v2_item_picked_up(current_event, caliper_event):
         'type': 'Person'
     })
 
-    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields'].update(
+        current_event['context'])
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
     caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event
@@ -91,7 +93,8 @@ def edx_drag_and_drop_v2_loaded(current_event, caliper_event):
 
     caliper_object = {
         'id': current_event['referer'],
-        'type': 'AssessmentItem'
+        'type': 'AssessmentItem',
+        'extensions': current_event['event']
     }
 
     caliper_event.update({
@@ -110,7 +113,8 @@ def edx_drag_and_drop_v2_loaded(current_event, caliper_event):
         'type': 'Person'
     })
 
-    caliper_event['extensions']['extra_fields'].update(current_event['context'])
+    caliper_event['extensions']['extra_fields'].update(
+        current_event['context'])
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
     caliper_event['extensions']['extra_fields'].pop('session')
     return caliper_event

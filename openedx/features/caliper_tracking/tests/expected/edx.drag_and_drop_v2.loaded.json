@@ -31,7 +31,8 @@
     "id": "urn:uuid:d4618c23-d612-4709-8d9a-478d87808067",
     "object": {
         "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/graded_interactions/simulations/7?activate_block_id=block-v1%3AedX%2BDemoX%2BDemo_Course%2Btype%40vertical%2Bblock%403835e93e2df44a3aaa6c94a5dc0d9da8",
-        "type": "AssessmentItem"
+        "type": "AssessmentItem",
+        "extensions": {}
     },
     "referrer": {
         "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/courseware/graded_interactions/simulations/7?activate_block_id=block-v1%3AedX%2BDemoX%2BDemo_Course%2Btype%40vertical%2Bblock%403835e93e2df44a3aaa6c94a5dc0d9da8",
