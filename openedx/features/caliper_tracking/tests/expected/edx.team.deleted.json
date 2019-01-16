@@ -28,7 +28,7 @@
     "extensions": {
       "team_id": "check-3429fc5983a84c8c8366a4477b03d91c"
     },
-    "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/teams/#teams/Topic1ID/check-3429fc5983a84c8c8366a4477b03d91c",
+    "id": "http://localhost:18000/courses/course-v1:edX+DemoX+Demo_Course/teams/",
     "type": "Group"
   },
   "referrer": {

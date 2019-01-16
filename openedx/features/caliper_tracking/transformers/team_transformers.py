@@ -117,10 +117,7 @@ def edx_team_deleted(current_event, caliper_event):
     :return: updated caliper_event.
     """
 
-    team_link = utils.get_team_url_from_team_id(
-        current_event['referer'],
-        current_event['event']['team_id']
-    )
+    team_link = current_event['referer']
 
     caliper_object = {
         'extensions': current_event['event'],
