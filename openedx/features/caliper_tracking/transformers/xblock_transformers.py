@@ -52,7 +52,8 @@ def xblock_survey_view_results(current_event, caliper_event):
     """
     caliper_object = {
         'id': current_event['referer'],
-        'type': 'Result'
+        'type': 'Result',
+        'extensions': current_event['event']
     }
     caliper_event['extensions']['extra_fields'].update({
         'ip': current_event['ip'],
