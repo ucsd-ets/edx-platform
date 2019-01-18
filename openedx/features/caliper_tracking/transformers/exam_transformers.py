@@ -55,7 +55,7 @@ def edx_special_exam_timed_attempt_submitted(current_event, caliper_event):
     })
     caliper_event['extensions']['extra_fields'].update({
         'course_id': current_event['context']['course_id'],
-        'course_user_tags': current_event['context']['course_user_tags'],
+        'course_user_tags': current_event['context'].get('course_user_tags'),
         'ip': current_event['ip']
     })
     caliper_event['actor'].update({
