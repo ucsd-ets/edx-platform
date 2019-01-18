@@ -2,8 +2,11 @@
 Transformers for all the problems events
 """
 import json
-
+import logging
 from django.conf import settings
+
+
+logger = logging.getLogger(__name__)
 
 
 def problem_reset(current_event, caliper_event):
@@ -275,6 +278,14 @@ def problem_rescore(current_event, caliper_event):
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
+    if not (current_event.get('referer') or current_event['context'].get('referer')):
+        logger.exception(
+            'Missing "referer" key in event which is required for "object.id"'
+            'in caliper events, therefore returning the original event'
+        )
+        current_event['id'] = None
+        return current_event
+
     caliper_object = {
         'id': current_event['context'].get('referer'),
         'extensions': current_event['event'],
@@ -417,6 +428,14 @@ def edx_grades_problem_rescored(current_event, caliper_event):
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
+    if not current_event.get('referer'):
+        logger.exception(
+            'Missing "referer" key in event which is required for "object.id"'
+            'in caliper events, therefore returning the original event'
+        )
+        current_event['id'] = None
+        return current_event
+
     caliper_object = {
         'id': current_event['referer'],
         'extensions': current_event['event'],
@@ -488,6 +507,14 @@ def edx_grades_problem_score_overridden(current_event, caliper_event):
     :param caliper_event: caliper_event log having some basic attributes.
     :return: updated caliper_event.
     """
+    if not current_event.get('referer'):
+        logger.exception(
+            'Missing "referer" key in event which is required for "object.id"'
+            'in caliper events, therefore returning the original event'
+        )
+        current_event['id'] = None
+        return current_event
+
     caliper_object = {
         'id': current_event['referer'],
         'extensions': current_event['event'],
