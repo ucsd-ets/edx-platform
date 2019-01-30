@@ -37,3 +37,38 @@ def edx_user_login(current_event, caliper_event):
     caliper_event['extensions']['extra_fields'].update(current_event['context'])
     caliper_event['extensions']['extra_fields']['ip'] = current_event['ip']
     return caliper_event
+
+
+def edx_user_logout(current_event, caliper_event):
+    """
+    This event is emitted when user logged out.
+
+    :param current_event: default event log generated.
+    :param caliper_event: caliper_event log having some basic attributes.
+    :return: updated caliper_event.
+    """
+    caliper_event.update({
+        'type': 'SessionEvent',
+        'action': 'LoggedOut',
+        'object': {
+            'id': settings.LMS_ROOT_URL,
+            'type': 'SoftwareApplication',
+            'extensions': current_event['event']
+        }
+    })
+
+    caliper_event['actor'].update({
+        'type': 'Person',
+        'name': current_event['username']
+    })
+
+    caliper_event['referrer'].update({
+        'type': 'WebPage'
+    })
+
+    caliper_event['extensions']['extra_fields'].update({
+        'ip': current_event.get('ip'),
+        'course_id': current_event['context']['course_id']
+    })
+
+    return caliper_event
