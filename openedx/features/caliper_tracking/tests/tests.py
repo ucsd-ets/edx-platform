@@ -8,7 +8,7 @@ import os
 
 from django.test import TestCase
 
-from openedx.features.caliper_tracking.base_transformer import CaliperBaseTransformer
+from openedx.features.caliper_tracking.base_transformer import base_transformer
 from openedx.features.caliper_tracking.caliper_config import EVENT_MAPPING
 
 TEST_DIR_PATH = 'openedx/features/caliper_tracking/tests/'
@@ -56,7 +56,7 @@ class CaliperTransformationTestCase(TestCase):
 
                 expected_event.pop('id')
 
-                caliper_event = CaliperBaseTransformer(event).transform_event()
+                caliper_event = base_transformer(event)
                 related_function = EVENT_MAPPING[event.get('event_type')]
                 caliper_event = related_function(event, caliper_event)
 
