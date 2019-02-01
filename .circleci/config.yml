@@ -47,6 +47,7 @@ jobs:
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             sudo mongod --config /etc/mongodb.conf &
             paver test_system -t openedx/features/caliper_tracking/tests/tests.py::CaliperTransformationTestCase::test_caliper_transformers --fasttest --cov-args="-p"
+            paver test_system -t openedx/features/ucsd_features/tests/tests.py --fasttest
 
       - store_artifacts:
           path: test-reports
