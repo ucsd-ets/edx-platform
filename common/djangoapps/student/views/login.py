@@ -770,6 +770,10 @@ class LogoutView(TemplateView):
         # Clear the cookie used by the edx.org marketing site
         delete_logged_in_cookies(response)
 
+        # Fire an event when user is logged out
+        event_name = 'edx.user.logout'
+        tracker.emit(event_name)
+
         return response
 
     def _build_logout_url(self, url):

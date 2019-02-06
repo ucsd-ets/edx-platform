@@ -198,5 +198,6 @@ from .certificate_transformers import (
     edx_certificate_shared
 )
 from .session_transformers import (
-    edx_user_login
+    edx_user_login,
+    edx_user_logout
 )
