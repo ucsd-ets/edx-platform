@@ -7,6 +7,7 @@ import logging
 import traceback
 from collections import defaultdict
 from functools import wraps
+from eventtracking import tracker
 
 from django import forms
 from django.core.serializers.json import DjangoJSONEncoder
@@ -514,6 +515,17 @@ def shim_student_view(view_func, check_logged_in=False):
         # in a JSON-serialized dictionary.
         else:
             response.content = msg
+
+        if response.status_code == 200:
+            event_name = 'edx.user.login'
+            event_data = {
+                'email': request.POST.get('email'),
+                'remember': request.POST.get('remember'),
+                'username': request.user.username,
+                'user_id': request.user.id
+            }
+            event_data.update(response_dict)
+            tracker.emit(event_name, event_data)
 
         # Return the response, preserving the original headers.
         # This is really important, since the student views set cookies
