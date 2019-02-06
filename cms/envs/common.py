@@ -1206,7 +1206,6 @@ EVENT_TRACKING_BACKENDS = {
             'processors': [
                 {'ENGINE': 'track.shim.LegacyFieldMappingProcessor'},
                 {'ENGINE': 'track.shim.PrefixedEventProcessor'},
-                {'ENGINE': 'openedx.features.caliper_tracking.processor.CaliperProcessor'}
             ]
         }
     },
