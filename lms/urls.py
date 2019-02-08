@@ -53,6 +53,7 @@ from student import views as student_views
 from student_account import views as student_account_views
 from track import views as track_views
 from util import views as util_views
+from openedx.features.ucsd_features import urls as ucsd_email_urls
 
 if settings.DEBUG or settings.FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
     django_autodiscover()
@@ -1081,5 +1082,9 @@ if settings.FEATURES.get('ENABLE_API_DOCS'):
     urlpatterns += [
         url(r'^api-docs/$', get_swagger_view(title='LMS API')),
     ]
+
+urlpatterns += [
+    url(r'^ucsd_email/', include(ucsd_email_urls))
+]
 
 urlpatterns.extend(plugin_urls.get_patterns(plugin_constants.ProjectType.LMS))
