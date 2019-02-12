@@ -591,6 +591,11 @@ RETIREMENT_STATES = ENV_TOKENS.get('RETIREMENT_STATES', RETIREMENT_STATES)
 ############### Settings for UCSD Support #####################
 SUPPORT_DESK_EMAILS = ENV_TOKENS.get('SUPPORT_DESK_EMAILS')
 
+############### Settings for Caliper Tracking #####################
+INSTALLED_APPS += [
+    'openedx.features.caliper_tracking.apps.CaliperTrackingConfig'
+]
+
 ####################### Plugin Settings ##########################
 
 from openedx.core.djangoapps.plugins import plugin_settings, constants as plugin_constants
