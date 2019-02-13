@@ -592,9 +592,10 @@ RETIREMENT_STATES = ENV_TOKENS.get('RETIREMENT_STATES', RETIREMENT_STATES)
 SUPPORT_DESK_EMAILS = ENV_TOKENS.get('SUPPORT_DESK_EMAILS')
 
 ############### Settings for Caliper Tracking #####################
-INSTALLED_APPS += [
-    'openedx.features.caliper_tracking.apps.CaliperTrackingConfig'
-]
+if FEATURES.get('ENABLE_CALIPER_EVENT_TRANSFORMATION'):
+    INSTALLED_APPS += [
+        'openedx.features.caliper_tracking.apps.CaliperTrackingConfig'
+    ]
 
 ####################### Plugin Settings ##########################
 
