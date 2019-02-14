@@ -593,9 +593,10 @@ SUPPORT_DESK_EMAILS = ENV_TOKENS.get('SUPPORT_DESK_EMAILS')
 
 ############### Settings for Caliper Tracking #####################
 if FEATURES.get('ENABLE_CALIPER_EVENT_TRANSFORMATION'):
-    INSTALLED_APPS += [
+    INSTALLED_APPS.insert(
+        INSTALLED_APPS.index('eventtracking.django.apps.EventTrackingConfig'),
         'openedx.features.caliper_tracking.apps.CaliperTrackingConfig'
-    ]
+    )
 
 ####################### Plugin Settings ##########################
 
