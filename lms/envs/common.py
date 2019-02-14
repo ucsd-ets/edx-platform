@@ -2090,7 +2090,8 @@ INSTALLED_APPS = [
 
     'static_template_view',
     'staticbook',
-
+    'track',
+    'eventtracking.django.apps.EventTrackingConfig',
     'util',
     'lms.djangoapps.certificates.apps.CertificatesConfig',
     'dashboard',
@@ -2124,10 +2125,6 @@ INSTALLED_APPS = [
     'oauth_provider',
 
     'openedx.core.djangoapps.auth_exchange',
-
-    # Tracking
-    'track',
-    'eventtracking.django.apps.EventTrackingConfig',
 
     # For the wiki
     'wiki',  # The new django-wiki from benjaoming
