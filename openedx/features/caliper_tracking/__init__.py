@@ -4,7 +4,7 @@ from . import processor
 from .settings import CALIPER_TRACKING_BACKENDS, CALIPER_TRACKING_PROCESSOR
 
 
-default_app_name = 'caliper_tracking.apps.CaliperTrackingConfig'
+default_app_config = 'caliper_tracking.apps.CaliperTrackingConfig'
 
 
 def _enable_caliper_backends():
