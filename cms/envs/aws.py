@@ -590,11 +590,14 @@ RETIREMENT_STATES = ENV_TOKENS.get('RETIREMENT_STATES', RETIREMENT_STATES)
 
 ############### Settings for UCSD Support #####################
 SUPPORT_DESK_EMAILS = ENV_TOKENS.get('SUPPORT_DESK_EMAILS')
+INSTALLED_APPS.append('openedx.features.ucsd_features')
 
 ############### Settings for Caliper Tracking #####################
-INSTALLED_APPS += [
-    'openedx.features.caliper_tracking.apps.CaliperTrackingConfig'
-]
+if FEATURES.get('ENABLE_EVENT_CALIPERIZATION'):
+    INSTALLED_APPS.insert(
+        INSTALLED_APPS.index('eventtracking.django.apps.EventTrackingConfig'),
+        'openedx.features.caliper_tracking'
+    )
 
 ####################### Plugin Settings ##########################
 
