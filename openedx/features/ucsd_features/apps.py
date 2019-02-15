@@ -12,10 +12,4 @@ class UcsdFeaturesConfig(AppConfig):
     def ready(self):
         # To override the settings after third_party_auth.
         if settings.FEATURES.get('ENABLE_THIRD_PARTY_AUTH'):
-            self._apply_third_party_auth_settings()
-
-    def _apply_third_party_auth_settings(self):
-        """
-        Apply the settings for third party auth app.
-        """
-        settings.SOCIAL_AUTH_PIPELINE.append(LOGIN_EVENT_EMITTER)
+            settings.SOCIAL_AUTH_PIPELINE.append(LOGIN_EVENT_EMITTER)
