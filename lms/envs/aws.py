@@ -1102,7 +1102,7 @@ INSTALLED_APPS.append('openedx.features.ucsd_features')
 if FEATURES.get('ENABLE_EVENT_CALIPERIZATION'):
     INSTALLED_APPS.insert(
         INSTALLED_APPS.index('eventtracking.django.apps.EventTrackingConfig'),
-        'caliper_tracking'
+        'openedx.features.caliper_tracking'
     )
 
 
