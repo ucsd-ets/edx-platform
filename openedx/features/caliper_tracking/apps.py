@@ -19,4 +19,5 @@ class CaliperTrackingConfig(AppConfig):
         """
         Apply the settings for third party auth app.
         """
-        settings.SOCIAL_AUTH_PIPELINE.append(LOGIN_EVENT_EMITTER)
+        if hasattr(settings, 'SOCIAL_AUTH_PIPELINE'):
+            settings.SOCIAL_AUTH_PIPELINE.append(LOGIN_EVENT_EMITTER)
