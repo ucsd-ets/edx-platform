@@ -1099,6 +1099,18 @@ SUPPORT_DESK_EMAILS = ENV_TOKENS.get('SUPPORT_DESK_EMAILS')
 INSTALLED_APPS.append('openedx.features.ucsd_features')
 
 ############### Settings for Caliper Tracking #####################
+# 'caliper_tracking' app enables us to transform Edx event-logs according to
+# IMSGlobal Caliper Standards.
+# https://www.imsglobal.org/sites/default/files/caliper/v1p1/caliper-spec-v1p1/caliper-spec-v1p1.html.
+#
+# Dependencies:
+#   1. This app adds its processor in both the event tracking engine's settings
+#      [EVENT_TRACKING_BACKENDS, TRACKING_BACKENDS]
+#   2. This app must be placed in INSTALLED_APPS settings before
+#      'eventtracking' app, as 'eventtracking' app uses EVENT_TRACKING_BACKENDS
+#      settings which must be changed earlier by 'caliper_tracking' app.
+#
+
 if FEATURES.get('ENABLE_EVENT_CALIPERIZATION'):
     INSTALLED_APPS.insert(
         INSTALLED_APPS.index('eventtracking.django.apps.EventTrackingConfig'),
