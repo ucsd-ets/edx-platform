@@ -1119,7 +1119,7 @@ INSTALLED_APPS.append('openedx.features.ucsd_features')
 #
 #      CALIPER_TRACKING_BACKENDS = {
 #        'logger': {
-#          'ENGINE': caliper_tracking.processor.CaliperProcessor,
+#          'ENGINE': 'caliper_tracking.processor.CaliperProcessor',
 #          'OPTIONS': {
 #             'name': 'tracking'
 #          }
@@ -1128,7 +1128,8 @@ INSTALLED_APPS.append('openedx.features.ucsd_features')
 #
 # 3. This app must be placed in INSTALLED_APPS settings before
 #    'eventtracking' app, as 'eventtracking' app uses EVENT_TRACKING_BACKENDS
-#    settings which must be changed earlier by 'caliper_tracking' app.
+#    settings which must be changed earlier by 'caliper_tracking' app. The code
+#    bellow will handle this.
 #
 
 if FEATURES.get('ENABLE_EVENT_CALIPERIZATION'):
