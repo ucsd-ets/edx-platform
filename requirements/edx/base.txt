@@ -109,7 +109,7 @@ docutils==0.14            # via botocore
 dogapi==1.2.1
 edx-ace==0.1.8
 edx-analytics-data-api-client==0.14.4
-edx-caliper-tracking==0.9.0
+openedx-caliper-tracking==0.9.0
 edx-ccx-keys==0.2.1
 edx-celeryutils==0.2.7
 edx-completion==0.1.7

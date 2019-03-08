@@ -595,7 +595,7 @@ SUPPORT_DESK_EMAILS = ENV_TOKENS.get('SUPPORT_DESK_EMAILS')
 if FEATURES.get('ENABLE_EVENT_CALIPERIZATION'):
     INSTALLED_APPS.insert(
         INSTALLED_APPS.index('eventtracking.django.apps.EventTrackingConfig'),
-        'edx_caliper_tracking'
+        'openedx_caliper_tracking'
     )
 
 ####################### Plugin Settings ##########################
