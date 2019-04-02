@@ -6,6 +6,7 @@ Much of this file was broken out from views.py, previous history can be found th
 
 import datetime
 import logging
+import json
 import uuid
 import warnings
 from urlparse import parse_qs, urlsplit, urlunsplit
@@ -481,7 +482,20 @@ def login_user(request):
         })
 
         # Ensure that the external marketing site can
-        # detect that the user is logged in.
+        # detect that the user is logged in.        
+        if response.status_code == 200:
+            event_name = 'edx.user.login'
+            event_data = {
+                'email': request.POST.get('email'),
+                'remember': request.POST.get('remember'),
+                'username': request.user.username,
+                'user_id': request.user.id
+            }
+            response_dict = json.loads(response.content)
+            event_data.update(response_dict)
+            tracker.emit(event_name, event_data)
+
+        
         return set_logged_in_cookies(request, response, possibly_authenticated_user)
     except AuthFailedError as error:
         return JsonResponse(error.get_response())
