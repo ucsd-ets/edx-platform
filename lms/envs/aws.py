@@ -1136,6 +1136,8 @@ if FEATURES.get('ENABLE_EVENT_CALIPERIZATION'):
         INSTALLED_APPS.index('eventtracking.django.apps.EventTrackingConfig'),
         'openedx_caliper_tracking'
     )
+CALIPER_DELIVERY_ENDPOINT = ENV_TOKENS.get('CALIPER_DELIVERY_ENDPOINT')
+CALIPER_DELIVERY_AUTH_TOKEN = AUTH_TOKENS.get('CALIPER_DELIVERY_AUTH_TOKEN')
 
 ############################### Plugin Settings ###############################
 
