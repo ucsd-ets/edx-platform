@@ -118,6 +118,14 @@ from student.models import CourseEnrollment
       </div>
     %endif
 
+    %if course_upgrade_message:
+    <div class="course-upgrade aa-icon info" role="alert">
+      <div class="message-copy" >
+        ${course_upgrade_message | n,  decode.utf8}
+      </div>
+    </div>
+    %endif
+
 </div>
 
 <main id="main" aria-label="Content" tabindex="-1">
