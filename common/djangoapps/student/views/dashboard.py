@@ -1,7 +1,8 @@
 """
 Dashboard view and supporting methods
 """
-
+import json
+import base64
 import datetime
 import logging
 from collections import defaultdict
@@ -782,21 +783,15 @@ def student_dashboard(request):
             enr for enr in course_enrollments if entitlement.enrollment_course_run.course_id != enr.course_id
         ]
 
-    course_upgrade_message = ""
-    if request.GET.get('transaction') and request.GET.get('data'):
-        data = request.GET.get('data')
-        decoded_data = data.decode('base64', 'strict')
-        transaction_course, transaction_user = decoded_data.split('#')
-        if transaction_course and transaction_user:
-            log.info(
-                "Approved Authorizenet transaction. Pending course status for Course %s and User %s",
-                transaction_user,
-                transaction_course,
-            )
-            if transaction_user == request.user.username:
-                transaction_course_id = CourseKey.from_string(transaction_course.replace(" ", "+"))
-                course_display_name = CourseOverview.get_from_id(transaction_course_id).display_name
-                course_upgrade_message = "Please wait for the confirmation email as your request is being processed. Course: \"{}\" will be updated soon.".format(course_display_name)
+    pending_courses = []
+    transaction_hash = request.COOKIES.get('pendingTransactionHash')
+    if transaction_hash:
+        decoded_data =  base64.b64decode(transaction_hash)
+        transaction_courses_list = json.loads(decoded_data)
+        for course_id in transaction_courses_list:
+            transaction_course_id = CourseKey.from_string(course_id)
+            course_display_name = CourseOverview.get_from_id(transaction_course_id).display_name
+            pending_courses.append(course_display_name)
 
     context = {
         'urls': urls,
@@ -845,7 +840,7 @@ def student_dashboard(request):
         'display_sidebar_account_activation_message': not(user.is_active or hide_dashboard_courses_until_activated),
         'display_dashboard_courses': (user.is_active or not hide_dashboard_courses_until_activated),
         'empty_dashboard_message': empty_dashboard_message,
-        'course_upgrade_message': course_upgrade_message,
+        'pending_courses_upgrade': pending_courses,
     }
 
     if ecommerce_service.is_enabled(request.user):
