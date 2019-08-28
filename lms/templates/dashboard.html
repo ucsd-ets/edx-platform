@@ -118,13 +118,11 @@ from student.models import CourseEnrollment
       </div>
     %endif
 
-    %if pending_courses_upgrade:
+    %if pending_upgrade_course_name:
       <div class="course-upgrade aa-icon info" role="alert">
-        % for course_name in pending_courses_upgrade:
-          <div class="message-copy" >
-            Wait for the confirmation email as your request is being processed. Course: ${ course_name } will be upgraded soon
-          </div>
-        % endfor
+        <div class="message-copy" >
+          Please wait for the confirmation email as your request is being processed. Course: ${ pending_upgrade_course_name } will be upgraded soon.
+        </div>
       </div>
     %endif
 

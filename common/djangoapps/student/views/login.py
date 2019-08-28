@@ -784,10 +784,6 @@ class LogoutView(TemplateView):
         # Clear the cookie used by the edx.org marketing site
         delete_logged_in_cookies(response)
 
-        # Clear pending transactions cookie (AuthorizeNet Transactions)
-        # Contain encrypted course-list
-        response.delete_cookie("pendingTransactionHash")
-
         # Fire an event when user is logged out
         event_name = 'edx.user.logout'
         tracker.emit(event_name)

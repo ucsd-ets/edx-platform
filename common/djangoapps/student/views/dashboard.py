@@ -783,16 +783,6 @@ def student_dashboard(request):
             enr for enr in course_enrollments if entitlement.enrollment_course_run.course_id != enr.course_id
         ]
 
-    pending_courses = []
-    transaction_hash = request.COOKIES.get('pendingTransactionHash')
-    if transaction_hash:
-        decoded_data =  base64.b64decode(transaction_hash)
-        transaction_courses_list = json.loads(decoded_data)
-        for course_id in transaction_courses_list:
-            transaction_course_id = CourseKey.from_string(course_id)
-            course_display_name = CourseOverview.get_from_id(transaction_course_id).display_name
-            pending_courses.append(course_display_name)
-
     context = {
         'urls': urls,
         'programs_data': programs_data,
@@ -840,8 +830,18 @@ def student_dashboard(request):
         'display_sidebar_account_activation_message': not(user.is_active or hide_dashboard_courses_until_activated),
         'display_dashboard_courses': (user.is_active or not hide_dashboard_courses_until_activated),
         'empty_dashboard_message': empty_dashboard_message,
-        'pending_courses_upgrade': pending_courses,
     }
+
+    # Retrieve pendingTransactionCourse cookie to show waiting alert to the learner. It conatain encrypted
+    # course_id for which AuthorizeNet transaction has been perfromed but notification is yet to be received.
+    transaction_hash = request.COOKIES.get('pendingTransactionCourse')
+    if transaction_hash:
+        decoded_course_id =  base64.b64decode(transaction_hash)
+        transaction_course_id = CourseKey.from_string(decoded_course_id)
+        pending_transaction_course_name = CourseOverview.get_from_id(transaction_course_id).display_name
+        context.update({
+            'pending_upgrade_course_name': pending_transaction_course_name,
+        })
 
     if ecommerce_service.is_enabled(request.user):
         context.update({
@@ -859,5 +859,7 @@ def student_dashboard(request):
     })
 
     response = render_to_response('dashboard.html', context)
+    response.delete_cookie('pendingTransactionCourse')
+
     set_user_info_cookie(response, request)
     return response
