@@ -1,7 +1,8 @@
 """
 Dashboard view and supporting methods
 """
-
+import json
+import base64
 import datetime
 import logging
 from collections import defaultdict
@@ -29,6 +30,7 @@ from entitlements.models import CourseEntitlement
 from lms.djangoapps.commerce.utils import EcommerceService  # pylint: disable=import-error
 from lms.djangoapps.verify_student.services import IDVerificationService
 from openedx.core.djangoapps import monitoring_utils
+from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
 from openedx.core.djangoapps.catalog.utils import (
     get_programs,
     get_pseudo_session_for_entitlement,
@@ -830,6 +832,17 @@ def student_dashboard(request):
         'empty_dashboard_message': empty_dashboard_message,
     }
 
+    # Retrieve pendingTransactionCourse cookie to show waiting alert to the learner. It conatain encrypted
+    # course_id for which AuthorizeNet transaction has been perfromed but notification is yet to be received.
+    transaction_hash = request.COOKIES.get('pendingTransactionCourse')
+    if transaction_hash:
+        decoded_course_id =  base64.b64decode(transaction_hash)
+        transaction_course_id = CourseKey.from_string(decoded_course_id)
+        pending_transaction_course_name = CourseOverview.get_from_id(transaction_course_id).display_name
+        context.update({
+            'pending_upgrade_course_name': pending_transaction_course_name,
+        })
+
     if ecommerce_service.is_enabled(request.user):
         context.update({
             'use_ecommerce_payment_flow': True,
@@ -846,5 +859,7 @@ def student_dashboard(request):
     })
 
     response = render_to_response('dashboard.html', context)
+    response.delete_cookie('pendingTransactionCourse')
+
     set_user_info_cookie(response, request)
     return response
