@@ -548,6 +548,8 @@ def student_dashboard(request):
         The dashboard response.
 
     """
+    ECOMMERCE_COOKIE_DOMAIN = ".ucsd.edu"
+    ECOMMERCE_TRANSACTION_COOKIE_NAME = "pendingTransactionCourse"
     user = request.user
     if not UserProfile.objects.filter(user=user).exists():
         return redirect(reverse('account_settings'))
@@ -834,7 +836,7 @@ def student_dashboard(request):
 
     # Retrieve pendingTransactionCourse cookie to show waiting alert to the learner. It conatain encrypted
     # course_id for which AuthorizeNet transaction has been perfromed but notification is yet to be received.
-    transaction_hash = request.COOKIES.get('pendingTransactionCourse')
+    transaction_hash = request.COOKIES.get(ECOMMERCE_TRANSACTION_COOKIE_NAME)
     if transaction_hash:
         decoded_course_id =  base64.b64decode(transaction_hash)
         transaction_course_id = CourseKey.from_string(decoded_course_id)
@@ -859,7 +861,9 @@ def student_dashboard(request):
     })
 
     response = render_to_response('dashboard.html', context)
-    response.delete_cookie('pendingTransactionCourse')
+
+    # delete cookie created by ecommerce for pending transaction (authorizenet) message
+    response.delete_cookie(ECOMMERCE_TRANSACTION_COOKIE_NAME, domain=ECOMMERCE_COOKIE_DOMAIN)
 
     set_user_info_cookie(response, request)
     return response
