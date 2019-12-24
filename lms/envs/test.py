@@ -620,4 +620,10 @@ plugin_settings.add_plugins(__name__, plugin_constants.ProjectType.LMS, plugin_c
 
 derive_settings(__name__)
 
+################## UCSD Features ######################################
+
 SUPPORT_DESK_EMAILS = ['servicedesk@ucsd.edu']
+
+INSTALLED_APPS.append('openedx.features.ucsd_features')
+FEATURES['ENABLE_EMAIL_INSTEAD_ZENDESK'] = False
+FEATURES['AUTOMATIC_PERMANENT_ACCOUNT_VERIFICATION'] = False
