@@ -105,7 +105,7 @@ case "$TEST_SUITE" in
     "quality")
 
         mkdir -p reports
-
+        echo "Shard ===> $SHARD"
         case "$SHARD" in
             1)
                 echo "Finding pylint violations and storing in report..."
@@ -186,19 +186,19 @@ case "$TEST_SUITE" in
 
         PAVER_ARGS="-n $NUMBER_OF_BOKCHOY_THREADS"
         export BOKCHOY_HEADLESS=true
-
+        echo "Shard ===> $SHARD"
         case "$SHARD" in
 
             "all")
-                $TOX paver test_bokchoy $PAVER_ARGS
+                $TOX paver -v test_bokchoy $PAVER_ARGS
                 ;;
 
             [1-9]|1[0-9]|2[0-1])
-                $TOX paver test_bokchoy --eval-attr="shard==$SHARD and not a11y" $PAVER_ARGS
+                $TOX paver -v test_bokchoy --eval-attr="shard==$SHARD and not a11y" $PAVER_ARGS
                 ;;
 
             22|"noshard")
-                $TOX paver test_bokchoy --eval-attr='not shard and not a11y' $PAVER_ARGS
+                $TOX paver -v test_bokchoy --eval-attr='not shard and not a11y' $PAVER_ARGS
                 ;;
 
             # Default case because if we later define another bok-choy shard on Jenkins
