@@ -31,6 +31,8 @@ class PytestContainerManager():
         Spins up tasks and generates two .txt files, containing the IP/ arns
         of the new tasks.
         """
+        print("Task Name", task_name)
+        print("Describe task defination", self.ecs.describe_task_definition(taskDefinition=task_name))
         revision = self.ecs.describe_task_definition(taskDefinition=task_name)['taskDefinition']['revision']
         task_definition = "{}:{}".format(task_name, revision)
 
