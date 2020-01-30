@@ -153,8 +153,8 @@ if __name__ == "__main__":
                         help="AWS Cluster name where the tasks run. Defaults to"
                         "the testeng cluster: jenkins-worker-containers")
 
-    parser.add_argument('--region', '-g', default='us-east-1',
-                        help="AWS region where ECS infrastructure lives. Defaults to us-east-1")
+    parser.add_argument('--region', '-g', default='us-west-2',
+                        help="AWS region where ECS infrastructure lives. Defaults to us-west-2")
 
     # Spinning up tasks
     parser.add_argument('--launch_type', default='FARGATE', choices=['EC2', 'FARGATE'],
