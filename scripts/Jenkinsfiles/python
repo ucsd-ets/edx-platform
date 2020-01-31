@@ -47,7 +47,7 @@ pipeline {
         XDIST_INSTANCE_TYPE = "c5d.large"
         XDIST_WORKER_AMI = credentials('XDIST_WORKER_AMI')
         XDIST_WORKER_IAM_PROFILE_ARN = credentials('XDIST_WORKER_IAM_PROFILE_ARN')
-        XDIST_WORKER_KEY_NAME = "jenkins-worker"
+        XDIST_WORKER_KEY_NAME = "ucsd-jenkins-worker"
         XDIST_WORKER_SUBNET = credentials('XDIST_WORKER_SUBNET')
         XDIST_WORKER_SECURITY_GROUP = credentials('XDIST_WORKER_SECURITY_GROUP')
         WTW_CONTEXT = "python"
