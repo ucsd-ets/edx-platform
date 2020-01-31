@@ -10,23 +10,23 @@ python scripts/xdist/pytest_worker_manager.py -a up -n ${XDIST_NUM_WORKERS} \
 -key ${XDIST_WORKER_KEY_NAME} \
 -iam ${XDIST_WORKER_IAM_PROFILE_ARN}
 
-# Install the correct version of Django depending on which tox environment (if any) is in use
-if [[ -z ${TOX_ENV+x} ]] || [[ ${TOX_ENV} == 'null' ]]; then
-    DJANGO_REQUIREMENT="-r requirements/edx/django.txt"
+# Need to map remote branch to local branch when fetching a branch other than master
+if [ "$XDIST_GIT_BRANCH" == "master" ]; then
+    XDIST_GIT_FETCH_STRING="$XDIST_GIT_BRANCH"
 else
-    DJANGO_REQUIREMENT=$(pip freeze | grep "^[Dd]jango==")
+    XDIST_GIT_FETCH_STRING="$XDIST_GIT_BRANCH:$XDIST_GIT_BRANCH"
 fi
 
 ip_list=$(<pytest_worker_ips.txt)
 for ip in $(echo $ip_list | sed "s/,/ /g")
 do
     worker_reqs_cmd="ssh -o StrictHostKeyChecking=no jenkins@$ip
-    'git clone --branch master --depth 1 -q https://github.com/edx/edx-platform.git; cd edx-platform;
+    'git clone --branch master --depth 1 -q https://github.com/ucsd-ets/edx-platform.git; cd edx-platform;
     git fetch -fq origin ${XDIST_GIT_REFSPEC}; git checkout -q ${XDIST_GIT_BRANCH};
-    rm -rf /home/jenkins/edx-venv-${PYTHON_VERSION}/edx-venv;
-    tar -C /home/jenkins/edx-venv-${PYTHON_VERSION} -xf /home/jenkins/edx-venv_clean-${PYTHON_VERSION}.tar.gz;
-    source ../edx-venv-${PYTHON_VERSION}/edx-venv/bin/activate;
-    pip install -q ${DJANGO_REQUIREMENT} -r requirements/edx/testing.txt; mkdir reports' & "
+    if [ -e /home/jenkins/edx-venv ]; then rm -rf /home/jenkins/edx-venv; fi;
+    mkdir /home/jenkins/edx-venv; tar -C /home/jenkins/edx-venv/ -xf /home/jenkins/edx-venv_clean.tar.gz
+    source ../edx-venv/bin/activate;
+    pip install -r requirements/edx/testing.txt; mkdir reports' & "
 
     cmd=$cmd$worker_reqs_cmd
 done

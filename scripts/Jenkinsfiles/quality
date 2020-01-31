@@ -43,7 +43,7 @@ pipeline {
     agent { label "jenkins-worker" }
     options {
         timestamps()
-        timeout(120)
+        timeout(60)
     }
     stages {
         stage('Mark build as pending on Github') {
@@ -198,12 +198,12 @@ pipeline {
                     // Publish Quality report
                     publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true,
                         reportDir: 'reports/metrics/',
-                        reportFiles: 'pylint/*view*/,pep8/*view*/,python_complexity/*view*/,xsscommitlint/*view*/,xsslint/*view*/,eslint/*view*/,pii/*view*/',
+                        reportFiles: 'pylint/*view*/,pep8/*view*/,python_complexity/*view*/,xsscommitlint/*view*/,xsslint/*view*/,eslint/*view*/',
                         reportName: 'Quality Report', reportTitles: ''])
                 } finally {
                     if (env.ghprbPullId != null) {
                         // For PR jobs, run the edx-platform-test-notifier for PR reporting
-                        build job: 'edx-platform-test-notifier', parameters: [string(name: 'REPO', value: "${REPO_NAME}"), string(name: 'PR_NUMBER', value: "${ghprbPullId}")], wait: false
+                        build job: 'edx-platform-test-notifier', parameters: [string(name: 'PR_NUMBER', value: "${ghprbPullId}")], wait: false
                     } else {
                         // For master jobs run github-build-status and report to slack when necessary
                         if (currentBuild.currentResult == "SUCCESS") {
