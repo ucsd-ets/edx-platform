@@ -105,7 +105,7 @@ case "$TEST_SUITE" in
     "quality")
 
         mkdir -p reports
-        echo "Shard ===> $SHARD"
+
         case "$SHARD" in
             1)
                 echo "Finding pylint violations and storing in report..."
@@ -186,7 +186,7 @@ case "$TEST_SUITE" in
 
         PAVER_ARGS="-n $NUMBER_OF_BOKCHOY_THREADS"
         export BOKCHOY_HEADLESS=true
-        echo "Shard ===> $SHARD"
+
         case "$SHARD" in
 
             "all")

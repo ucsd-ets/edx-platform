@@ -40,10 +40,10 @@ def qualityTestCleanup() {
 }
 
 pipeline {
-    agent { label "ironwood-jenkins-worker" }
+    agent { label "jenkins-worker" }
     options {
         timestamps()
-        timeout(60)
+        timeout(120)
     }
     stages {
         stage('Mark build as pending on Github') {
@@ -72,7 +72,7 @@ pipeline {
         stage('Run Tests') {
             parallel {
                 stage("commonlib pylint") {
-                    agent { label "ironwood-jenkins-worker" }
+                    agent { label "jenkins-worker" }
                     environment {
                         TEST_SUITE = "quality"
                         SHARD = 1
@@ -91,7 +91,7 @@ pipeline {
                     }
                 }
                 stage("lms pylint") {
-                    agent { label "ironwood-jenkins-worker" }
+                    agent { label "jenkins-worker" }
                     environment {
                         TEST_SUITE = "quality"
                         SHARD = 2
@@ -110,7 +110,7 @@ pipeline {
                     }
                 }
                 stage("cms/openedx/pavelib pylint") {
-                    agent { label "ironwood-jenkins-worker" }
+                    agent { label "jenkins-worker" }
                     environment {
                         TEST_SUITE = "quality"
                         SHARD = 3
@@ -129,7 +129,7 @@ pipeline {
                     }
                 }
                 stage("Other quality checks") {
-                    agent { label "ironwood-jenkins-worker" }
+                    agent { label "jenkins-worker" }
                     environment {
                         TEST_SUITE = "quality"
                         SHARD = 4
@@ -198,12 +198,12 @@ pipeline {
                     // Publish Quality report
                     publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true,
                         reportDir: 'reports/metrics/',
-                        reportFiles: 'pylint/*view*/,pep8/*view*/,python_complexity/*view*/,xsscommitlint/*view*/,xsslint/*view*/,eslint/*view*/',
+                        reportFiles: 'pylint/*view*/,pep8/*view*/,python_complexity/*view*/,xsscommitlint/*view*/,xsslint/*view*/,eslint/*view*/,pii/*view*/',
                         reportName: 'Quality Report', reportTitles: ''])
                 } finally {
                     if (env.ghprbPullId != null) {
                         // For PR jobs, run the edx-platform-test-notifier for PR reporting
-                        build job: 'edx-platform-test-notifier', parameters: [string(name: 'PR_NUMBER', value: "${ghprbPullId}")], wait: false
+                        build job: 'edx-platform-test-notifier', parameters: [string(name: 'REPO', value: "${REPO_NAME}"), string(name: 'PR_NUMBER', value: "${ghprbPullId}")], wait: false
                     } else {
                         // For master jobs run github-build-status and report to slack when necessary
                         if (currentBuild.currentResult == "SUCCESS") {
