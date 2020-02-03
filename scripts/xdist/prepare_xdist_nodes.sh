@@ -21,10 +21,11 @@ ip_list=$(<pytest_worker_ips.txt)
 for ip in $(echo $ip_list | sed "s/,/ /g")
 do
     worker_reqs_cmd="ssh -o StrictHostKeyChecking=no jenkins@$ip
-    'git clone --branch master --depth 1 -q https://github.com/ucsd-ets/edx-platform.git; cd edx-platform;
+    'if [ -e /home/jenkins/edx-platform ]; then rm -rf /home/jenkins/edx-platform; fi;
+    git clone --branch master --depth 1 -q https://github.com/ucsd-ets/edx-platform.git; cd edx-platform;
     git fetch -fq origin ${XDIST_GIT_REFSPEC}; git checkout -q ${XDIST_GIT_BRANCH};
     if [ -e /home/jenkins/edx-venv ]; then rm -rf /home/jenkins/edx-venv; fi;
-    mkdir /home/jenkins/edx-venv; tar -C /home/jenkins/edx-venv/ -xf /home/jenkins/edx-venv_clean.tar.gz
+    mkdir /home/jenkins/edx-venv; tar -C /home/jenkins/ -xf /home/jenkins/edx-venv_clean.tar.gz;
     source ../edx-venv/bin/activate;
     pip install -r requirements/edx/testing.txt; mkdir reports' & "
 
