@@ -20,7 +20,7 @@ from django.utils.translation import ugettext as _
         <li class="status status-verification is-denied">
             <span class="title status-title">${_("Current Verification Status: Denied")}</span>
             <p class="status-note">
-        ${_("Your verification submission was not accepted. To receive a verified certificate, you must submit a new photo of yourself and your government-issued photo ID before the verification deadline for your course.")}
+        ${_("Your verification submission was not accepted. To receive a statement of accomplishment, you must submit a new photo of yourself and your government-issued photo ID before the verification deadline for your course.")}
 
             %if verification_errors:
                 <br><br>
@@ -39,7 +39,7 @@ from django.utils.translation import ugettext as _
     %elif verification_status == 'expired':
         <li class="status status-verification is-denied">
             <span class="title status-title">${_("Current Verification Status: Expired")}</span>
-            <p class="status-note">${_("Your verification has expired. To receive a verified certificate, you must submit a new photo of yourself and your government-issued photo ID before the verification deadline for your course.")}</p>
+            <p class="status-note">${_("Your verification has expired. To receive a statement of accomplishment, you must submit a new photo of yourself and your government-issued photo ID before the verification deadline for your course.")}</p>
             <div class="btn-reverify">
                 <a href="${reverse('verify_student_reverify')}" class="action action-reverify">${_("Resubmit Verification")}</a>
             </div>

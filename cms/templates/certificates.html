@@ -9,7 +9,7 @@ from openedx.core.djangolib.js_utils import (
 )
 %>
 
-<%block name="title">${_("Course Certificates")}</%block>
+<%block name="title">${_("Course Statements of Accomplishment")}</%block>
 <%block name="bodyclass">is-signedin course view-certificates</%block>
 
 <%block name="header_extras">
@@ -51,7 +51,7 @@ CMS.User.isGlobalStaff = '${is_global_staff}'=='True' ? true : false;
     <header class="mast has-actions has-subtitle">
       <h1 class="page-header">
         <small class="subtitle">${_("Settings")}</small>
-        <span class="sr">&gt; </span>${_("Certificates")}
+        <span class="sr">&gt; </span>${_("Statements of Accomplishment")}
       </h1>
       <div class="preview-certificate nav-actions"></div>
     </header>
@@ -61,7 +61,7 @@ CMS.User.isGlobalStaff = '${is_global_staff}'=='True' ? true : false;
     <section class="content">
       <article class="content-primary" role="main">
         <div class="wrapper-certificates certificates-list">
-          <h2 class="sr title">${_("Certificates")}</h2>
+          <h2 class="sr title">${_("Statements of Accomplishment")}</h2>
           % if certificates is None:
             <div class="notice notice-incontext notice-moduledisabled">
                 <p class="copy">
@@ -71,7 +71,7 @@ CMS.User.isGlobalStaff = '${is_global_staff}'=='True' ? true : false;
           % elif not has_certificate_modes:
             <div class="notice notice-incontext notice-moduledisabled">
                 <p class="copy">
-                    ${_("This course does not use a mode that offers certificates.")}
+                    ${_("This course does not use a mode that offers statements of accomplishment.")}
                 </p>
             </div>
           % else:
@@ -84,17 +84,17 @@ CMS.User.isGlobalStaff = '${is_global_staff}'=='True' ? true : false;
       <aside class="content-supplementary" role="complementary">
         <div class="bit">
           <div class="certificates-doc">
-            <h2 class="title-3">${_("Certificates")}</h2>
-            <h3 class="title-3">${_("Working with Certificates")}</h3>
-            <p>${_("Specify a course title to use on the certificate if the course's official title is too long to be displayed well.")}</p>
-            <p>${_("For verified certificates, specify between one and four signatories and upload the associated images.")}</p>
-            <p>${_("To edit or delete a certificate before it is activated, hover over the top right corner of the form and select {em_start}Edit{em_end} or the delete icon.").format(em_start="<strong>", em_end="</strong>")}</p>
-            <p>${_("To view a sample certificate, choose a course mode and select {em_start}Preview Certificate{em_end}.").format(em_start='<strong>', em_end="</strong>")}</p>
+            <h2 class="title-3">${_("Statements of Accomplishment")}</h2>
+            <h3 class="title-3">${_("Working with Statements of Accomplishment")}</h3>
+            <p>${_("Specify a course title to use on the statement of accomplishment if the course's official title is too long to be displayed well.")}</p>
+            <p>${_("For statements of accomplishment, specify between one and four signatories and upload the associated images.")}</p>
+            <p>${_("To edit or delete a statement of accomplishment before it is activated, hover over the top right corner of the form and select {em_start}Edit{em_end} or the delete icon.").format(em_start="<strong>", em_end="</strong>")}</p>
+            <p>${_("To view a sample statement of accomplishment, choose a course mode and select {em_start}Preview Statement of Accomplishment{em_end}.").format(em_start='<strong>', em_end="</strong>")}</p>
 
-            <h3 class="title-3">${_("Issuing Certificates to Learners")}</h3>
-            <p>${_("To begin issuing course certificates, a course team member with either the Staff or Admin role selects {em_start}Activate{em_end}. Only course team members with these roles can edit or delete an activated certificate.").format(em_start="<strong>", em_end="</strong>")}</p>
-            <p>${_("{em_start}Do not{em_end} delete certificates after a course has started; learners who have already earned certificates will no longer be able to access them.").format(em_start="<strong>", em_end="</strong>")}</p>
-            <p><a href="${get_online_help_info(online_help_token())['doc_url']}" target="_blank" class="button external-help-button">${_("Learn more about certificates")}</a></p>
+            <h3 class="title-3">${_("Issuing Statements of Accomplishment to Learners")}</h3>
+            <p>${_("To begin issuing course statements of accomplishment, a course team member with either the Staff or Admin role selects {em_start}Activate{em_end}. Only course team members with these roles can edit or delete an activated statement of accomplishment.").format(em_start="<strong>", em_end="</strong>")}</p>
+            <p>${_("{em_start}Do not{em_end} delete statements of accomplishment after a course has started; learners who have already earned statements of accomplishment will no longer be able to access them.").format(em_start="<strong>", em_end="</strong>")}</p>
+            <p><a href="${get_online_help_info(online_help_token())['doc_url']}" target="_blank" class="button external-help-button">${_("Learn more about statements of accomplishment")}</a></p>
           </div>
         </div>
         <div class="bit">

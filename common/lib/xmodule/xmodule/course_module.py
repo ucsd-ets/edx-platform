@@ -288,7 +288,7 @@ class CourseFields(object):
     )
     end = Date(help=_("Date that this class ends"), scope=Scope.settings)
     certificate_available_date = Date(
-        help=_("Date that certificates become available to learners"),
+        help=_("Date that statements of accomplishment become available to learners"),
         scope=Scope.content
     )
     cosmetic_display_price = Integer(
@@ -516,10 +516,10 @@ class CourseFields(object):
         scope=Scope.settings
     )
     certificates_show_before_end = Boolean(
-        display_name=_("Certificates Downloadable Before End"),
+        display_name=_("Statements of Accomplishment Downloadable Before End"),
         help=_(
-            "Enter true or false. If true, students can download certificates before the course ends, if they've "
-            "met certificate requirements."
+            "Enter true or false. If true, students can download statements of accomplishment before the course ends, if they've "
+            "met statement of accomplishment requirements."
         ),
         scope=Scope.settings,
         default=False,
@@ -527,14 +527,14 @@ class CourseFields(object):
     )
 
     certificates_display_behavior = String(
-        display_name=_("Certificates Display Behavior"),
+        display_name=_("Statements of Accomplishment Display Behavior"),
         help=_(
-            "Enter end, early_with_info, or early_no_info. After certificate generation, students who passed see a "
-            "link to their certificates on the dashboard and students who did not pass see information about the "
-            "grading configuration. The default is end, which displays this certificate information to all students "
-            "after the course end date. To display this certificate information to all students as soon as "
-            "certificates are generated, enter early_with_info. To display only the links to passing students as "
-            "soon as certificates are generated, enter early_no_info."
+            "Enter end, early_with_info, or early_no_info. After statement of accomplishment generation, students who passed see a "
+            "link to their statements of accomplishment on the dashboard and students who did not pass see information about the "
+            "grading configuration. The default is end, which displays this statement of accomplishment information to all students "
+            "after the course end date. To display this statement of accomplishment information to all students as soon as "
+            "statements of accomplishment are generated, enter early_with_info. To display only the links to passing students as "
+            "soon as statements of accomplishment are generated, enter early_no_info."
         ),
         scope=Scope.settings,
         default="end"
@@ -572,7 +572,7 @@ class CourseFields(object):
     issue_badges = Boolean(
         display_name=_("Issue Open Badges"),
         help=_(
-            "Issue Open Badges badges for this course. Badges are generated when certificates are created."
+            "Issue Open Badges badges for this course. Badges are generated when statements of accomplishment are created."
         ),
         scope=Scope.settings,
         default=True
@@ -580,34 +580,34 @@ class CourseFields(object):
     ## Course level Certificate Name overrides.
     cert_name_short = String(
         help=_(
-            'Use this setting only when generating PDF certificates. '
-            'Between quotation marks, enter the short name of the type of certificate that '
-            'students receive when they complete the course. For instance, "Certificate".'
+            'Use this setting only when generating PDF statements of accomplishment. '
+            'Between quotation marks, enter the short name of the type of statement of accomplishment that '
+            'students receive when they complete the course. For instance, "Statement of Accomplishment".'
         ),
-        display_name=_("Certificate Name (Short)"),
+        display_name=_("Statement of Accomplishment Name (Short)"),
         scope=Scope.settings,
         default=""
     )
     cert_name_long = String(
         help=_(
-            'Use this setting only when generating PDF certificates. '
-            'Between quotation marks, enter the long name of the type of certificate that students '
-            'receive when they complete the course. For instance, "Certificate of Achievement".'
+            'Use this setting only when generating PDF statements of accomplishment. '
+            'Between quotation marks, enter the long name of the type of Statement of Accomplishment that students '
+            'receive when they complete the course. For instance, "Statement of Accomplishment".'
         ),
-        display_name=_("Certificate Name (Long)"),
+        display_name=_("Statement of Accomplishment Name (Long)"),
         scope=Scope.settings,
         default=""
     )
     cert_html_view_enabled = Boolean(
-        display_name=_("Certificate Web/HTML View Enabled"),
-        help=_("If true, certificate Web/HTML views are enabled for the course."),
+        display_name=_("Statement of Accomplishment Web/HTML View Enabled"),
+        help=_("If true, statement of accomplishment Web/HTML views are enabled for the course."),
         scope=Scope.settings,
         default=True,
         deprecated=True
     )
     cert_html_view_overrides = Dict(
         # Translators: This field is the container for course-specific certificate configuration values
-        display_name=_("Certificate Web/HTML View Overrides"),
+        display_name=_("Statement of Accomplishment Web/HTML View Overrides"),
         # Translators: These overrides allow for an alternative configuration of the certificate web view
         help=_("Enter course-specific overrides for the Web/HTML template parameters here (JSON format)"),
         scope=Scope.settings,
@@ -616,7 +616,7 @@ class CourseFields(object):
     # Specific certificate information managed via Studio (should eventually fold other cert settings into this)
     certificates = Dict(
         # Translators: This field is the container for course-specific certificate configuration values
-        display_name=_("Certificate Configuration"),
+        display_name=_("Statement of Accomplishment Configuration"),
         # Translators: These overrides allow for an alternative configuration of the certificate web view
         help=_("Enter course-specific configuration information here (JSON format)"),
         scope=Scope.settings,

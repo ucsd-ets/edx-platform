@@ -1212,8 +1212,8 @@ def get_issued_certificates(request, course_id):
     query_features = ['course_id', 'mode', 'total_issued_certificate', 'report_run_date']
     query_features_names = [
         ('course_id', _('CourseID')),
-        ('mode', _('Certificate Type')),
-        ('total_issued_certificate', _('Total Certificates Issued')),
+        ('mode', _('Statement of Accomplishment Type')),
+        ('total_issued_certificate', _('Total Statement of Accomplishment Issued')),
         ('report_run_date', _('Date Report Run'))
     ]
     certificates_data = instructor_analytics.basic.issued_certificates(course_key, query_features)
@@ -3021,7 +3021,7 @@ def start_certificate_generation(request, course_id):
     """
     course_key = CourseKey.from_string(course_id)
     task = lms.djangoapps.instructor_task.api.generate_certificates_for_students(request, course_key)
-    message = _('Certificate generation task for all students of this course has been started. '
+    message = _('Statement of Accomplishment generation task for all students of this course has been started. '
                 'You can view the status of the generation task in the "Pending Tasks" section.')
     response_payload = {
         'message': message,
@@ -3046,7 +3046,7 @@ def start_certificate_regeneration(request, course_id):
     certificates_statuses = request.POST.getlist('certificate_statuses', [])
     if not certificates_statuses:
         return JsonResponse(
-            {'message': _('Please select one or more certificate statuses that require certificate regeneration.')},
+            {'message': _('Please select one or more statement of accomplishment statuses that require statement of accomplishment regeneration.')},
             status=400
         )
 
@@ -3060,13 +3060,13 @@ def start_certificate_regeneration(request, course_id):
     ]
     if not set(certificates_statuses).issubset(allowed_statuses):
         return JsonResponse(
-            {'message': _('Please select certificate statuses from the list only.')},
+            {'message': _('Please select statement of accomplishment statuses from the list only.')},
             status=400
         )
 
     lms.djangoapps.instructor_task.api.regenerate_certificates(request, course_key, certificates_statuses)
     response_payload = {
-        'message': _('Certificate regeneration task has been started. '
+        'message': _('Statement of Accomplishment regeneration task has been started. '
                      'You can view the status of the generation task in the "Pending Tasks" section.'),
         'success': True
     }
@@ -3286,7 +3286,7 @@ def generate_certificate_exceptions(request, course_id, generate_for=None):
     lms.djangoapps.instructor_task.api.generate_certificates_for_students(request, course_key, student_set=students)
     response_payload = {
         'success': True,
-        'message': _('Certificate generation started for white listed students.'),
+        'message': _('Statement of Accomplishment generation started for white listed students.'),
     }
 
     return JsonResponse(response_payload)

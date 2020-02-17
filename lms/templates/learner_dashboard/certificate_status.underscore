@@ -1,5 +1,5 @@
 <p class="certificate-status col-12 md-col-8">
-    <span class="card-msg"><%- gettext('Certificate Status:') %></span>
+    <span class="card-msg"><%- gettext('Statement of Accomplishment Status:') %></span>
     <span class="fa fa-check-circle" aria-hidden="true"></span>
-    <span class="certificate-status-msg"><%- gettext('Certificate Purchased') %></span>
+    <span class="certificate-status-msg"><%- gettext('Statement of Accomplishment Purchased') %></span>
 </p>

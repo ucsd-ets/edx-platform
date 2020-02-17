@@ -1,5 +1,5 @@
 <p class="under-heading info">
- <%- gettext("To invalidate a certificate for a particular learner, add the username or email address below.") %>
+ <%- gettext("To invalidate a statement of accomplishment for a particular learner, add the username or email address below.") %>
 </p>
 
 <div class="add-certificate-invalidation">
@@ -12,7 +12,7 @@
         <textarea class="notes-field" id="certificate-invalidation-notes" rows="10"></textarea>
     </div>
     <br/>
-    
+
     <button type="button" class="btn-blue" id="invalidate-certificate"><%- gettext('Invalidate Certificate') %></button>
 </div>
 

@@ -130,7 +130,7 @@ CertData = namedtuple(
 AUDIT_PASSING_CERT_DATA = CertData(
     CertificateStatuses.audit_passing,
     _('Your enrollment: Audit track'),
-    _('You are enrolled in the audit track for this course. The audit track does not include a certificate.'),
+    _('You are enrolled in the audit track for this course. The audit track does not include a statement of accomplishment.'),
     download_url=None,
     cert_web_view_url=None
 )
@@ -138,7 +138,7 @@ AUDIT_PASSING_CERT_DATA = CertData(
 HONOR_PASSING_CERT_DATA = CertData(
     CertificateStatuses.honor_passing,
     _('Your enrollment: Honor track'),
-    _('You are enrolled in the honor track for this course. The honor track does not include a certificate.'),
+    _('You are enrolled in the honor track for this course. The honor track does not include a statement of accomplishment.'),
     download_url=None,
     cert_web_view_url=None
 )
@@ -152,7 +152,7 @@ GENERATING_CERT_DATA = CertData(
     CertificateStatuses.generating,
     _("We're working on it..."),
     _(
-        "We're creating your certificate. You can keep working in your courses and a link "
+        "We're creating your statement of accomplishment. You can keep working in your courses and a link "
         "to it will appear here and on your Dashboard when it is ready."
     ),
     download_url=None,
@@ -161,7 +161,7 @@ GENERATING_CERT_DATA = CertData(
 
 INVALID_CERT_DATA = CertData(
     CertificateStatuses.invalidated,
-    _('Your certificate has been invalidated'),
+    _('Your statement of accomplishment has been invalidated'),
     _('Please contact your course team if you have any questions.'),
     download_url=None,
     cert_web_view_url=None
@@ -169,17 +169,17 @@ INVALID_CERT_DATA = CertData(
 
 REQUESTING_CERT_DATA = CertData(
     CertificateStatuses.requesting,
-    _('Congratulations, you qualified for a certificate!'),
-    _("You've earned a certificate for this course."),
+    _('Congratulations, you qualified for a statement of accomplishment!'),
+    _("You've earned a statement of accomplishment for this course."),
     download_url=None,
     cert_web_view_url=None
 )
 
 UNVERIFIED_CERT_DATA = CertData(
     CertificateStatuses.unverified,
-    _('Certificate unavailable'),
+    _('Statement of Accomplishment unavailable'),
     _(
-        'You have not received a certificate because you do not have a current {platform_name} '
+        'You have not received a statement of accomplishment because you do not have a current {platform_name} '
         'verified identity.'
     ).format(platform_name=configuration_helpers.get_value('PLATFORM_NAME', settings.PLATFORM_NAME)),
     download_url=None,
@@ -190,8 +190,8 @@ UNVERIFIED_CERT_DATA = CertData(
 def _downloadable_cert_data(download_url=None, cert_web_view_url=None):
     return CertData(
         CertificateStatuses.downloadable,
-        _('Your certificate is available'),
-        _("You've earned a certificate for this course."),
+        _('Your statement of accomplishment is available'),
+        _("You've earned a statement of accomplishment for this course."),
         download_url=download_url,
         cert_web_view_url=cert_web_view_url
     )
@@ -1420,7 +1420,7 @@ def generate_user_cert(request, course_id):
 
     if not is_course_passed(student, course):
         log.info(u"User %s has not passed the course: %s", student.username, course_id)
-        return HttpResponseBadRequest(_("Your certificate will be available when you pass the course."))
+        return HttpResponseBadRequest(_("Your statement of accomplishment will be available when you pass the course."))
 
     certificate_status = certs_api.certificate_downloadable_status(student, course.id)
 
@@ -1433,9 +1433,9 @@ def generate_user_cert(request, course_id):
     )
 
     if certificate_status["is_downloadable"]:
-        return HttpResponseBadRequest(_("Certificate has already been created."))
+        return HttpResponseBadRequest(_("Statement of Accomplishment has already been created."))
     elif certificate_status["is_generating"]:
-        return HttpResponseBadRequest(_("Certificate is being created."))
+        return HttpResponseBadRequest(_("Statement of Accomplishment is being created."))
     else:
         # If the certificate is not already in-process or completed,
         # then create a new certificate generation task.
@@ -1527,10 +1527,10 @@ def render_xblock(request, usage_key_string, check_if_enrolled=True):
 # Translators: "percent_sign" is the symbol "%". "platform_name" is a
 # string identifying the name of this installation, such as "edX".
 FINANCIAL_ASSISTANCE_HEADER = _(
-    '{platform_name} now offers financial assistance for learners who want to earn Verified Certificates but'
-    ' who may not be able to pay the Verified Certificate fee. Eligible learners may receive up to 90{percent_sign} off'
-    ' the Verified Certificate fee for a course.\nTo apply for financial assistance, enroll in the'
-    ' audit track for a course that offers Verified Certificates, and then complete this application.'
+    '{platform_name} now offers financial assistance for learners who want to earn Statements of Accomplishment but'
+    ' who may not be able to pay the Statement of Accomplishment fee. Eligible learners may receive up to 90{percent_sign} off'
+    ' the Statement of Accomplishment fee for a course.\nTo apply for financial assistance, enroll in the'
+    ' audit track for a course that offers Statement of Accomplishment, and then complete this application.'
     ' Note that you must complete a separate application for each course you take.\n We plan to use this'
     ' information to evaluate your application for financial assistance and to further develop our'
     ' financial assistance program.'
@@ -1545,7 +1545,7 @@ FA_REASON_FOR_APPLYING_LABEL = _(
     'Tell us about your current financial situation. Why do you need assistance?'
 )
 FA_GOALS_LABEL = _(
-    'Tell us about your learning or professional goals. How will a Verified Certificate in'
+    'Tell us about your learning or professional goals. How will a Statement of Accomplishment in'
     ' this course help you achieve these goals?'
 )
 FA_EFFORT_LABEL = _(
@@ -1665,7 +1665,7 @@ def financial_assistance_form(request):
                 'required': True,
                 'options': enrolled_courses,
                 'instructions': _(
-                    'Select the course for which you want to earn a verified certificate. If'
+                    'Select the course for which you want to earn a statement of accomplishment. If'
                     ' the course does not appear in the list, make sure that you have enrolled'
                     ' in the audit track for the course.'
                 )

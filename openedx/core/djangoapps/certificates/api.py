@@ -51,7 +51,7 @@ def certificates_viewable_for_course(course):
 
 def is_certificate_valid(certificate):
     """
-    Returns True if the student has a valid, verified certificate for this course, False otherwise.
+    Returns True if the student has a valid, statement of accomplishment for this course, False otherwise.
     """
     return CourseEnrollment.is_enrolled_as_verified(certificate.user, certificate.course_id) and certificate.is_valid()
 

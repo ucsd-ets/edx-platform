@@ -1,9 +1,9 @@
 <aside class="aside js-program-progress program-progress">
     <% if (programCertificate) { %>
-        <h2 class="progress-heading certificate-heading"><%- StringUtils.interpolate(gettext('Your {program} Certificate'), {program: type}, true) %></h2>
+        <h2 class="progress-heading certificate-heading"><%- StringUtils.interpolate(gettext('Your {program} Statement of Accomplishment'), {program: type}, true) %></h2>
 
         <a href="<%- programCertificate.url %>" class="program-cert-link">
-            <img src="<%- programCertificate.img %>" class="program-cert" alt="<%- interpolate(gettext('Open the certificate you earned for the %(title)s program.'), {title: programCertificate.title}, true) %>" />
+            <img src="<%- programCertificate.img %>" class="program-cert" alt="<%- interpolate(gettext('Open the statement of accomplishment you earned for the %(title)s program.'), {title: programCertificate.title}, true) %>" />
         </a>
     <% } %>
 </aside>

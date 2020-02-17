@@ -42,9 +42,9 @@ function($, _, str, gettext, BaseView, SignatoryModel, SignatoryDetailsView, Vie
             var self = this;
             if (this.model.get('is_active') === true) {
                 ViewUtils.confirmThenRunOperation(
-                    gettext('Edit this certificate?'),
-                    gettext('This certificate has already been activated and is live. Are you sure you want to continue editing?'),
-                    gettext('Yes, allow edits to the active Certificate'),
+                    gettext('Edit this statement of accomplishment?'),
+                    gettext('This statement of accomplishment has already been activated and is live. Are you sure you want to continue editing?'),
+                    gettext('Yes, allow edits to the active statement of accomplishment'),
                     function() {
                         return self.model.set('editing', true);
                     }

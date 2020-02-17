@@ -47,14 +47,14 @@ var edx = edx || {};
         _getProductText: function(modeSlug, isUpgrade) {
             switch (modeSlug) {
             case 'professional':
-                return gettext('Professional Education Verified Certificate');
+                return gettext('Professional Education Statement of Accomplishment');
             case 'no-id-professional':
                 return gettext('Professional Education');
             default:
                 if (isUpgrade) {
-                    return gettext('Verified Certificate upgrade');
+                    return gettext('Statement of Accomplishment upgrade');
                 } else {
-                    return gettext('Verified Certificate');
+                    return gettext('Statement of Accomplishment');
                 }
             }
         },

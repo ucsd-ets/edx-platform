@@ -81,11 +81,11 @@ from openedx.core.djangolib.js_utils import dump_js_escaped_json, js_escaped_str
         <h3 class="hd hd-3">${_("Generate Certificates")}</h3>
         <form id="certificates-generating-form" method="post" action="${section_data['urls']['start_certificate_generation']}">
             % if section_data['html_cert_enabled'] and section_data['active_certificate'] is None:
-                <p>${_("Course certificate generation requires an activated web certificate configuration.")}</p>
-                <input type="button" id="disabled-btn-start-generating-certificates" class="is-disabled" aria-disabled="true" value="${_('Generate Certificates')}"/>
+                <p>${_("Course statement of accomplishment generation requires an activated web statement of accomplishment configuration.")}</p>
+                <input type="button" id="disabled-btn-start-generating-certificates" class="is-disabled" aria-disabled="true" value="${_('Generate Statements of Accomplishment')}"/>
             % else:
                 <p class="under-heading">
-                    ${_("When you are ready to generate certificates for your course, click Generate Certificates. You do not need to do this if you have set the certificate mode to on-demand generation.")}
+                    ${_("When you are ready to generate statements of accomplishment for your course, click Generate Statements of Accomplishment. You do not need to do this if you have set the statement of accomplishment mode to on-demand generation.")}
                 </p>
                 <input type="button" class="btn-blue" id="btn-start-generating-certificates" value="${_('Generate Certificates')}" data-endpoint="${section_data['urls']['start_certificate_generation']}"/>
             %endif
@@ -154,7 +154,7 @@ from openedx.core.djangolib.js_utils import dump_js_escaped_json, js_escaped_str
 
     <hr>
     <div class="certificate-generation-history">
-        <h3 class="hd hd-3 title">${_("Certificate Generation History")}</h3>
+        <h3 class="hd hd-3 title">${_("Statement of Accomplishment Generation History")}</h3>
         <div class="certificate-generation-history-content">
             <table>
                 <thead>
@@ -179,9 +179,9 @@ from openedx.core.djangolib.js_utils import dump_js_escaped_json, js_escaped_str
 
     <div class="certificate-exception-container">
         <hr class="section-divider">
-        <h3 class="hd hd-3"> ${_("SET CERTIFICATE EXCEPTIONS")} </h3>
+        <h3 class="hd hd-3"> ${_("SET STATEMENT OF ACCOMPLISHMENT EXCEPTIONS")} </h3>
          <p class="under-heading info">
-             ${_("Set exceptions to generate certificates for learners who did not qualify for a certificate but have " \
+             ${_("Set exceptions to generate certificates for learners who did not qualify for a statement of accomplishment but have " \
               "been given an exception by the course team. After you add learners to the exception list, click Generate " \
               "Exception Certificates below.")}
          </p>

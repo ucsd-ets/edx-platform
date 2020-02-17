@@ -74,7 +74,7 @@ define([
                 // Ensure the provided attributes set meets our expectations for format, type, etc.
                 if (!attrs.name.trim()) {
                     return {
-                        message: gettext('Certificate name is required.'),
+                        message: gettext('Statement of Accomplishment name is required.'),
                         attributes: {name: true}
                     };
                 }

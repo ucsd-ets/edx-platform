@@ -5,7 +5,7 @@
 <% }); %>
 </select>
 <a href=<%= certificate_web_view_url %> class="button preview-certificate-link" target="_blank">
-    <%= gettext("Preview Certificate") %>
+    <%= gettext("Preview Statement of Accomplishment") %>
 </a>
 <button class="button activate-cert">
     <span>

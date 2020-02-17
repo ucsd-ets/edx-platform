@@ -1,6 +1,6 @@
 <div class="message certificate-status col-12 md-col-8">
-    <span class="card-msg"><%- gettext('Certificate Status:') %></span>
-    <span><%- gettext('Needs verified certificate ') %></span>
+    <span class="card-msg"><%- gettext('Statement of Accomplishment Status:') %></span>
+    <span><%- gettext('Needs Statement of Accomplishment ') %></span>
     <span class="price">  <%- price %></span>
 </div>
 <% if (typeof is_mobile_only === 'undefined' || is_mobile_only === false) { %>

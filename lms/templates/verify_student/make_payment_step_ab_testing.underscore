@@ -18,7 +18,7 @@
     <% } else { %>
       <h2 class="page-title">
         <%= HtmlUtils.interpolateHtml(
-            gettext( "Upgrade to a Verified Certificate for {courseName}"),
+            gettext( "Upgrade to a Statement of Accomplishment for {courseName}"),
             { courseName: HtmlUtils.joinHtml(
                 HtmlUtils.HTML('<span class="course-title">'),
                 courseName,
@@ -30,7 +30,7 @@
 
     <% if ( !isActive ) { %>
         <p>
-            <%- gettext("Before you upgrade to a certificate track, you must activate your account.") %>
+            <%- gettext("Before you upgrade to a statement of accomplishment track, you must activate your account.") %>
             <%- gettext("Check your email for an activation message.") %>
         </p>
     <% } else { %>
@@ -42,11 +42,11 @@
             <p>
                 <% if ( courseModeSlug === 'no-id-professional' || courseModeSlug === 'professional') { %>
                     <%- StringUtils.interpolate(
-                        gettext( "Professional Certificate for {courseName}"),{  courseName: courseName }
+                        gettext( "Professional Statement of Accomplishment for {courseName}"),{  courseName: courseName }
                      )%>
                 <% } else { %>
                     <%- StringUtils.interpolate(
-                        gettext( "Verified Certificate for {courseName}"),{  courseName: courseName }
+                        gettext( "Statement of Accomplishment for {courseName}"),{  courseName: courseName }
                      )%>
                 <% } %>
             </p>

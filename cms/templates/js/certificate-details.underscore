@@ -15,7 +15,7 @@
      <% if (showDetails) { %>
          <section class="certificate-settings course-details">
              <header>
-               <h2 class="title title-2"><%- gettext("Certificate Details") %></h2>
+               <h2 class="title title-2"><%- gettext("Statement of Accomplishment Details") %></h2>
              </header>
              <div class='certificate-info-section'>
                  <div class='course-title-section pull-left'>
@@ -50,9 +50,9 @@
 
         <section class="certificate-settings signatories">
              <header>
-               <h2 class="title title-2"><%- gettext("Certificate Signatories") %></h2>
+               <h2 class="title title-2"><%- gettext("Statement of Accomplishment Signatories") %></h2>
              </header>
-             <p class="instructions"><%- gettext("It is strongly recommended that you include four or fewer signatories. If you include additional signatories, preview the certificate in Print View to ensure the certificate will print correctly on one page.") %></p>
+             <p class="instructions"><%- gettext("It is strongly recommended that you include four or fewer signatories. If you include additional signatories, preview the statement of accomplishment in Print View to ensure the statement of accomplishment will print correctly on one page.") %></p>
              <div class="signatory-details-list"></div>
         </section>
     <% } %>

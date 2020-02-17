@@ -37,7 +37,7 @@
   <ol class="list-input">
     <li class="field-group field-group-certificate-available" id="certificate-available">
       <div class="field date" id="field-certificate-available-date">
-        <label for="certificate-available-date">Certificates Available Date</label>
+        <label for="certificate-available-date">Statements of Accomplishment Available Date</label>
         <input type="text" class="certificate-available-date date start datepicker" id="certificate-available-date" placeholder="MM/DD/YYYY" autocomplete="off" />
         <span class="tip tip-stacked">By default, 48 hours after course end date</span>
       </div>

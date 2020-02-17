@@ -36,7 +36,7 @@ else:
       <p class="message-copy">
         <%
           certificate_available_date_string = course_overview.certificate_available_date.strftime('%Y-%m-%dT%H:%M:%S%z')
-          container_string = _("Your certificate will be available on or before {date}")
+          container_string = _("Your statement of accomplishment will be available on or before {date}")
           format = 'shortDate'
         %>
         <span class="info-date-block localized-datetime" data-language="${user_language}" data-timezone="${user_timezone}" data-datetime="${certificate_available_date_string}" data-format=${format} data-string="${container_string}"></span>
@@ -64,7 +64,7 @@ else:
           </p>
         % elif cert_status['status'] == 'unverified':
           <p class="message-copy">
-            ${Text(_("Your certificate was not issued because you do not have a current verified identity with {platform_name}. ")).format(platform_name=settings.PLATFORM_NAME)}
+            ${Text(_("Your statement of accomplishment was not issued because you do not have a current verified identity with {platform_name}. ")).format(platform_name=settings.PLATFORM_NAME)}
             <a href="${reverify_link}"> ${Text(_("Verify your identity now."))}</a>
           </p>
         % endif
@@ -83,7 +83,7 @@ else:
             % elif cert_status['status'] == 'downloadable' and cert_status.get('show_cert_web_view', False):
               <li class="action action-certificate">
                 <a class="btn" href="${cert_status['cert_web_view_url']}" target="_blank"
-                   title="${_('This link will open the certificate web view')}">
+                   title="${_('This link will open the statement of accomplishment web view')}">
                   ${_("View {cert_name_short}").format(cert_name_short=cert_name_short,)}
                 </a>
               </li>
@@ -124,7 +124,7 @@ else:
           <ul class="actions actions-secondary">
               <li class="action action-share">
                 <a class="action-linkedin-profile" target="_blank" href="${cert_status['linked_in_url']}"
-                 title="${_('Add Certificate to LinkedIn Profile')}"
+                 title="${_('Add Statement of Accomplishment to LinkedIn Profile')}"
                  data-course-id="${course_overview.id}"
                  data-certificate-mode="${cert_status['mode']}"
                 >
@@ -146,4 +146,3 @@ else:
     </div>
   % endif
 % endif
-
