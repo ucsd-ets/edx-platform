@@ -181,7 +181,7 @@ FEATURES = {
     'CUSTOM_COURSES_EDX': False,
 
     # Toggle to enable certificates of courses on dashboard
-    'ENABLE_VERIFIED_CERTIFICATES': False,
+    'ENABLE_VERIFIED_CERTIFICATES': True,
 
     # .. toggle_name: DISABLE_HONOR_CERTIFICATES
     # .. toggle_type: feature_flag
@@ -310,7 +310,7 @@ FEATURES = {
     'LICENSING': False,
 
     # Certificates Web/HTML Views
-    'CERTIFICATES_HTML_VIEW': False,
+    'CERTIFICATES_HTML_VIEW': True,
 
     # Course discovery feature
     'ENABLE_COURSE_DISCOVERY': False,
@@ -1620,6 +1620,7 @@ PIPELINE_CSS = {
     'style-certificates': {
         'source_filenames': [
             'certificates/css/main-ltr.css',
+            'css/lms-main-v1.css',
             'css/vendor/font-awesome.css',
         ],
         'output_filename': 'css/certificates-style.css'
