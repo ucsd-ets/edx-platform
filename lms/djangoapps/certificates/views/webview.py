@@ -123,11 +123,10 @@ def _update_certificate_context(context, course, user_certificate, platform_name
     )
 
     # Translators:  This text is bound to the HTML 'title' element of the page and appears in the browser title bar
-    context['document_title'] = _("{partner_short_name} {course_number} Statement of Accomplishment | {platform_name}").format(
-        partner_short_name=context['organization_short_name'],
-        course_number=context['course_number'],
+    context['document_title-1'] = _("{platform_name}").format(
         platform_name=platform_name
-    )
+    context['document_title-2'] = _("Statement of Accomplishment")
+    
 
     # Translators:  This text fragment appears after the student's name (displayed in a large font) on the certificate
     # screen.  The text describes the accomplishment represented by the certificate information displayed to the user
