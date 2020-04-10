@@ -123,16 +123,30 @@ def _update_certificate_context(context, course, user_certificate, platform_name
     )
 
     # Translators:  This text is bound to the HTML 'title' element of the page and appears in the browser title bar
-    context['document_title-1'] = _("{platform_name}").format(
+
+    # Translators:  This text is bound to the HTML 'title' element of the page and appears in the browser title bar
+    context['document_title'] = _(u"{partner_short_name} {course_number} Certificate | {platform_name}").format(
+        partner_short_name=context['organization_short_name'],
+        course_number=context['course_number'],
         platform_name=platform_name
-    context['document_title-2'] = _("Statement of Accomplishment")
-    
+    )
+
+    # edx-417: this is used in SOA, replaces document_title there
+    context['document_title_1_a'] = _("UC SAN DIEGO")
+    context['document_title_1_b'] = _("ONLINE")
+    context['document_title_2'] = _("STATEMENT OF ACCOMPLISHMENT")
+    context['course_prof_1_name'] = _("TODO")
+    context['course_prof_1_title'] = _("TODO")
+    context['course_prof_1_org'] = _("UC San Diego")
 
     # Translators:  This text fragment appears after the student's name (displayed in a large font) on the certificate
     # screen.  The text describes the accomplishment represented by the certificate information displayed to the user
-    context['accomplishment_copy_description_full'] = _("successfully completed, received a passing grade, and was "
-                                                        "awarded this {platform_name} "
-                                                        "Statement of Accomplishment in ").format(platform_name=platform_name)
+    # edx-417
+    context['accomplishment_copy_description_full'] = _("has successfully completed an offering of")
+    context['accomplishment_disclaimer'] = _("A STATEMENT OF ACCOMPLISHMENT ACKNOWLEDGES THAT A UC SAN DIEGO ONLINE " +
+                                             "COURSE OFFERED ON ONLINE.UCSD.EDU WAS COMPLETED WITH A SCORE INDICATING MASTERY OF MATERIAL BY A PARTICULAR LEARNER. " +
+                                             "A STATEMENT OF ACCOMPLISHMENT IS NOT A CERTIFICATE.  IT DOES NOT CONVEY ANY ACADEMIC CREDIT, GRADE OR DEGREE, " +
+                                             "OR INDICATE ENROLLMENT AT UC SAN DIEGO")
 
     certificate_type_description = get_certificate_description(user_certificate.mode, certificate_type, platform_name)
     if certificate_type_description:
