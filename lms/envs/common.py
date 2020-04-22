@@ -58,6 +58,7 @@ PLATFORM_TWITTER_ACCOUNT = "@YourPlatformTwitterAccount"
 
 ENABLE_JASMINE = False
 
+LMS_BASE = "localhost:8000"
 LMS_ROOT_URL = "http://localhost:8000"
 LMS_INTERNAL_ROOT_URL = LMS_ROOT_URL
 LMS_ENROLLMENT_API_PATH = "/api/enrollment/v1/"
@@ -1620,6 +1621,7 @@ PIPELINE_CSS = {
     'style-certificates': {
         'source_filenames': [
             'certificates/css/main-ltr.css',
+            'css/lms-main-v1.css',
             'css/vendor/font-awesome.css',
         ],
         'output_filename': 'css/certificates-style.css'
