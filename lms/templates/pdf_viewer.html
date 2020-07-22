@@ -38,8 +38,8 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 
     <!-- This snippet is used in production (included from viewer.html) -->
     <link rel="resource" type="application/l10n" href="${static.url('/static/js/vendor/pdfjs/locale/locale.properties')}"/>
-    <script type="text/javascript" src="${static.url('/static/js/vendor/pdfjs/l10n.js')}"></script>
-    <script type="text/javascript" src="${static.url('/static/js/vendor/pdfjs/pdf.js')}"></script>
+    <script type="text/javascript" src="${static.url('js/vendor/pdfjs/l10n.js')}"></script>
+    <script type="text/javascript" src="${static.url('js/vendor/pdfjs/pdf.js')}"></script>
 
     <script type="text/javascript">
         PDFJS.imageResourcesPath = "${static.url('/static/css/vendor/pdfjs/images/') | n, js_escaped_string}";
@@ -49,7 +49,7 @@ http://sourceforge.net/adobe/cmap/wiki/License/
     </script>
 
     <script ${static.url('/static/js/vendor/pdfjs/debugger.js')}></script>
-    
+
     <%static:js group='main_vendor'/>
     <%static:js group='application'/>
     <%static:js group='courseware'/>
@@ -147,7 +147,7 @@ http://sourceforge.net/adobe/cmap/wiki/License/
             <button id="toggleHandTool" class="secondaryToolbarButton handTool" title="Enable hand tool" data-l10n-id="hand_tool_enable">
               <span data-l10n-id="hand_tool_enable_label">Enable hand tool</span>
             </button>
-            
+
             <div class="horizontalToolbarSeparator"></div>
 
             <button id="documentProperties" class="secondaryToolbarButton documentProperties" title="Document Properties…" data-l10n-id="document_properties">
@@ -202,10 +202,9 @@ http://sourceforge.net/adobe/cmap/wiki/License/
                 </a>
 
                 <div class="verticalToolbarSeparator hiddenSmallView"></div>
-                
                 <button id="secondaryToolbarToggle" class="toolbarButton" title="Tools" data-l10n-id="tools">
                   <span data-l10n-id="tools_label">Tools</span>
-                </button> 
+                </button>
               </div>
               <div class="outerCenter">
                 <div class="innerCenter" id="toolbarViewerMiddle">
