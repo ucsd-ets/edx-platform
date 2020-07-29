@@ -26,8 +26,7 @@ profile_image_url = get_profile_image_urls_for_user(self.real_user)['medium']
             </a>
             <div class="dropdown">
                 <a class="dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${username}</a>
-                <ul role="menu" class="dropdown-menu dropdown-menu-right" id="${_("Usermenu")}" aria-labelledby="dropdownMenuLink" tabindex="-1">
-                    <li role="presentation"><a role="menuitem" class="dropdown-item" href="${reverse('dashboard')}">${_("Dashboard")}</a></li>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right" id='${_("Usermenu")}' aria-labelledby="dropdownMenuLink" tabindex="-1">
                     <li role="presentation"><a role="menuitem" class="dropdown-item" href="${reverse('account_settings')}">${_("Account")}</a></li>
                     <li role="presentation"><a role="menuitem" class="dropdown-item" href="${reverse('logout')}">${_("Sign Out")}</a></li>
                 </ul>
@@ -35,7 +34,6 @@ profile_image_url = get_profile_image_urls_for_user(self.real_user)['medium']
         </div>
     </div>
     <ul role="menu" class="nav flex-column align-items-center">
-        <li role="presentation" class="nav-item nav-item-open-collapsed-only collapse"><a role="menuitem" href="${reverse('dashboard')}">${_("Dashboard")}</a></li>
         <li role="presentation" class="nav-item nav-item-open-collapsed-only"><a role="menuitem" href="${reverse('account_settings')}">${_("Account")}</a></li>
         <li role="presentation" class="nav-item nav-item-open-collapsed-only"><a role="menuitem" href="${reverse('logout')}">${_("Sign Out")}</a></li>
     </ul>
@@ -47,13 +45,12 @@ profile_image_url = get_profile_image_urls_for_user(self.real_user)['medium']
             ${username}
         </a>
         <div role="group" aria-label="User menu" class="user-menu">
-            <button type="button" class="menu-button button-more has-dropdown js-dropdown-button" aria-expanded="false" aria-controls="${_("Usermenu")}">
+            <button type="button" class="menu-button button-more has-dropdown js-dropdown-button" aria-expanded="false" aria-controls='${_("Usermenu")}'>
                   <span class="icon fa fa-caret-down" aria-hidden="true"></span>
                   <span class="sr-only">${_("Usermenu dropdown")}</span>
             </button>
-            <ul class="dropdown-menu list-divided is-hidden" id="${_("Usermenu")}" tabindex="-1">
+            <ul class="dropdown-menu list-divided is-hidden" id='${_("Usermenu")}' tabindex="-1">
                 <%block name="navigation_dropdown_menu_links" >
-                    <li class="dropdown-item item has-block-link"><a href="${reverse('dashboard')}" role="menuitem" class="action dropdown-menuitem">${_("Dashboard")}</a></li>
                     <li class="dropdown-item item has-block-link"><a href="${reverse('account_settings')}" role="menuitem" class="action dropdown-menuitem">${_("Account")}</a></li>
                 </%block>
                 <li class="dropdown-item item has-block-link"><a href="${reverse('logout')}" role="menuitem" class="action dropdown-menuitem">${_("Sign Out")}</a></li>

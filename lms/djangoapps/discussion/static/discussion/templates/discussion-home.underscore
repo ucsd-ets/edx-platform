@@ -13,7 +13,7 @@
             {platform_name: window.PLATFORM_NAME}, true
           ) %>
     </span>
-    <table class="home-helpgrid">
+    <table class="home-helpgrid" id="helperTable">
       <tr class="helpgrid-row helpgrid-row-navigation">
         <th scope="row" class="row-title"><%- gettext("Find discussions") %></td>
         <td class="row-item">
@@ -46,7 +46,7 @@
       </tr>
       <tr class="helpgrid-row helpgrid-row-notification">
         <th scope="row" class="row-title"><%- gettext('Receive updates') %></td>
-        <td class="row-item-full" colspan="3">
+        <td class="row-item-full" colspan="3" id="emailSettingsCol">
           <label for="email-setting-checkbox">
             <span class="sr"><%- gettext("Toggle Notifications Setting") %></span>
             <span class="notification-checkbox">
@@ -54,7 +54,7 @@
               <span class="icon fa fa-envelope" aria-hidden="true"></span>
             </span>
           </label>
-          <span class="row-description"><%- gettext("Check this box to receive an email digest once a day notifying you about new, unread activity from posts you are following.") %></span>
+          <div class="row-description" id="emailContent"><%- gettext("Check this box to receive an email digest once a day notifying you about new, unread activity from posts you are following.") %></div>
         </td>
       </tr>
     </table>
