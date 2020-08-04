@@ -223,3 +223,67 @@
         }(Backbone.Collection));
     }
 }).call(window);
+
+
+// Table Resizing
+var orgTable;
+var $clone;
+var resizeTimer;
+var resized = false;
+
+$(window).load(function()
+{
+    // Save default table layout
+    orgTable = $('#helperTable').html();
+    if (localStorage.getItem("discussionHelperTable") == null)
+    {
+        localStorage.setItem("discussionHelperTable", orgTable);
+    }
+    // Update table
+    renderTable();
+});
+
+// Update on window resize
+$( window ).resize(function(e) 
+{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {renderTable()},150);
+});
+
+// Update for smaller window size 
+function renderTable() 
+{
+    if ($(window).width() < 600)
+    {
+        if (!resized)
+        {
+            var replaceHTML = "";
+            resized = true;
+
+            $('.helpgrid-row').each(
+            function() 
+            {
+                replaceHTML = "";
+                var headerHTML = $(this).find("th").html();
+
+
+                $(this).find("td").each(
+                function()
+                {
+                replaceHTML += '<div class="oneColumn">';
+                replaceHTML += $(this).html();
+            });
+            replaceHTML += '</div>';
+
+            $(this).html('<th scope="row" class="row-title">' + headerHTML + '</th> <td class="row-item">' + replaceHTML + '</td>');
+            });
+        }
+    }
+    else
+    {
+        orgTable = localStorage.getItem("discussionHelperTable");
+        $("#helperTable").html(orgTable);
+        resized = false;
+    }
+}
+>>>>>>> Stashed changes
