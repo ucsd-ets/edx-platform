@@ -286,4 +286,3 @@ function renderTable()
         resized = false;
     }
 }
->>>>>>> Stashed changes
