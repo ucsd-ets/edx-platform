@@ -253,7 +253,7 @@ $( window ).resize(function(e)
 // Update for smaller window size 
 function renderTable() 
 {
-    if ($(window).width() < 600)
+    if ($(window).width() <= 768)
     {
         if (!resized)
         {
