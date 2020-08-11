@@ -7,6 +7,7 @@ import json
 import logging
 import random
 import re
+from branding.api import get_logo_url
 from collections import Counter
 from smtplib import SMTPConnectError, SMTPDataError, SMTPException, SMTPServerDisconnected
 from time import sleep
