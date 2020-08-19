@@ -7,6 +7,7 @@ import json
 import logging
 import random
 import re
+from branding.api import get_logo_url
 from collections import Counter
 from smtplib import SMTPConnectError, SMTPDataError, SMTPException, SMTPServerDisconnected
 from time import sleep
@@ -107,6 +108,8 @@ def _get_course_email_context(course):
         settings.LMS_ROOT_URL,
         course_root
     )
+    lms_url = settings.LMS_ROOT_URL
+    logo_url = get_logo_url()
     image_url = u'{}{}'.format(settings.LMS_ROOT_URL, course_image_url(course))
     email_context = {
         'course_title': course_title,
@@ -114,6 +117,8 @@ def _get_course_email_context(course):
         'course_language': course.language,
         'course_url': course_url,
         'course_image_url': image_url,
+    'lms_url': lms_url,
+    'logo_url': logo_url,
         'course_end_date': course_end_date,
         'account_settings_url': '{}{}'.format(settings.LMS_ROOT_URL, reverse('account_settings')),
         'email_settings_url': '{}{}'.format(settings.LMS_ROOT_URL, reverse('dashboard')),
