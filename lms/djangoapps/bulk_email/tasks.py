@@ -7,7 +7,7 @@ import json
 import logging
 import random
 import re
-from branding.api import get_logo_url
+from branding.api import get_footer
 from collections import Counter
 from smtplib import SMTPConnectError, SMTPDataError, SMTPException, SMTPServerDisconnected
 from time import sleep
@@ -109,7 +109,8 @@ def _get_course_email_context(course):
         course_root
     )
     lms_url = settings.LMS_ROOT_URL
-    logo_url = get_logo_url()
+    footer_context = get_footer()
+    logo_url = footer_context['openedx_link']['image']
     image_url = u'{}{}'.format(settings.LMS_ROOT_URL, course_image_url(course))
     email_context = {
         'course_title': course_title,
