@@ -18,6 +18,7 @@ from course_modes.models import CourseMode
 from eventtracking import tracker
 from openedx.core.lib.courses import course_image_url
 from xmodule.annotator_mixin import html_to_text
+from xmodule.course_module import CATALOG_VISIBILITY_ABOUT, CATALOG_VISIBILITY_NONE
 from xmodule.library_tools import normalize_key_for_search
 from xmodule.modulestore import ModuleStoreEnum
 
@@ -629,18 +630,27 @@ class CourseAboutSearchIndexer(object):
 
         # Broad exception handler to protect around and report problems with indexing
         try:
-            searcher.index(cls.DISCOVERY_DOCUMENT_TYPE, [course_info])
+
+            if course.catalog_visibility in (CATALOG_VISIBILITY_ABOUT, CATALOG_VISIBILITY_NONE):
+                searcher.remove(cls.DISCOVERY_DOCUMENT_TYPE, [course_id])
+                log.debug(
+                    "Successfully removed %s \"hidden\" course from the course discovery index",
+                    course_id
+                )
+
+            else:
+                searcher.index(cls.DISCOVERY_DOCUMENT_TYPE, [course_info])
+                log.debug(
+                    "Successfully added %s course to the course discovery index",
+                    course_id
+                )
+
         except:
             log.exception(
                 "Course discovery indexing error encountered, course discovery index may be out of date %s",
                 course_id,
             )
             raise
-
-        log.debug(
-            "Successfully added %s course to the course discovery index",
-            course_id
-        )
 
     @classmethod
     def _get_location_info(cls, normalized_structure_key):
