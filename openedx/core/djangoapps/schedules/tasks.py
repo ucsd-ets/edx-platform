@@ -243,7 +243,8 @@ def _track_message_sent(site, user, msg):
             user_id=user.id,
             event_name='edx.bi.email.sent',
             properties=properties,
-            send_to_track=True
+            send_to_track=True,
+            user=user
         )
 
 
