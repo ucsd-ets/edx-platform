@@ -313,6 +313,12 @@ class TaskTestCase(ModuleStoreTestCase):
     ))
     @ddt.unpack
     def test_track_notification_sent(self, context, test_props):
+        thread_author = UserFactory(
+            username='a_fake_dude2',
+            password='password',
+            email='email'
+        )
+
         with mock.patch('edx_ace.ace.send').start() as message:
             # Populate mock message (
             # There are some cruft attrs, but they're harmless.
@@ -324,10 +330,11 @@ class TaskTestCase(ModuleStoreTestCase):
             site = Site.objects.get_current()
             context['site'] = site
             with mock.patch('lms.djangoapps.discussion.tasks.segment.track') as mock_segment_track:
-                _track_notification_sent(message, context)
+                _track_notification_sent(message, context, thread_author)
                 mock_segment_track.assert_called_once_with(
                     user_id=context['thread_author_id'],
                     event_name='edx.bi.email.sent',
                     properties=test_props,
-                    send_to_track=True
+                    send_to_track=True,
+                    user=thread_author
                 )

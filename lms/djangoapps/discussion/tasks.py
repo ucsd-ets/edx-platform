@@ -72,10 +72,10 @@ def send_ace_message(context):
             )
             log.info('Sending forum comment email notification with context %s', message_context)
             ace.send(message)
-            _track_notification_sent(message, context)
+            _track_notification_sent(message, context, thread_author)
 
 
-def _track_notification_sent(message, context):
+def _track_notification_sent(message, context, user):
     """
     Send analytics event for a sent email
     """
@@ -102,7 +102,8 @@ def _track_notification_sent(message, context):
             user_id=context['thread_author_id'],
             event_name='edx.bi.email.sent',
             properties=properties,
-            send_to_track=True
+            send_to_track=True,
+            user=user
         )
 
 
