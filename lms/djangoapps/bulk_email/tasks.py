@@ -31,6 +31,7 @@ from celery.exceptions import RetryTaskError
 from celery.states import FAILURE, RETRY, SUCCESS
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives, get_connection
 from django.core.mail.message import forbid_multi_line_headers
 from django.urls import reverse
@@ -49,6 +50,7 @@ from lms.djangoapps.instructor_task.subtasks import (
     update_subtask_status
 )
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+from openedx.core.lib.celery.task_utils import emulate_http_request
 from openedx.core.lib.courses import course_image_url
 from util.date_utils import get_default_time_display
 
@@ -109,16 +111,17 @@ def _get_course_email_context(course):
         course_root
     )
     lms_url = settings.LMS_ROOT_URL
-    logo_url = get_logo_url()
+    logo_url = get_logo_url(is_secure=(not settings.DEBUG))
     image_url = u'{}{}'.format(settings.LMS_ROOT_URL, course_image_url(course))
+
     email_context = {
         'course_title': course_title,
         'course_root': course_root,
         'course_language': course.language,
         'course_url': course_url,
         'course_image_url': image_url,
-    'lms_url': lms_url,
-    'logo_url': logo_url,
+        'lms_url': lms_url,
+        'logo_url': logo_url,
         'course_end_date': course_end_date,
         'account_settings_url': '{}{}'.format(settings.LMS_ROOT_URL, reverse('account_settings')),
         'email_settings_url': '{}{}'.format(settings.LMS_ROOT_URL, reverse('dashboard')),
@@ -137,6 +140,7 @@ def perform_delegate_email_batches(entry_id, course_id, task_input, action_name)
     # Get inputs to use in this task from the entry.
     user_id = entry.requester.id
     task_id = entry.task_id
+    site_id = task_input.get('site', None)
 
     # Perfunctory check, since expansion is made for convenience of other task
     # code that doesn't need the entry_id.
@@ -178,7 +182,16 @@ def perform_delegate_email_batches(entry_id, course_id, task_input, action_name)
 
     # Get arguments that will be passed to every subtask.
     targets = email_obj.targets.all()
-    global_email_context = _get_course_email_context(course)
+
+    # [UCSD_CUSTOM]
+    # If `site_id` was passed in the task_input, get the site and derive
+    # context as per the provided site, otherwise simply get the email
+    # context.
+    try:
+        with emulate_http_request(site=Site.objects.get(id=site_id)):
+            global_email_context = _get_course_email_context(course)
+    except Site.DoesNotExist:
+        global_email_context = _get_course_email_context(course)
 
     recipient_qsets = [
         target.get_users(course_id, user_id)
