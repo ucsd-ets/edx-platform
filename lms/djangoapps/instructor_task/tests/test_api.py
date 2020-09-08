@@ -249,9 +249,11 @@ class InstructorTaskCourseSubmitTest(TestReportMixin, InstructorTaskCourseTestCa
             api_call()
 
     def test_submit_bulk_email_all(self):
+        request = self.create_task_request(self.instructor)
+        request.site.id = None
         email_id = self._define_course_email()
         api_call = lambda: submit_bulk_course_email(
-            self.create_task_request(self.instructor),
+            request,
             self.course.id,
             email_id
         )

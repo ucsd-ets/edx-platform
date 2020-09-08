@@ -188,7 +188,7 @@ def perform_delegate_email_batches(entry_id, course_id, task_input, action_name)
     # context as per the provided site, otherwise simply get the email
     # context.
     try:
-        with emulate_http_request(site=Site.objects.get(id=site_id)):
+        with emulate_http_request(site=Site.objects.get(id=site_id), user=entry.requester):
             global_email_context = _get_course_email_context(course)
     except Site.DoesNotExist:
         global_email_context = _get_course_email_context(course)
