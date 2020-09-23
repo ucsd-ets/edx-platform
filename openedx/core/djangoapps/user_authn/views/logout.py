@@ -2,6 +2,7 @@
 from urlparse import parse_qs, urlsplit, urlunsplit
 
 import edx_oauth2_provider
+from eventtracking import tracker
 from django.conf import settings
 from django.contrib.auth import logout
 from django.urls import reverse_lazy
@@ -55,7 +56,20 @@ class LogoutView(TemplateView):
         # Get the list of authorized clients before we clear the session.
         self.oauth_client_ids = request.session.get(edx_oauth2_provider.constants.AUTHORIZED_CLIENTS_SESSION_KEY, [])
 
+        # if tests are giving Anonymous User objects
+        event_data = {}
+        if not request.user.is_anonymous:
+            event_data = {
+                'email': request.POST.get('email'),
+                'username': request.user.username,
+                'user_id': request.user.id
+            }
+
         logout(request)
+
+        if request.user.is_anonymous:
+            event_name = 'edx.user.logout'
+            tracker.emit(event_name, event_data)
 
         # If we are using studio logout directly and there is not OIDC logouts we can just redirect the user
         if settings.FEATURES.get('DISABLE_STUDIO_SSO_OVER_LMS', False) and not self.oauth_client_ids:
