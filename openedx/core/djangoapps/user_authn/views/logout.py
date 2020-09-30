@@ -56,7 +56,6 @@ class LogoutView(TemplateView):
         # Get the list of authorized clients before we clear the session.
         self.oauth_client_ids = request.session.get(edx_oauth2_provider.constants.AUTHORIZED_CLIENTS_SESSION_KEY, [])
 
-        # if tests are giving Anonymous User objects
         event_data = {}
         if not request.user.is_anonymous:
             event_data = {
@@ -67,7 +66,10 @@ class LogoutView(TemplateView):
 
         logout(request)
 
-        if request.user.is_anonymous:
+        # `event_data` will be empty if the user was anonymous even before
+        # the `logout` call. don't emit event if an anonymous user has hit
+        # the logout URL.
+        if request.user.is_anonymous and event_data:
             event_name = 'edx.user.logout'
             tracker.emit(event_name, event_data)
 
