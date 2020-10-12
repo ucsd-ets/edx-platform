@@ -136,6 +136,9 @@
                     url: url,
                     success: function(data) {
                         if (data.tasks.length) {
+                            sendemail.$history_request_response_error.css({
+                                display: 'none'
+                            });
                             return createTaskListTable(sendemail.$table_task_history_email, data.tasks);
                         } else {
                             sendemail.$history_request_response_error.text(
@@ -146,10 +149,13 @@
                             });
                         }
                     },
-                    error: statusAjaxError(function() {
-                        return sendemail.$history_request_response_error.text(
+                    error: statusAjaxError(function () {
+                        sendemail.$history_request_response_error.text(
                             gettext('There was an error obtaining email task history for this course.')
                         );
+                        return sendemail.$history_request_response_error.css({
+                            display: 'block'
+                        });
                     })
                 });
             });
@@ -161,6 +167,9 @@
                     url: url,
                     success: function(data) {
                         if (data.emails.length) {
+                            sendemail.$content_request_response_error.css({
+                                display: 'none'
+                            });
                             createEmailContentTable(sendemail.$table_email_content_history,
                                 sendemail.$email_content_table_inner, data.emails
                             );
@@ -174,10 +183,13 @@
                             });
                         }
                     },
-                    error: statusAjaxError(function() {
-                        return sendemail.$content_request_response_error.text(
+                    error: statusAjaxError(function () {
+                        sendemail.$content_request_response_error.text(
                             gettext('There was an error obtaining email content history for this course.')
                         );
+                        return sendemail.$content_request_response_error.css({
+                            display: 'block'
+                        });
                     })
                 });
             });
