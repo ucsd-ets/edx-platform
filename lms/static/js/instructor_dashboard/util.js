@@ -239,7 +239,7 @@
         });
         $tableEmailsInner.append($tablePlaceholder);
         Slick.Grid($tablePlaceholder, tableData, columns, options);
-        return $tableEmails.append($('<br/>'));
+        return $tableEmails;
     };
 
     createEmailMessageViews = function($messagesWrapper, emails) {
