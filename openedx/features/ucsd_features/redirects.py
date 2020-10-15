@@ -10,6 +10,7 @@ urls = importlib.import_module(settings.ROOT_URLCONF)
 
 log = getLogger(__name__)
 
+
 def callback_generator(destination):
     def callback(request):
         return redirect(destination)
