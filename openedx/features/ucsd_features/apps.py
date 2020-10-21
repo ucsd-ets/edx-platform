@@ -8,4 +8,3 @@ class UcsdFeatures(AppConfig):
         super(UcsdFeatures, self).ready()
         from openedx.features.ucsd_features.signals import *
         from openedx.features.ucsd_features.additional_registration_fields import *
-        from openedx.features.ucsd_features.redirects import *
