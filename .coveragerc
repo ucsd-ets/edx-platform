@@ -49,4 +49,5 @@ output = reports/coverage.xml
 jenkins_source =
     /home/jenkins/workspace/$JOB_NAME
     /home/jenkins/workspace/$SUBSET_JOB
+    /home/jenkins/edx-platform
     /edx/app/edxapp/edx-platform
